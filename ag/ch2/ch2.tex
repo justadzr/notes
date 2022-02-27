@@ -78,11 +78,11 @@ rulewidth=.5pt, bgcolor={rgb}{1,1,1}}]{corollary}
   \newenvironment{bsmallmatrix}
   {\left[\begin{smallmatrix}}
   {\end{smallmatrix}\right]}
-    \begin{document}
+\begin{document}
     \maketitle
     \tableofcontents
     \newpage
-    \section{Sheaves}\label{sec-sheaf}
+	\section{Sheaves}\label{sec-sheaf}
     \subsection{Presheaves and sheaves}\label{ssec-sheaf}
     Let $X$ be a topological space and $\Top_X$ be the category of open sets in $X$ with inclusion maps as the only morphisms. Then a \textit{presheaf} on $X$ is just a contravariant functor $\mathscr F:\Top_X\to \mathcal C$ where $\mathcal C$ is an arbitrary category. Contravariant functors $\mathscr F:\mathcal B\to\mathcal C$ can be seen as (covariant) functors $\mathscr F':\mathcal B^\op\to \mathcal C$ such that $Ff=F'f^\op$ (this is how Lean defines presheaves!). Hartshorne requires the functor to preserve initial objects. But this is considered as the "wrong" definition. Grothendieck only defines the presheaves as contravariant functors (see 3.1.1 in the 1971 Springer's version of EGA I).
     
@@ -389,7 +389,6 @@ A_{f(\mathfrak p)} \arrow[rr, "\varphi_{\mathfrak p}"]                          
 	
 	(b) Suppose we have a morphism of locally ringed spaces $(f, f^\#)$. Then $f^\#(\Spec A):\mathscr O_{\Spec A}(\Spec A)\to \mathscr O_{\Spec B}(\Spec B)$ which then by part (c) of \autoref{l213} gives us a homomorphism $\varphi: A\to B$. Then for any $\mathfrak p\in \Spec B$, the homomorphism $\varphi: A\to B$ is compatible with the map $f^\#_{\mathfrak p}:A_{f(\mathfrak p)}\to B_{\mathfrak p}$. Note that an element $b$ in $B$ is sent via an isomorphism (proved) to the function $t\in \mathscr O_{\Spec B}(\Spec B)$ which sends each $\mathfrak p$ in $D(1)=\Spec B$ to the class represented by $b/1$ in $B_{\mathfrak p}$. Then this function will be sent to the germ $[(D(1), t)]$ in the stalk at $\mathfrak p$. But then this germ is sent to $t_{\mathfrak p}=b/1\in B_{\mathfrak p}$. Therefore, if $\iota_B, \iota_A$ are the localization homomorphisms from $B\to B_{\mathfrak p}$ and $A\to A_{f(\mathfrak p)}$ respectively, then $f^\#_{\mathfrak p}\circ \iota_A=\iota_B\circ \varphi$. Then by the universal property of localizations, the map $f^\#_{\mathfrak p}$ sends $a/s$ to $\varphi(a)/\varphi(s)$. But the locality of this map shows the set $\{a/s:\varphi(a)/\varphi(t)\in \mathfrak pA_{\mathfrak p}\}$ is the maximal ideal $f(\mathfrak p)A_{f(\mathfrak p)}$. The clearly the preimage of $\mathfrak p$ under is precisely $f(\mathfrak p)$, that is, $\varphi^{-1}(\mathfrak p)=f(\mathfrak p)$. Then by our argument in part (a), $\varphi$ induces the map $f^\#$.
 	\end{proof}
-	
 	\subsection{Affine schemes and schemes}\label{ssec-scheme}
 	An \textit{affine scheme} is a locally ringed space $(X,\mathscr O_X)$ isomorphic to the spectrum of some ring $A$. A \textit{scheme} is a locally ringed space $(X,\mathscr O_X)$ where every point $x\in X$ has a nhds $U$ such that the subspace $U$ with the restricted sheaf $\mathscr O_X|_U=\iota^{-1}\mathscr O_X$ is an affine scheme (note the stalks of restricted sheaves are the same as the stalks of $\mathscr O_X$, so they are also local rings, meaning each pair $(U, \mathscr O_X|_U)$ is indeed a locally ringed space). The space $X$ is called the \textit{underlying topological space} and $\mathscr O_X$ has been named its \text{structure sheaf}. A morphism of schemes is just a morphism of locally ringed space. (Grothendieck (in early versions of EGA) called (and Hartshorne used to call) the schemes ``preschemes"; the term is then changed in the 1971 edition of EGA).
 	
