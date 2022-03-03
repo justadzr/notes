@@ -1193,6 +1193,8 @@ INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmti12.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmss12.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmss10.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmss8.tfm
+INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmti8.tfm
+INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmti7.tfm
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\ueuf.fd
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\ueuf.fd
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\ueuf.fd
@@ -1235,6 +1237,8 @@ INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy8.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy8.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmti12.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmti12.pfb
+INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmti8.pfb
+INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmti8.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\euler\eufm10.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\euler\eufm10.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\euler\eufm7.pfb

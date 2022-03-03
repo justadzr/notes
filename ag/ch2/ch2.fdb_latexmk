@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1645992371 "c:/Users/youro/Desktop/Latex/notes/ag/ch2/ch2.tex" "ch2.pdf" "ch2" 1645992375
+["pdflatex"] 1646326166 "c:/Users/youro/Desktop/Latex/notes/ag/ch2/ch2.tex" "ch2.pdf" "ch2" 1646326169
   "C:/Program Files/MiKTeX 2.9/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1233951848 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
   "C:/Program Files/MiKTeX 2.9/fonts/tfm/public/amsfonts/cmextra/cmbsy7.tfm" 1233951848 1120 7f9f170e8aa57527ad6c49feafd45d54 ""
   "C:/Program Files/MiKTeX 2.9/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm" 1233951848 1120 200be8b775682cdf80acad4be5ef57e4 ""
@@ -36,6 +36,8 @@
   "C:/Program Files/MiKTeX 2.9/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Program Files/MiKTeX 2.9/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
   "C:/Program Files/MiKTeX 2.9/fonts/tfm/public/cm/cmti12.tfm" 1136765053 1484 ed72f8f5cf654cda15ecc8e32bfcbee5 ""
+  "C:/Program Files/MiKTeX 2.9/fonts/tfm/public/cm/cmti7.tfm" 1136765053 1492 86331993fe614793f5e7e755835c31c5 ""
+  "C:/Program Files/MiKTeX 2.9/fonts/tfm/public/cm/cmti8.tfm" 1136765053 1504 1747189e0441d1c18f3ea56fafc1c480 ""
   "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247593066 32080 340ef9bf63678554ee606688e7b5339d ""
   "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1247593067 30251 6afa5cb1d0204815a708a080681d4674 ""
   "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1247593067 36741 0ee9e374ec3e30da87cdfb0ea3575226 ""
@@ -52,6 +54,7 @@
   "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1247593067 32587 65067f817f408bc71a7312f3d9828a9b ""
   "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1247593067 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
   "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1247593067 36118 fad905eba93cff5bce1e185fe980a177 ""
+  "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti8.pfb" 1247593066 35660 fb24af7afbadb71801619f1415838111 ""
   "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm10.pfb" 1335362546 21098 d4aee7c0aac232caac5688b586b9363c ""
   "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm7.pfb" 1335362546 21251 56705123063d7b34002d6b6e7142345e ""
   "C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1247593073 34694 870c211f62cb72718a00e353f14f254d ""
@@ -219,11 +222,11 @@
   "C:/Users/youro/AppData/Local/MiKTeX/2.9/fonts/tfm/public/rsfs/rsfs5.tfm" 1645990148 684 3a51bd4fd9600428d5264cf25f04bb9a ""
   "C:/Users/youro/AppData/Local/MiKTeX/2.9/fonts/tfm/public/rsfs/rsfs7.tfm" 1645990146 692 1b6510779f0f05e9cbf03e0f6c8361e6 ""
   "C:/Users/youro/AppData/Local/MiKTeX/2.9/miktex/data/le/pdftex/pdflatex.fmt" 1645992363 10913050 fb50efbc102e86b63f536613cddf717a ""
-  "c:/Users/youro/Desktop/Latex/notes/ag/ch2/ch2.tex" 1645992357 62548 8bed4125caad547fb32a3be1a2b7562b ""
-  "ch2.aux" 1645992374 6124 163d202640d0aec37bad09bbf35e05db "pdflatex"
-  "ch2.out" 1645992374 1651 ce25c91d092e1c667a997b7e3775bdca "pdflatex"
-  "ch2.tex" 1645992357 62548 8bed4125caad547fb32a3be1a2b7562b ""
-  "ch2.toc" 1645992374 860 6b746a486c6bab6415192a58ba950d0a "pdflatex"
+  "c:/Users/youro/Desktop/Latex/notes/ag/ch2/ch2.tex" 1646326163 64213 b200e5ff37ed73778bacd97397bda253 ""
+  "ch2.aux" 1646326169 6425 caf41e420b3c77ef608857eedf764304 "pdflatex"
+  "ch2.out" 1646326169 1651 ce25c91d092e1c667a997b7e3775bdca "pdflatex"
+  "ch2.tex" 1646326163 64213 b200e5ff37ed73778bacd97397bda253 ""
+  "ch2.toc" 1646326169 860 3445f6c6e0104c9f36079fccd5620afa "pdflatex"
   (generated)
   "ch2.aux"
   "ch2.log"
