@@ -1,7 +1,7 @@
-PWD c:\Users\youro\Desktop\Latex\notes\ag\sheaves_and_schemes
+PWD c:\Users\youro\Desktop\Latex\notes\ag.algebraic-geometry\sheaves-and-schemes
 INPUT C:\Users\youro\AppData\Local\MiKTeX\2.9\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\youro\Desktop\Latex\notes\ag\sheaves_and_schemes\sheaves_and_schemes.tex
-OUTPUT sheaves_and_schemes.log
+INPUT c:\Users\youro\Desktop\Latex\notes\ag.algebraic-geometry\sheaves-and-schemes\sheaves-and-schemes.tex
+OUTPUT sheaves-and-schemes.log
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls
@@ -1036,10 +1036,10 @@ INPUT C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\shadethm\s
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\thmtools\thm-patch.sty
 INPUT C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\shadethm\shadethm.sty
 INPUT C:\Program Files\MiKTeX 2.9\tex\latex\thmtools\thm-patch.sty
-INPUT .\sheaves_and_schemes.aux
-INPUT sheaves_and_schemes.aux
-INPUT sheaves_and_schemes.aux
-OUTPUT sheaves_and_schemes.aux
+INPUT .\sheaves-and-schemes.aux
+INPUT sheaves-and-schemes.aux
+INPUT sheaves-and-schemes.aux
+OUTPUT sheaves-and-schemes.aux
 INPUT C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mkii
 INPUT C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mkii
 INPUT C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mkii
@@ -1102,18 +1102,18 @@ INPUT C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitle
 INPUT C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestring\gettitlestring.sty
 INPUT C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\kvoptions\kvoptions.sty
 INPUT C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ltxcmds\ltxcmds.sty
-INPUT .\sheaves_and_schemes.out
-INPUT sheaves_and_schemes.out
-INPUT .\sheaves_and_schemes.out
-INPUT sheaves_and_schemes.out
-INPUT .\sheaves_and_schemes.out
-INPUT sheaves_and_schemes.out
-INPUT .\sheaves_and_schemes.out
-INPUT sheaves_and_schemes.out
-OUTPUT sheaves_and_schemes.pdf
-INPUT .\sheaves_and_schemes.out
-INPUT .\sheaves_and_schemes.out
-OUTPUT sheaves_and_schemes.out
+INPUT .\sheaves-and-schemes.out
+INPUT sheaves-and-schemes.out
+INPUT .\sheaves-and-schemes.out
+INPUT sheaves-and-schemes.out
+INPUT .\sheaves-and-schemes.out
+INPUT sheaves-and-schemes.out
+INPUT .\sheaves-and-schemes.out
+INPUT sheaves-and-schemes.out
+OUTPUT sheaves-and-schemes.pdf
+INPUT .\sheaves-and-schemes.out
+INPUT .\sheaves-and-schemes.out
+OUTPUT sheaves-and-schemes.out
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmr17.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmr12.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmmi12.tfm
@@ -1152,9 +1152,9 @@ INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmbsy10.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\amsfonts\cmextra\cmbsy7.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmr17.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmbx12.tfm
-INPUT .\sheaves_and_schemes.toc
-INPUT sheaves_and_schemes.toc
-INPUT sheaves_and_schemes.toc
+INPUT .\sheaves-and-schemes.toc
+INPUT sheaves-and-schemes.toc
+INPUT sheaves-and-schemes.toc
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmr8.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmr6.tfm
@@ -1184,7 +1184,7 @@ INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\amsfonts\cmextra\cmmib6.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmbsy10.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\amsfonts\cmextra\cmbsy8.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\amsfonts\cmextra\cmbsy6.tfm
-OUTPUT sheaves_and_schemes.toc
+OUTPUT sheaves-and-schemes.toc
 INPUT C:\Users\youro\AppData\Local\MiKTeX\2.9\fonts\map\pdftex\pdftex.map
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmss12.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\cm\cmss8.tfm
@@ -1197,9 +1197,9 @@ INPUT C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\ueuf.fd
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\amsfonts\euler\eufm10.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\amsfonts\euler\eufm10.tfm
 INPUT C:\Program Files\MiKTeX 2.9\fonts\tfm\public\amsfonts\euler\eufm7.tfm
-INPUT sheaves_and_schemes.aux
-INPUT .\sheaves_and_schemes.out
-INPUT .\sheaves_and_schemes.out
+INPUT sheaves-and-schemes.aux
+INPUT .\sheaves-and-schemes.out
+INPUT .\sheaves-and-schemes.out
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Program Files\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmex10.pfb
