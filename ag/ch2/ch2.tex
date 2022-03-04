@@ -22,11 +22,11 @@
     \title{Chapter 2 Notes}
     %\author{Yourong Zang (auditor), CID: 01861742}
     \declaretheorem[numberwithin=subsection, refname={Theorem, Theorems}, shaded={rulecolor=black,
-rulewidth=.5pt, bgcolor={rgb}{1,1,1}}]{theorem}
+rulewidth=.5pt, margin=5pt, bgcolor={rgb}{1,1,1}}]{theorem}
     \declaretheorem[numberwithin=subsection, refname={Lemma, Lemmas}, shaded={rulecolor=black,
-rulewidth=.5pt, bgcolor={rgb}{1,1,1}}]{lemma}
+rulewidth=.5pt, margin=5pt, bgcolor={rgb}{1,1,1}}]{lemma}
     \declaretheorem[numberwithin=subsection, refname={Corollary, Corollaries}, shaded={rulecolor=black,
-rulewidth=.5pt, bgcolor={rgb}{1,1,1}}]{corollary}
+rulewidth=.5pt, margin=5pt, bgcolor={rgb}{1,1,1}}]{corollary}
     \newcommand{\res}[2]{\underset{#1}{\,\operatorname{Res}\,}#2}
     \newcommand{\ord}[0]{\operatorname{ord}}
     \newcommand{\ind}[0]{\operatorname{ind}}
@@ -181,7 +181,7 @@ X \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left] &  & Y \arrow[rr, "r
 	
 	We introduce the \textit{sheafification} of a presheaf in a "less category theory way".
 	\begin{theorem}[sheafification]\label{t121}
-	Given a sheaf $\mathscr F$, there is a sheaf $\mathscr F^+$ and a morphism $\theta: \mathscr F\to \mathscr F^+$ such that for any sheaf $\mathscr G$ and morphism $\varphi:\mathscr F\to\mathscr G$, there is a unique morphism $\psi:\mathscr F^+\to \mathscr G$ such that $\varphi=\psi\circ\theta$. Furthermore, $\mathscr F^+$ is unique up to (natural) isomorphisms. 
+	Given a presheaf $\mathscr F$, there is a sheaf $\mathscr F^+$ and a morphism $\theta: \mathscr F\to \mathscr F^+$ such that for any sheaf $\mathscr G$ and morphism $\varphi:\mathscr F\to\mathscr G$, there is a unique morphism $\psi:\mathscr F^+\to \mathscr G$ such that $\varphi=\psi\circ\theta$. Furthermore, $\mathscr F^+$ is unique up to (natural) isomorphisms. 
 	\end{theorem}
 	\begin{proof}
 	For any open set $U$, let $\mathscr F^+(U)$ be the set of functions $s:U\to \bigsqcup_{p\in U}\mathscr F_p$ such that for each $p$, $s_p\in \mathscr F_p$ and there exists a nhds $p\in V\subseteq U$ and $t\in\mathscr F(V)$ s.t. for all $q\in V$ we have
@@ -271,17 +271,60 @@ X \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left] &  & Y \arrow[rr, "r
 	
 	It is therefore important to remember that, if $Y$ is open in $X$, then the restriction $\mathscr F|_Y$ contains the same data as $\mathscr F$: we have $\mathscr F|_Y(U)\cong \mathscr F(U)$ for all open $U\subseteq Y$. This is because the map $u:\varinjlim_{V\supseteq U} \mathscr F(V)\to \mathscr F(U)$ sending the class $[(V, t)]$ to $t|_U$ is an isomorphism. Clearly it is well-defined, injective (as restrictions being equal is exactly the definition of the equivalence classes) and surjective ($[(U, s)]$ for any $s\in \mathscr F(U)$). Therefore the sheafification of the restriction of the presheaf is just $\mathscr F$ itself, as a functor on $\Top_U^\op$ (which is still a sheaf since all sheaf conditions are local properties and can be passed to an open subspace).
 	\textcolor{blue}{
-	\subsection{Exploring the functoriality of $f_*$ and $f^{-1}$}\label{ssec-functoriality}
+	\subsection{Exploring the functoriality of sheafification, pullback, and pushforward}\label{ssec-functoriality}
 	}
-	Here I want to explore/summarize some basic properties of $f_*$ and $f^{-1}$ as functors, given a continuous map $f:X\to Y$. We have a pushforward functor $f_*:\mathsf{PSh}(X)\to\mathsf{PSh}(Y)$ where $\mathsf{PSh}(\cdot)$ dentoes the categories of presheaves on the topological space. The image of objects under $f_*$ is defined in the previous subsection (in which the restriction maps are $\eta_{UV}=\rho_{f^{-1}(U)f^{-1}V}$ for open sets $U, V\subseteq Y$). The morphisms are also clear: if $\mathscr F$ and $\mathscr G$ are two presheaves on $X$ and $\varphi:\mathscr F\to\mathscr G$ morphism of presheaves, then $f_*\varphi$ would be a morphism of presheaves on $Y$, which carries the data $f_*\varphi(V)=\varphi(f^{-1}(V))$. These results are quite natural considering the definition of $f_*\mathscr F$. We have proved in the last subsection that the pushforward of sheaves are themselves sheaves, so $f_*$ also gives a functor $\mathsf{Sh}(X)\to\mathsf{Sh}(Y)$.
-
-	Then we proceed to study the pullback functor $f^{-1}$. We first study the functor on presheaves, defined by $f_{\text{pre}}^{-1}\mathscr G:U\mapsto \varinjlim_{V\supseteq f(U)}\mathscr G(U)$ (actually now, at the time I'm writing this part, it seems natural to define the pullback in this way, as $f(U)$ is not guaranteed to be open) where $\mathscr G$ is a presheaf on $Y$. Note the restriction maps on the pullback is 
+	Let $X$ be a topological space. The map ${}^+:\mathsf{PSh}(X)\to \mathsf{Sh}(X)$. This map defines a functor which sends a morphism of presheaves $\varphi:\mathscr F\to\mathscr G$ to a natural transformation carrying data $\varphi^+(U):s\mapsto \sqcup_{p\in U}\varphi_p\circ s$ for some $s\in \mathscr F^+(U)$ and $U$ open in $X$.
+	
+	Let $\iota$ be the inclusion functor $\mathsf{Sh}(X)\to \mathsf{PSh}(X)$ from the category of sheaves on $X$ to the category of presheaves on $X$. We claim that
 	\begin{lemma}\label{l141}
-		Given two topological spaces $X, Y$ and a continuous map $f$, then the pullback of presheaves $f_{\text{pre}}^{-1}$ is a left adjoint of $f_*$.
+		The sheafification ${}^+$ is a left adjoint of the inclusion $\iota$.
 	\end{lemma}
 	\begin{proof}
-
+		It suffices to prove that for any presheaf $\mathscr F$ and sheaf $\mathscr G$, $\Hom_{\mathsf{Sh}(X)}(\mathscr F^+,\mathscr G)=\Hom_{\mathsf{PSh}(X)}(\mathscr F,\iota(\mathscr G))$. This is an immediate result of \autoref{t121}: every morphism $\mathscr F\to \mathscr G=\iota(\mathscr G)$ induces a \textbf{unique} morphism $\mathscr F^+\to \mathscr G$!
 	\end{proof}
+	Here I want to explore/summarize some basic properties of $f_*$ and $f^{-1}$ as functors, given a continuous map $f:X\to Y$. We have a pushforward functor $f_*:\mathsf{PSh}(X)\to\mathsf{PSh}(Y)$. The image of objects under $f_*$ is defined in the previous subsection (in which the restriction maps are $\eta_{UV}=\rho_{f^{-1}(U)f^{-1}V}$ for open sets $U, V\subseteq Y$). The morphisms are also clear: if $\mathscr F$ and $\mathscr G$ are two presheaves on $X$ and $\varphi:\mathscr F\to\mathscr G$ morphism of presheaves, then $f_*\varphi$ would be a morphism of presheaves on $Y$, which carries the data $f_*\varphi(V)=\varphi(f^{-1}(V))$. These results are quite natural considering the definition of $f_*\mathscr F$. We have proved in the last subsection that the pushforward of sheaves are themselves sheaves, so $f_*$ also gives a functor $\mathsf{Sh}(X)\to\mathsf{Sh}(Y)$.
+
+	Then we proceed to study the pullback functor $f^{-1}$. We first study the functor on presheaves, defined by $f_{\text{pre}}^{-1}\mathscr G:U\mapsto \varinjlim_{V\supseteq f(U)}\mathscr G(U)$ (actually now, at the time I'm writing this part, it seems natural to define the pullback in this way, as $f(U)$ is not guaranteed to be open) where $\mathscr G$ is a presheaf on $Y$. To understand the induced restriction maps one can refer to the \autoref{ssec-sheaf} for a similar definition. But we also quote a result in category theory here for clarity:
+	\begin{lemma}\label{l142}
+		Consider diagrams $\mathscr F:\mathcal I\to \mathcal C$ and $\mathscr G:\mathcal J\to \mathcal C$ whose colimits exist and $\varphi:\mathcal I\to\mathcal J$ a functor with $\theta:\mathscr F\to \mathscr G\circ\rho$ a natural transformation, then there is a unique morphism $\theta_*:\varinjlim_{\mathcal I} \mathscr F\to\varinjlim_{\mathcal J}G$ such that the following diagram
+		\[
+			\begin{tikzcd}
+				\mathscr F(i) \arrow[rr] \arrow[dd, "\theta"'] &  & \varinjlim_{\mathcal I}\mathscr F \arrow[dd, "\theta_*"] \\
+															   &  &                                                          \\
+				\mathscr{G}(\theta(i)) \arrow[rr]              &  & \varinjlim_{\mathcal J}\mathscr G                       
+				\end{tikzcd}	
+		\]
+		commutes.
+	\end{lemma}
+	\begin{proof}
+		The proof is quite clear if we apply colimits' universal properties twice. Consider the natrual transformation $\theta$ and the cocone $\left(\varinjlim_{\mathcal J} \mathscr G, t\right)$ of $\mathscr G$. For each index $i$ we can define $r(i)$ to be the composition of morphisms $t(\varphi(i))$ and $\theta(i):\mathscr F(i)\to \mathscr G(\varphi(i))$, getting a new cocone $\left(\varinjlim_{\mathcal J}\mathscr  G, r\right)$ of $\mathscr F$ (the commutativity of the cocone can be checked easily). Then by the universal property of $\varinjlim_{\mathcal I} \mathscr F$, there is a unique map $\theta_*:\varinjlim_{\mathcal I} \mathscr F\to\varinjlim_{\mathcal J}G$ that commutes with the cocone morphisms if one decomposes each map $r(i)$ into $t(\varphi(i))\circ\theta(i)$.
+	\end{proof}
+	\autoref{l142} can be used to induce restriction maps on $f_{\mathrm{pre}}^{-1}\mathscr F$ with $\mathscr F$ on $Y$. Take open sets $V\subseteq U$ in $X$ and index categories $\mathcal I=\{U'\supseteq f(U)\}$ and $\mathcal J=\{V'\subseteq f(V)\}$. Then clearly we have an inclusion functor: $\iota:\mathcal I\to\mathcal J$ since if $U'\supseteq f(U)$ then it contains $f(V)$. We also have a natural transformation $\theta$ simply given by the restriction morphisms of $\mathscr F$, from $\mathscr F$ restricted to $\mathcal I$ to its restriction to $\mathcal J$. Then by \autoref{l142} we get a unique morphism $\theta_*:f_{\mathrm{pre}}^{-1}\mathscr F(U)\to f_{\mathrm{pre}}^{-1}\mathscr F(V)$. Note that the resulting morphisms are associative by their uniqueness.
+	\begin{lemma}\label{l143}
+		Given two topological spaces $X, Y$ and a continuous map $f$, then the pullback of presheaves $f_{\mathrm{pre}}^{-1}$ is a left adjoint of $f_*$.
+	\end{lemma}
+	\begin{proof}
+		We claim that, for any two presheaves $\mathscr F$ on $X$, $\mathscr G$ on $Y$, 
+		\[\Hom_{\mathsf{PSh}(X)}(f_{\mathrm{pre}}^{-1}\mathscr G, \mathscr F)=\Hom_{\mathsf{PSh}(Y)}(\mathscr G, f_*\mathscr F)\]
+		
+		Take any open $V\subseteq Y$. Then $V$ is an open nhds of $f(f^{-1}(V))$. Therefore, we have a canonical map $i_{\mathscr G}(V):\mathscr G(V)\to f_{\mathrm{pre}}^{-1}\mathscr G(f^{-1}(V))$ (the cocone morphism given by the colimit). Therefore we have a canonical morphism: $i_{\mathscr G}:\mathscr G\to f_*f_{\mathrm{pre}}^{-1}\mathscr G$ (the images of restriction maps are also given by the induced maps on colimits).
+
+		Similarly, if $U\subseteq X$ is open, then for every open set $V$ containing $f(U)$, there is a map $t(V):f_*\mathscr F(V)\to \mathscr F(U)$ given by the restriction map of $\mathscr F$ from $f^{-1}(V)$ to $U$. These maps given by open nhds of $f(U)$ are clearly compatible with the restriction maps of $f_*\mathscr F$ (since they are all given by $\mathscr F$). Thus, we have a cocone $(\mathscr F(U), t)$ of $f_*\mathscr F$. And by the universal property of colimits we get a canonical map $j_{\mathscr F}(U):f_{\mathrm{pre}}^{-1}f_*\mathscr F(U)\to \mathscr F(U)$.
+
+		Now for any morphism $\varphi:f_{\mathrm{pre}}^{-1}\mathscr G\to \mathscr F$, the corresponding map from $\mathscr G\to f_*\mathscr F$ is given by $f_*\varphi\circ i_{\mathscr G}$. For any morphism $\psi:\mathscr G\to f_*\mathscr F$, the corresponding map from $f_{\mathrm{pre}}^{-1}\mathscr G\to \mathscr F$ is given by $j_{\mathscr F}\circ f_{\mathrm{pre}}^{-1}\psi$.
+
+		It remains to check that these two constructions are inverses, i.e.,
+		\[j_{\mathscr F}\circ f_{\mathrm{pre}}^{-1}(f_*\varphi\circ i_{\mathscr G})=\varphi\]
+		and
+		\[f_*(j_{\mathscr F}\circ f_{\mathrm{pre}}^{-1}\psi)\circ i_{\mathscr G}=\psi\]
+
+		The verification is quite trivial if one draws the commutative diagrams. It is only important to notice facts like $(j_{\mathscr F}\circ\eta)(V)=\id$ if $\eta(V)$ is the cocone map from $f_*\mathscr F(V)\to f^{-1}_{\mathrm{pre}}f_*\mathscr F(f^{-1}(V))$ (draw the cocones and the answer will be clear!).
+	\end{proof}
+
+	By our definition of $f^{-1}$ as $(f^{-1}_{\mathrm{pre}})^+$ together with \autoref{l141} and \autoref{l143}, we have the following corollary:
+	\begin{corollary}\label{c141}
+		The pullback functor $f^{-1}$ is a left adjoint of $f_*$ on sheaves.
+	\end{corollary}
 	\section{Spectra and Schemes}\label{sec-scheme}
 	\subsection{Sheaves of rings}\label{ssec-sheaf-of-ring}
 	Given a commutative ring with unity $A$ and its $\Spec A$ with the Zariski topology. For any open set $U$ of $\Spec A$, we let
