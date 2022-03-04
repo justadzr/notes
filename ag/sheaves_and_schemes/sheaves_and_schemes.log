@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2022.2.27)  4 MAR 2022 05:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2022.2.27)  4 MAR 2022 05:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/youro/Desktop/Latex/notes/ag/ch2/ch2.tex
-(c:/Users/youro/Desktop/Latex/notes/ag/ch2/ch2.tex
+**c:/Users/youro/Desktop/Latex/notes/ag/sheaves_and_schemes/sheaves_and_schemes.tex
+(c:/Users/youro/Desktop/Latex/notes/ag/sheaves_and_schemes/sheaves_and_schemes.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-21> (C:\Program Files\MiKTeX 2.9\tex/latex/base\article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -616,8 +616,8 @@ Package translations Info: No language package found. I am going to use `english
 LaTeX Warning: Unused global option(s):
     [letter].
 
-(ch2.aux)
-\openout1 = `ch2.aux'.
+(sheaves_and_schemes.aux)
+\openout1 = `sheaves_and_schemes.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
 LaTeX Font Info:    ... okay on input line 81.
@@ -707,9 +707,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 81.
 LaTeX Info: Redefining \pageref on input line 81.
 LaTeX Info: Redefining \nameref on input line 81.
- (ch2.out) (ch2.out)
+ (sheaves_and_schemes.out) (sheaves_and_schemes.out)
 \@outlinefile=\write4
-\openout4 = `ch2.out'.
+\openout4 = `sheaves_and_schemes.out'.
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 83.
  (C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd
@@ -722,13 +722,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Trying to load font information for U+rsfs on input line 83.
  (C:\Users\Danny's PC\AppData\Local\Programs\MiKTeX 2.9\tex/latex/jknappen\ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-)
-
-LaTeX Warning: No \author given.
-
-(ch2.toc)
+) (sheaves_and_schemes.toc)
 \tf@toc=\write5
-\openout5 = `ch2.toc'.
+\openout5 = `sheaves_and_schemes.toc'.
 
  [1
 
@@ -811,20 +807,20 @@ Overfull \hbox (9.7678pt too wide) in paragraph at lines 441--442
 []\OT1/cmr/m/n/12 (b) Sup-pose we have a mor-phism of lo-cally ringed spaces $(\OML/cmm/m/it/12 f; f[]\OT1/cmr/m/n/12 )$. Then $\OML/cmm/m/it/12 f[]\OT1/cmr/m/n/12 ([] \OML/cmm/m/it/12 A\OT1/cmr/m/n/12 ) :
  []
 
-[18] [19] [20] [21] (ch2.aux)
-Package rerunfilecheck Info: File `ch2.out' has not changed.
+[18] [19] [20] [21] (sheaves_and_schemes.aux)
+Package rerunfilecheck Info: File `sheaves_and_schemes.out' has not changed.
 (rerunfilecheck)             Checksum: CB3BAE06CC0D5E7D9E08841C351030DF;1809.
  ) 
 Here is how much of TeX's memory you used:
  28491 strings out of 478550
- 594015 string characters out of 2850662
- 835098 words of memory out of 3000000
+ 594527 string characters out of 2850662
+ 835130 words of memory out of 3000000
  46154 multiletter control sequences out of 15000+600000
  485890 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,30n,94p,2648b,1225s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,30n,94p,2680b,1225s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eufm7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/rsfs/rsfs10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/rsfs/rsfs5.pfb>
-Output written on ch2.pdf (21 pages, 326728 bytes).
+Output written on sheaves_and_schemes.pdf (21 pages, 327431 bytes).
 PDF statistics:
  311 PDF objects out of 1000 (max. 8388607)
  59 named destinations out of 1000 (max. 500000)
