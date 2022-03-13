@@ -8,3 +8,4 @@
 \contentsline {subsection}{\numberline {2.2}Ringed spaces and locally ringed spaces}{15}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Affine schemes and schemes}{18}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Gluing schemes}{20}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Projective Schemes}{22}{subsection.2.5}%
