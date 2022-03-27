@@ -1,4 +1,4 @@
-\documentclass[12pt,letter]{article}
+\documentclass[12pt]{article}
     \usepackage{indentfirst}
     \usepackage{amsmath}
     \usepackage{amssymb}
@@ -6,11 +6,11 @@
     \usepackage[utf8]{inputenc}
     \usepackage{geometry}
     \usepackage{diagbox}
+	\usepackage{enumerate}
     \usepackage{siunitx}
     \usepackage{graphicx}
     \usepackage{multirow}
     \usepackage{xcolor}
-    \usepackage{thmtools}
     \usepackage{tikz-cd}
     \usepackage{mathrsfs}
     \usepackage{bm}
@@ -21,12 +21,13 @@
     \usepackage{cleveref}
     \title{Notes on Sheaves and Schemes}
     \author{Yourong Zang}
-    \declaretheorem[numberwithin=subsection, refname={Theorem, Theorems}, shaded={rulecolor=black,
-rulewidth=.5pt, margin=5pt, bgcolor={rgb}{1,1,1}}]{theorem}
-    \declaretheorem[numberwithin=subsection, refname={Lemma, Lemmas}, shaded={rulecolor=black,
-rulewidth=.5pt, margin=5pt, bgcolor={rgb}{1,1,1}}]{lemma}
-    \declaretheorem[numberwithin=subsection, refname={Corollary, Corollaries}, shaded={rulecolor=black,
-rulewidth=.5pt, margin=5pt, bgcolor={rgb}{1,1,1}}]{corollary}
+	\newtheorem{theorem}{Theorem}[subsection]
+	\newtheorem{lemma}{Lemma}[subsection]
+	\newtheorem{corollary}{Corollary}[subsection]
+	\theoremstyle{remark}
+	\newtheorem*{remark}{Remark}
+	\newcommand*{\lemmaautorefname}{Lemma}
+	\newcommand*{\corollaryautorefname}{Corollary}
     \newcommand{\res}[2]{\underset{#1}{\,\operatorname{Res}\,}#2}
     \newcommand{\ord}[0]{\operatorname{ord}}
     \newcommand{\ind}[0]{\operatorname{ind}}
@@ -300,7 +301,9 @@ X \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left] &  & Y \arrow[rr, "r
 	\begin{proof}
 		The proof is quite clear if we apply colimits' universal properties twice. Consider the natural transformation $\theta$ and the cocone $\left(\varinjlim_{\mathcal J} \mathscr G, t\right)$ of $\mathscr G$. For each index $i$ we can define $r(i)$ to be the composition of morphisms $t(\varphi(i))$ and $\theta(i):\mathscr F(i)\to \mathscr G(\varphi(i))$, getting a new cocone $\left(\varinjlim_{\mathcal J}\mathscr  G, r\right)$ of $\mathscr F$ (the commutativity of the cocone can be checked easily). Then by the universal property of $\varinjlim_{\mathcal I} \mathscr F$, there is a unique map $\theta_*:\varinjlim_{\mathcal I} \mathscr F\to\varinjlim_{\mathcal J}G$ that commutes with the cocone morphisms if one decomposes each map $r(i)$ into $t(\varphi(i))\circ\theta(i)$.
 	\end{proof}
-	\autoref{l142} can be used to induce restriction maps on $f_{\mathrm{pre}}^{-1}\mathscr F$ with $\mathscr F$ on $Y$. Take open sets $V\subseteq U$ in $X$ and index categories $\mathcal I=\{U'\supseteq f(U)\}$ and $\mathcal J=\{V'\subseteq f(V)\}$. Then clearly we have an inclusion functor: $\iota:\mathcal I\to\mathcal J$ since if $U'\supseteq f(U)$ then it contains $f(V)$. We also have a natural transformation $\theta$ simply given by the restriction morphisms of $\mathscr F$, from $\mathscr F$ restricted to $\mathcal I$ to its restriction to $\mathcal J$. Then by \autoref{l142} we get a unique morphism $\theta_*:f_{\mathrm{pre}}^{-1}\mathscr F(U)\to f_{\mathrm{pre}}^{-1}\mathscr F(V)$. Note that the resulting morphisms are associative by their uniqueness.
+	\begin{remark}
+		\autoref{l142} can be used to induce restriction maps on $f_{\mathrm{pre}}^{-1}\mathscr F$ with $\mathscr F$ on $Y$. Take open sets $V\subseteq U$ in $X$ and index categories $\mathcal I=\{U'\supseteq f(U)\}$ and $\mathcal J=\{V'\subseteq f(V)\}$. Then clearly we have an inclusion functor: $\iota:\mathcal I\to\mathcal J$ since if $U'\supseteq f(U)$ then it contains $f(V)$. We also have a natural transformation $\theta$ simply given by the restriction morphisms of $\mathscr F$, from $\mathscr F$ restricted to $\mathcal I$ to its restriction to $\mathcal J$. Then by \autoref{l142} we get a unique morphism $\theta_*:f_{\mathrm{pre}}^{-1}\mathscr F(U)\to f_{\mathrm{pre}}^{-1}\mathscr F(V)$. Note that the resulting morphisms are associative by their uniqueness.
+	\end{remark}
 	\begin{lemma}\label{l143}
 		Given two topological spaces $X, Y$ and a continuous map $f$, then the pullback of presheaves $f_{\mathrm{pre}}^{-1}$ is a left adjoint of $f_*$.
 	\end{lemma}
@@ -365,11 +368,11 @@ X \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left] &  & Y \arrow[rr, "r
 	Although we have proved that the stalk of the structure sheaf at a point $\mathfrak p$ is precisely $A_{\mathfrak p}$, but to get a clearer proof and some general results, we will do this again.
 	\begin{lemma}\label{l213}
 	Given a ring $A$ and its spectrum $(\Spec A, \mathscr O)$, we have:
-	\begin{enumerate}
-\item[(a)] For any $\mathfrak p\in\Spec A$, the stalk $\mathscr O_{\mathfrak p}$ is isomorphic to $A_{\mathfrak p}$.
-\item[(b)] For any element $f\in A$, we have $\mathscr O(D(f))\cong A_f$.
-\item[(c)] In particular $\mathscr O(\Spec A)=A$.
-\end{enumerate}
+	\begin{enumerate}[\normalfont(a)]
+		\item For any $\mathfrak p\in\Spec A$, the stalk $\mathscr O_{\mathfrak p}$ is isomorphic to $A_{\mathfrak p}$.
+		\item For any element $f\in A$, we have $\mathscr O(D(f))\cong A_f$.
+		\item In particular $\mathscr O(\Spec A)=A$.
+	\end{enumerate}
 	\end{lemma}
 	\begin{proof}
 	(a) Let $\varphi:\mathscr O_{\mathfrak p}\to A_{\mathfrak p}$ be the homomorphism defined by $[(U, s)]\mapsto s_{\mathfrak p}$. This is a well-defined map since if $[(U, s)]=[(V, t)]$ then there is an open nhds $p\in W\subseteq U\cap V$ such that $s|_W=t|_W$. In particular as $\mathfrak p \in W$, $s_{\mathfrak p}=t_{\mathfrak p}$. Now for any element $\alpha\in A_{\mathfrak p}$ represented by $a/f$ where $a, f\in A$ and $f\notin \mathfrak p$, we can define a function $t$ that sends all element $\mathfrak q\in D(f)$ to the element represented by $a/f$ in $A_{\mathfrak q}$ (recall the definition of $D(f)$). Then clearly $t\in\mathscr O(D(f))$. Then $[(D(f), t)]\in \mathscr O_{\mathfrak p}$ is the preimage of $t_{\mathfrak p}=a/f\in A_{\mathfrak p}$. Thus, $\varphi$ is surjective. Take elements $[(U, s)]$ and $[(V, t)]$ of $\mathscr O_{\mathfrak p}$ such that $\varphi(s)=s_{\mathfrak p}=t_{\mathfrak p}=\varphi(t)$. By construction, there are $a, f\in A$ with a smaller nhds $V$ of $\mathfrak p$ such that for all $\mathfrak q\in V$, $f\notin \mathfrak q$ and $s_{\mathfrak q}=a/f$, and $b, g\in A$ with a smaller nhds $V'$ of $\mathfrak p$ such that for all $\mathfrak q\in V'$, $g\notin \mathfrak q$ and $t_{\mathfrak q}=b/g$. So we can shrink to a smaller nhds $W=V\cap V'$ such that $[(U, s)]=[(W, s|_W)]$, $[(W, t)]=[(V, t|_W)]$. Our assumption suggests that $a/f=(s|_W)_{\mathfrak p}=(t|_{W})_{\mathfrak p}=b/g$ in $A_{\mathfrak p}$, so there is some $r\notin \mathfrak p$ such that $r(ag-bf)=0$. Therefore if $\mathfrak q$ is a prime ideal such that $f, g, r\notin \mathfrak q$, the classes represented by $a/f$ and $b/g$ in $A_{\mathfrak q}$ are the same. However the set of such points is exactly $D(f)\cap D(g)\cap D(r)$, which contains $\mathfrak p$. Therefore $s|_W$ and $t|_W$ agrees on a nhds of $\mathfrak p$, meaning $[(U, s)]=[(W, s|_W)]=[(W, t|_W)]=[(V, t)]$. Therefore $\varphi$ is an isomorphism.
@@ -404,7 +407,7 @@ X \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left] &  & Y \arrow[rr, "r
 \end{tikzcd}	
 	\]
 	
-	To construct with categories, note that there exist maps 
+	To construct with categories, observe there exist maps 
 	\[g_p(f^{-1}(V)):\mathscr O_X(f^{-1}(V))\to \mathscr O_{X, p}\] 
 	which sends elements to its equivalent classes. Also note that these maps are compatible with the restriction maps (since stalks on $X$, i.e., colimits are required to be targets). Therefore, for any $V$ containing $f(p)$, we can compose $f^\#(V)$ with $g_p(f^{-1}(V))$ to get a new map from $\mathscr O_{Y}(V)$ to $\mathscr O_{X, p}$, compatible with restriction maps. Hence by the universal property of colimits, there is a unique map $f^\#_p:\mathscr O_{Y, f(p)}\to \mathscr O_{X,p}$. Immediately one can deduce that this map aligns with the explicit description above.
 	
@@ -419,10 +422,10 @@ X \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left] &  & Y \arrow[rr, "r
 	Clearly, for any ring $(\Spec A, \mathscr O_{\Spec A})$ is a locally ringed space: its stalk at $\mathfrak p$ is isomorphic to the local ring $A_{\mathfrak p}$. Then it's natural to ask whether the morphisms of these locally ringed spaces are related to the homomorphisms on the rings. Indeed, they are closely related:
 	\begin{lemma}\label{l221}
 	Given rings $A, B$,
-	\begin{enumerate}
-	\item[(a)] if $\varphi: A\to B$ is a homomorphism of rings, then $\varphi$ induces a morphism of locally ringed spaces:
-	\[(f, f^\#):(\Spec B, \mathscr O_{\Spec B})\to (\Spec A, \mathscr O_{\Spec A}).\]
-	\item[(b)] any morphism of the locally ringed spaces $(f, f^\#):(\Spec A, \mathscr O_{\Spec A})\to (\Spec B, \mathscr O_{\Spec B})$ is induced by a homomorphism $\varphi: A\to B$.
+	\begin{enumerate}[\normalfont(a)]
+		\item If $\varphi: A\to B$ is a homomorphism of rings, then $\varphi$ induces a morphism of locally ringed spaces:
+		\[(f, f^\#):(\Spec B, \mathscr O_{\Spec B})\to (\Spec A, \mathscr O_{\Spec A}).\]
+		\item Any morphism of the locally ringed spaces $(f, f^\#)$ from $\Spec A$ to $\Spec B$ is induced by a homomorphism $\varphi: A\to B$.
 	\end{enumerate}
 	\end{lemma}
 	\begin{proof}
@@ -439,24 +442,24 @@ A_{f(\mathfrak p)} \arrow[rr, "\varphi_{\mathfrak p}"]                          
 	
 	Then since $\varphi_{\mathfrak p}$ is a local ring map (an easy result), $f^\#_{\mathfrak p}$ is a local ring map. Thus, $f^\#$ is a morphism of locally ringed spaces.
 	
-	(b) Suppose we have a morphism of locally ringed spaces $(f, f^\#)$. Then $f^\#(\Spec A):\mathscr O_{\Spec A}(\Spec A)\to \mathscr O_{\Spec B}(\Spec B)$ which then by part (c) of \autoref{l213} gives us a homomorphism $\varphi: A\to B$. Then for any $\mathfrak p\in \Spec B$, the homomorphism $\varphi: A\to B$ is compatible with the map $f^\#_{\mathfrak p}:A_{f(\mathfrak p)}\to B_{\mathfrak p}$. Note that an element $b$ in $B$ is sent via an isomorphism (proved) to the function $t\in \mathscr O_{\Spec B}(\Spec B)$ which sends each $\mathfrak p$ in $D(1)=\Spec B$ to the class represented by $b/1$ in $B_{\mathfrak p}$. Then this function will be sent to the germ $[(D(1), t)]$ in the stalk at $\mathfrak p$. But then this germ is sent to $t_{\mathfrak p}=b/1\in B_{\mathfrak p}$. Therefore, if $\iota_B, \iota_A$ are the localization homomorphisms from $B\to B_{\mathfrak p}$ and $A\to A_{f(\mathfrak p)}$ respectively, then $f^\#_{\mathfrak p}\circ \iota_A=\iota_B\circ \varphi$. Then by the universal property of localizations, the map $f^\#_{\mathfrak p}$ sends $a/s$ to $\varphi(a)/\varphi(s)$. But the locality of this map shows the set $\{a/s:\varphi(a)/\varphi(t)\in \mathfrak pA_{\mathfrak p}\}$ is the maximal ideal $f(\mathfrak p)A_{f(\mathfrak p)}$. The clearly the preimage of $\mathfrak p$ under is precisely $f(\mathfrak p)$, that is, $\varphi^{-1}(\mathfrak p)=f(\mathfrak p)$. Then by our argument in part (a), $\varphi$ induces the map $f^\#$.
+	(b) Suppose we have a morphism of locally ringed spaces $(f, f^\#)$. Then $f^\#$'s value on $\Spec A$ as a map $\mathscr O_{\Spec A}(\Spec A)\to \mathscr O_{\Spec B}(\Spec B)$ gives us, by part (c) of \autoref{l213}, a homomorphism $\varphi: A\to B$. Then for any $\mathfrak p\in \Spec B$, the homomorphism $\varphi: A\to B$ is compatible with the map $f^\#_{\mathfrak p}:A_{f(\mathfrak p)}\to B_{\mathfrak p}$. Note that an element $b$ in $B$ is sent via an isomorphism (proved) to the function $t\in \mathscr O_{\Spec B}(\Spec B)$ which sends each $\mathfrak p$ in $D(1)=\Spec B$ to the class represented by $b/1$ in $B_{\mathfrak p}$. Then this function will be sent to the germ $[(D(1), t)]$ in the stalk at $\mathfrak p$. But then this germ is sent to $t_{\mathfrak p}=b/1\in B_{\mathfrak p}$. Therefore, if $\iota_B, \iota_A$ are the localization homomorphisms from $B\to B_{\mathfrak p}$ and $A\to A_{f(\mathfrak p)}$ respectively, then $f^\#_{\mathfrak p}\circ \iota_A=\iota_B\circ \varphi$. Then by the universal property of localizations, the map $f^\#_{\mathfrak p}$ sends $a/s$ to $\varphi(a)/\varphi(s)$. But the locality of this map shows the set $\{a/s:\varphi(a)/\varphi(t)\in \mathfrak pA_{\mathfrak p}\}$ is the maximal ideal $f(\mathfrak p)A_{f(\mathfrak p)}$. The clearly the preimage of $\mathfrak p$ under is precisely $f(\mathfrak p)$, that is, $\varphi^{-1}(\mathfrak p)=f(\mathfrak p)$. Then by our argument in part (a), $\varphi$ induces the map $f^\#$.
 	\end{proof}
 	\subsection{Affine schemes and schemes}\label{ssec-scheme}
 	An \textit{affine scheme} is a locally ringed space $(X,\mathscr O_X)$ isomorphic to the spectrum of some ring $A$. A \textit{scheme} is a locally ringed space $(X,\mathscr O_X)$ where every point $x\in X$ has a nhds $U$ such that the subspace $U$ with the restricted sheaf $\mathscr O_X|_U=\iota^{-1}\mathscr O_X$ is an affine scheme (note the stalks of restricted sheaves are the same as the stalks of $\mathscr O_X$, so they are also local rings, meaning each pair $(U, \mathscr O_X|_U)$ is indeed a locally ringed space). The space $X$ is called the \textit{underlying topological space} and $\mathscr O_X$ has been named its \text{structure sheaf}. A morphism of schemes is just a morphism of locally ringed space. (Grothendieck (in early versions of EGA) called (and Hartshorne used to call) the schemes ``preschemes"; the term is then changed in the 1971 edition of EGA).
 	
 	Instead of producing a topological space that is an (affine) scheme, we investigate the simplest  affine schemes: the spectra of different rings. 
 	
-	Take any field $k$ then the affine scheme $(\Spec k, \mathscr O_{\Spec k})$ consists of a topological space of only one point (the zero ideal) and the structure sheaf carrying only one piece of data: $k$ (why is this the case? by construction we have $\mathscr O_{\Spec k}((0))$ the ring of functions which send $(0)$ to elements in $k_{(0)}=k$; so this ring is isomorphic to $k$). Still take the field $k$ but the spectrum $(\Spec k[x], \mathscr O)$. The underlying topological space consists of one point called the \textit{generic point} corresponding to the zero ideal and \textit{closed points} corresponding to the maximal ideals in $k[x]$ (which are precisely the nonzero prime ideals since $k[x]$ is a PID). We call this affine scheme the \textit{affine line}, denoted by $\mathbb A_k^1$. When $k$ is algebraically closed, then the maximal ideals are linear and are thus in one-to-one correspondence with elements in $k$.
+	Take any field $k$ then the affine scheme $(\Spec k, \mathscr O_{\Spec k})$ consists of a topological space of only one point (the zero ideal) and the structure sheaf carrying only one piece of data: $k$ (why is this the case? by construction we have $\mathscr O_{\Spec k}((0))$ the ring of functions which send $(0)$ to elements in $k_{(0)}=k$; so this ring is isomorphic to $k$). Still take the field $k$ but the spectrum $(\Spec k[x], \mathscr O)$. The underlying topological space contain one point called the \textit{generic point} corresponding to the zero ideal and \textit{closed points} corresponding to the maximal ideals in $k[x]$ (which are precisely the nonzero prime ideals since $k[x]$ is a PID). We call this affine scheme the \textit{affine line}, denoted by $\mathbb A_k^1$. When $k$ is algebraically closed, the maximal ideals are linear and are thus in one-to-one correspondence with elements in $k$.
 	
 	Consider an algebraically closed $k$. Define the \textit{affine plane} $\mathbb A^2_k$ to be the spectrum $(\Spec k[x, y], \mathscr O)$. The \textit{closed points} (i.e., points correspond to maximal ideals) correspond to ordered pairs of elements in $k$ (since the maximal ideals are of the form $(x-a, y-b)$). Note that the set of closed points $\MaxSpec k[x, y]$ is homeomorphic to the affine variety $\mathbb A^2$. (Each Zariski closed set $V(I)$ is mapped to $\{(x-a, y-b):f(a, b)=0,\forall f\in I\}$. Clearly $I\subseteq (x-a, y-b)$ so the image is $V(I)$ in $\MaxSpec k[x, y]$. The map is clearly invertible.) For each irreducible polynomial $f(x, y)$ there is a point $\eta$ such that its closure consists of closed points $(x-a, y-b)$ such that $f(a, b)=0$. The point $\eta$ is called the \textit{generic point} of the curve $f(x, t)=0$.
 	
 	Here is a counter-example for part (b) of \autoref{l221} where the locality condition is not satisfied. Let $R$ be a discrete valuation ring, i.e., a principal ideal domain with only one nonzero maximal ideal. Then the spectrum $\Spec R$ is an affine scheme with only two points: the zero ideal and the unique maximal ideal (prime ideals in PIDs are maximal). The stalk at the first point, the zero ideal, is the field of fractions $K(R)$ of $R$. The stalk at the second point, the maximal ideal, is the ring itself which is local by assumptions (elements in the complement of maximal ideals are units so the localization homomorphism is an isomorphism). There is a morphism of ringed spaces: the map $f:\Spec K(R)\to \Spec R$ sending the zero ideal to the maximal ideal in $\Spec R$ and the morphism of sheaves $f^\#: \mathscr O_{\Spec K(R)}\to\mathscr O_{\Spec R}$ associated to the inclusion map as a morphism on stalks $R_{\mathfrak m}=R\hookrightarrow K(R)=K(R)_{(0)}$. This morphism $(f, f^\#)$ is not induced by a homomorphism from $R$ to $K(R)$ since the map on stalks is not local (we have shown that morphisms induced by homomorphisms must be morphisms of locally ringed space)!
-	\subsection{Gluing schemes}\label{ssec-gluing}
+	\subsection{Gluing sheaves and schemes}\label{ssec-gluing}
 	Before gluing schemes we first glue sheaves. Given a topological space $X$, an indexed family of open subsets $\{U_i\subseteq X_i\}_{i\in I}$ and sheaves $\mathscr F_i$ on $X$ with isomorphisms $\varphi_{ij}:\mathscr F_j|_{U_i\cap U_j}\to \mathscr F_i|_{U_i\cap U_j}$ where $\varphi_{ii}=\id$ (to understand these maps see my comment in the end of \ref{ssec-subsheaf}). Let $\mathscr F:\Top_X^\op\to\mathsf{Comm}$ be the functor which maps $V\subseteq X$ to the ring of tuples
 	\[\mathscr F(V)=\left\{(s_i)_{i\in I}:s_i\in \mathscr F_i(V\cap U_i),\forall i,j,\varphi_{ij}(V\cap U_i\cap U_j)(s_j|_{V\cap U_i\cap U_j})=s_i|_{V\cap U_i\cap U_j}\right\}\]
 	We claim that this is a sheaf on $X$. First it is clear that it's a presheaf: the set is a ring since each $\varphi_{ij}(V\cap U_i\cap U_j)$ is an isomorphism of rings (so we have additions, additive inverses, multiplications, etc.). Furthermore the restrictions maps are of the form $\rho_{UV}=(\rho_i)_{i\in I}$ where $\rho_i$ is the restriction map of $U\cap U_i$ to $V\cap U_i$ in $\mathscr F_i$. If $(s_i)_{i\in I}\in \mathscr F(U)$ then we have $\rho_{UV}((s_i))=(\rho_i(s_i))_{i\in I}$. But then by the commutativity of $\varphi_{ij}$ with the restriction maps, $\varphi_{ij}(V\cap U_i\cap U_j)(\rho_j(s_j)|_{V\cap U_i\cap U_j})$ is simply 
 	\[\varphi_{ij}(U\cap U_j)(s_j)|_{V\cap U_i\cap U_j}=s_i|_{U\cap U_i\cap U_j}|_{V\cap U_i\cap U_j}=s_i|_{V\cap U_i\cap U_j}\]
-	meaning $\rho_{UV}((s_i))\in \mathscr F(V)$. So the restriction maps are well-defined. To show that this is a sheaf let $\{W_\alpha\}$ be an open cover of $V$. Then if $(s_i)_{i\in I}|_{W_\alpha}=0$ for all $\alpha$, each $s_i$ is zero on $W_\alpha\cap U_i$ for all $\alpha$. By the locality condition of each $\mathscr F_i$, we have $s_i=0$ on $V$. Thus, $s=0$. Similarly given $\{s_\alpha\in \mathscr F(W_\alpha)\}$ that are compatible on the overlaps, we have a family of $s_{\alpha, i}\in F(W_\alpha\cap U_i)$ compatible on all $W_\alpha\cap W_{\alpha'}\cap U_i$. Gluing them using $\mathscr F_i$ together gives an element $s_i$ in $V\cap U_i$. Clearly the tuple $(s_i)_{i\in I}$ is in $\mathscr F(V)$ since the $\varphi_{ij}$-condition is satisfied on each $W_\alpha$, and by the locality property we've proved the $\varphi_{ij}$-condition is satisfied globally. The restriction of $(s_i)_{i\in I}$ to each $W_\alpha$ is by construction $s_{\alpha}$. Thus, $\mathscr F$ is a sheaf.
+	meaning $\rho_{UV}((s_i))\in \mathscr F(V)$. So the restriction maps are well-defined. To show that this is a sheaf let $\{W_\alpha\}$ be an open cover of $V$. Then if $(s_i)_{i\in I}|_{W_\alpha}=0$ for all $\alpha$, each $s_i$ is zero on $W_\alpha\cap U_i$ for all $\alpha$. By the locality condition of each $\mathscr F_i$, we have $s_i=0$ on $V$. Thus, $s=0$. Similarly given $\{s_\alpha\in \mathscr F(W_\alpha)\}$ that are compatible on the overlaps, we have a family of $s_{\alpha, i}\in F(W_\alpha\cap U_i)$ compatible on all $W_\alpha\cap W_{\alpha'}\cap U_i$. Gluing them using $\mathscr F_i$ together gives an element $s_i$ in $V\cap U_i$. Clearly the tuple $(s_i)_{i\in I}$ is in $\mathscr F(V)$ since the $\varphi_{ij}$-condition is satisfied on each $W_\alpha$, and by the locality property we've proved the $\varphi_{ij}$-condition is satisfied globally. The restriction of $(s_i)_{i\in I}$ to each $W_\alpha$ is by construction $s_{\alpha}$. Thus, $\mathscr F$ is a sheaf, called the \textit{gluing sheaf of $X_i$ along $U_i$ via $\varphi$}.
 	
 	The construction of this gluing sheaf does not require the cocycle condition $\varphi_{ik}=\varphi_{ij}\circ\varphi_{jk}$ for any $i,j,k\in I$. But this property is required to make sense of the idea of ``gluing": we want a sheaf which can be ``cut" into the original family of data, i.e., isomorphisms $\psi_j:\mathscr F|_{U_j}\xrightarrow{\sim}\mathscr F_j$. Furthermore these isomorphisms should consist of the canonical projections $\psi_j(V):(s_i)_{i\in I}\in\mathscr F(V)=\mathscr F|_{U_j}(V)\mapsto s_j\in\mathscr F_j(V)$ where $V\subseteq U_j$. If the cocycle property is satisfied, for any $s_j\in \in\mathscr F_j(V)$, the inverse of $\psi_j(V)$ is defined by $s_j\mapsto \left(\varphi_{ji}^{-1}(V\cap U_i)(s_j|_{V\cap U_i})\right)_{i\in I}$. It's easy to check that by construction and the cocycle condition, the image obeys the $\varphi_{ij}$-condition. Clearly the latter map is the inverse of the projection and therefore we have an isomorphism $\psi_j:\mathscr F|_{U_j}\xrightarrow{\sim}\mathscr F_j$. It can be further deduced that since for all $i$, $\mathscr F|_{U_i}\cong\mathscr F_i$, for any $x\in U_i$ the stalk $\mathscr F_x$ is simply $(\mathscr F|_{U_i})_x=\mathscr F_{i, x}$.
 	
@@ -465,14 +468,65 @@ A_{f(\mathfrak p)} \arrow[rr, "\varphi_{\mathfrak p}"]                          
 	Clearly the new maps satisfy the cocycle condition --- there are only two maps! Therefore, $\mathscr O_X$ is a sheaf on $X$ such that, by the previous arguments on sheaves, we have $\mathscr O_X|_{U_i}=\left(\iota_{i}\right)_*\mathscr O_i$. In particular, since $U_i$ covers $X$,  for any $x\in X$ we can find an $i$ such that $x\in U_i$. Therefore, the stalk at $x$ is the stalk $\left(\mathscr O_X|_{U_i}\right)_x=\left(\mathscr O_{X, i}\right)_x$. By since $\iota_i$ is a homeomorphism, the stalk is precise the stalk of $\mathscr O_i$ at the (unique) preimage of $x$. But by assumption the stalks are local rings, so $(X,\mathscr O_X)$ is a locally ringed space. Furthermore, if the $(X_i, \mathscr O_i)$ are schemes, $(X, \mathscr O_X)$ is also a scheme. This is because if $(X_i, \mathscr O_i)$ is a scheme, then for each $x\in U_i\subseteq X$ we have an isomorphism of locally ringed spaces (we are abusing the notations here: $X_i$ is the affine scheme around the point corresponding to $x$ and $U_i$ is the image of $X_i$ under the restriction of the homeomorphism $\iota_i$) $(\iota_i, \id):(U_i, \mathscr O_X|_{U_i})\to\mathscr (X_i, \mathscr O_i)$ where we have identity since for the structure sheaves $\mathscr O_X|_{U_i}\cong (\iota_i)_*\mathscr O_i$ and its inverse is just $\mathscr O_i\to (\iota_i^{-1})_*\mathscr O_X|_{U_i}\cong(\iota_i^{-1})_*(\iota_i)_*\mathscr O_i=\mathscr O_i$ which is still the identity. Thus, as $X_i$ is an affine scheme, so is $U_i$. This means $X$ is a scheme, completing our construction. The resulting scheme is called \textit{the gluing scheme of $X_1$, $X_2$ along $U_1, U_2$ via the isomorphism $\varphi$}.
 
 	Here is an example: consider affine schemes $X_1=X_2=\mathbb{A}_{\mathbb k}^1$, $U_1=U_2=\mathbb{A}_{\mathbb k}^1\backslash p$ for some point $p$. Then gluing $X_1, X_2$ along $U_1, U_2$ we get a new scheme $X$. This is an example of a scheme that is NOT an affine scheme, \textcolor{purple}{which we will prove later}.
-	\subsection{Projective Schemes}\label{ssec-proj-scheme}
-	Let $S=\bigoplus_{d\in\mathbb N} S_d$ be a graded ring. Let $S_+$ denote the irrelevant ideal $\bigoplus_{d>0} S_d$. We define $\Proj S=\{\mathfrak p\text{ homogeneous prime ideal}:S_+\subsetneq \mathfrak p\}$. It is therefore easy to construct a Zariski topology on $\Proj S$ via closed sets $\mathbb V(\mathfrak a)=\{\mathfrak p\in\Proj S:\mathfrak a\subseteq\mathfrak p\}$ for an arbitrary homogeneous ideal $\mathfrak a$. It's quite easy to check the topology with the following elementary commutative algebra lemma:
-	\begin{lemma}\label{l251}
+	\textcolor{blue}{
+	\subsection{Structure sheaves and schemes via topological bases}\label{ssec-alt-sheaves-schemes}}
+	To be written.
+
+	\subsection{The \texorpdfstring{$\Proj$}{Lg} of a ring}\label{ssec-proj}
+	Let $S=\bigoplus_{d\in\mathbb N} S_d$ be a graded ring. An ideal $\mathfrak a$ of $S$ is called a \textit{homogeneous ideal} when $\mathfrak a=\bigoplus_{d\in\N} (\mathfrak a\cap S_d)$. In this case if $f$ is an element of $\mathfrak a$, by directness of the sum, each homogeneous component of $f$ should belong to $\mathfrak a$.
+
+	I here reproduce some commutative algebra results for convenience.
+	\begin{lemma}\label{l261}
+		An ideal $\mathfrak a$ of $S$ is homogeneous if and only if it's generated by a set of homogeneous elements.
+	\end{lemma}
+	\begin{proof}
+		The forward direction is clear: if $\mathfrak a=\bigoplus_{d\in\N} (\mathfrak a\cap S_d)$ then $\mathfrak a$ is generated by $\bigcup (\mathfrak a\cap S_d)$.
+
+		Conversely, if $\mathfrak a$ is generated by a set of homogeneous elements $H=\bigcup H_d$ for $H_d\subseteq S_d$. Then for any $f\in \mathfrak a$ we have $f=\sum b_hh$ where $h\in H_d$ for some $d$ and $b_h\in S$ are nonzero for finitely many $h$. We can further write
+		\[f=\sum_{d\in\mathbb N}\sum_{h\in H_d}b_hh.\]
+		But since $b_h$ can be expressed in homogeneous components $b_h=\sum b_{h, k}$, $b_{h, k}h\in S_{k+d}$ and $b_{h, k}h\in \mathfrak a$ as $\mathfrak a$ is an ideal, $b_hh\in \bigoplus_{d\leqslant k} (\mathfrak a\cap S_k)$ and thus $f=\sum b_hh\in \bigoplus_{d\in\N} (\mathfrak a\cap S_d)$. Yet trivially $\bigoplus_{d\in\N} (\mathfrak a\cap S_d)\subseteq \mathfrak a$ so we have $\mathfrak a =\bigoplus_{d\in\N} (\mathfrak a\cap S_d)$, completing the proof.
+	\end{proof}
+	\begin{lemma}\label{l262}
 		A homogeneous ideal $\mathfrak p$ is prime iff for all homogeneous elements $a, b$ satisfying $ab\in\mathfrak p$, we have $a\in\mathfrak p$ or $b\in\mathfrak p$.
 	\end{lemma}
 	\begin{proof}
-		The forward direction is obvious. Conversely, suppose the assumption on homogeneous elements holds. Let $a, b\in S$ such that $ab\in\mathfrak p$. Assume, in contradiction, that neither $a$ nor $b$ is in the ideal. Then if we write $a=\sum a_d$ and $b=\sum b_d$ in homogeneous elements, then there must exist some $a_d$ and $b_{d'}$ such that $a_d\notin\mathfrak p$ and $b_{d'}\notin\mathfrak p$. We can assume $d, d'$ are maximal among such indexes since the two sums above are finite. But as $\mathfrak p$ is homogeneous, each homogeneous component of $ab$ must belong to $\mathfrak p$. This suggests the $d+d'$th component
+		The only if direction is obvious. Conversely, suppose the assumption on homogeneous elements holds. Let $a, b\in S$ such that $ab\in\mathfrak p$. Assume, in contradiction, that neither $a$ nor $b$ is in the ideal. Then if we write $a=\sum a_d$ and $b=\sum b_d$ in homogeneous elements, then there must exist some $a_d$ and $b_{d'}$ such that $a_d\notin\mathfrak p$ and $b_{d'}\notin\mathfrak p$. We can assume $d, d'$ are maximal among such indexes since the two sums above are finite. But as $\mathfrak p$ is homogeneous, each homogeneous component of $ab$ must belong to $\mathfrak p$. This suggests the $(d+d')$th component
 		\[\sum_{i+j=d+d'}a_ib_j\in\mathfrak p\]
 		If $(i, j)\neq(d, d')$, then $i>d$ or $j>d'$, meaning $a_i$ or $b_j\in \mathfrak p$ so $a_ib_j\in\mathfrak p$. But then $a_db_{d'}\in\mathfrak p$ which gives us a contradiction given $a_d, b_{d'}\notin\mathfrak p$.
 	\end{proof}
+	
+	Let $S_+$ denote the irrelevant ideal $\bigoplus_{d>0} S_d$. We define the \textit{homogeneous spectrum} $\Proj S=\{\mathfrak p\text{ homogeneous prime ideal}:S_+\subsetneq \mathfrak p\}$. It is therefore easy to construct a Zariski topology on $\Proj S$ via closed sets $V_+(\mathfrak a)=\{\mathfrak p\in\Proj S:\mathfrak a\subseteq\mathfrak p\}$ for an arbitrary homogeneous ideal $\mathfrak a$. For any homogeneous element $f$ of positive degree, define the open set $D_+(f)=\{\mathfrak p\in\Proj S:f\notin\mathfrak p\}$. It is easy to see that they are just the induced closed and open sets from $\Spec S$, so they form a subspace topology.
+
+	Here are two very important lemmas we need for the next section.
+	\begin{lemma}\label{l263}
+		Suppose $S$ is a $\Z$-graded ring with an invertible element $f$ of positive degree. Then the subspace $G$ of homogeneous prime ideals of $S$ is homeomorphic to $\Spec S_0$.
+	\end{lemma}
+	\begin{proof}
+		Assume $f$ has degree $d>0$. We define the map $\varphi:G\to\Spec S_0$ by $\mathfrak p\mapsto\mathfrak p\cap S_0$. Clearly if $\mathfrak p \in G$, $\mathfrak p\cap S_0$ is prime in $S_0$. So it suffices to construct an inverse of this map. For any $\mathfrak p_0\in \Spec S_0$, the ideal $\mathfrak p_0S$
+	\end{proof}
+
+	\subsection{Projective schemes}\label{ssec-proj-scheme}
+
+	Fix some homogeneous prime ideal $\mathfrak p$. Let $T$ be the set of all homogeneous elements that are not in $\mathfrak p$, which is a multiplicative set. Then the localization $T^{-1}S$ is actually ($\Z$-)graded: for $s\in S_d$ and $t\in T$, let the degree of $s/t$ be $d-\deg t$. Let $S_{(\mathfrak p)}$ denote the elements of degree zero in $T^{-1}S$, i.e., they are of the form $s/t$ where $s, t$ are homogeneous of the same degree except we need $t$ sitting outside $\mathfrak p$ (note that if $S$ is an integral domain then so is $S_{(\mathfrak p)}$).
+
+	We then define the structure sheaf of $\Proj S$ to be the functor $\mathscr O$ which sends an open set $U\subseteq\Proj S$ to the set of functions
+	\[s:U\to \bigsqcup_{\mathfrak p\in U}S_{(\mathfrak p)},\quad s_{\mathfrak p}\in S_{(\mathfrak p)}\]
+	and for each $\mathfrak p\in U$, there is an open nhds $p\in V\subset U$ and homogeneous $a, f\in S$ of the same degree such that $f\notin \mathfrak q$ for all $\mathfrak q\in V$ and $s_{\mathfrak q}=a/f\in S_{(\mathfrak q)}$ (this is really the same thing as what we did about the spectra of rings, only with the extra degree condition). This presheaf $\mathscr O$ is clearly a sheaf.
+
+	For any homogeneous $f\in S_+$, define $D_+(f)=\{\mathfrak p\in\Proj S:f\notin \mathfrak p\}$.
+
+	\begin{remark}
+		The ring $S_{(\mathfrak p)}$ is a local ring with 
+	\end{remark}
+	
+	Similar to \autoref{l213}, the following lemma gives us a scheme $(\Proj S, \mathscr O_{\Proj S})$ called the \textit{homogeneous spectrum of $S$}:
+	\begin{lemma}\label{l271}
+		Given a graded ring $S$, we have
+		\begin{enumerate}[\normalfont(a)]
+			\item For any $\mathfrak p\in\Proj S$, the stalk $\mathscr O_{\mathfrak p}$ is the ring $S_{(\mathfrak p)}$, which is local.
+			\item Each $D_+(f)$ is open. Furthermore, they cover $\Proj S$ and the following locally ringed spaces are isomorphic:
+				\[\left(D_+(f), \mathscr O|_{D_+(f)}\right)\cong\Spec S_{(f)}\]
+			where $S_{(f)}$ is the ring of homogeneous elements of degree zero in $S_f$.
+		\end{enumerate}
+	\end{lemma}
 \end{document}
