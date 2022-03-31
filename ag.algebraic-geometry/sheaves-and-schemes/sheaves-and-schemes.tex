@@ -50,7 +50,7 @@
     \renewcommand{\Re}[0]{\operatorname{Re}}
     \renewcommand{\Im}[0]{\operatorname{Im}}
     \newcommand{\nS}[0]{\mathcal{S}}
-    \newcommand{\M}[0]{\mathcal{M}}
+	\newcommand{\M}[0]{\mathcal{M}}
     \newcommand{\To}[0]{\mathbb{C}/\Lambda}
     \newcommand{\Too}[0]{\mathbb{C}/\Lambda'}
     \newcommand{\mtx}[4]{\begin{bmatrix}#1 & #2\\ #3 & #4\end{bmatrix}}
@@ -75,15 +75,20 @@
     \newcommand{\Top}[0]{\mathsf{Top}}
     \newcommand{\op}[0]{\mathsf{op}}
     \newenvironment{psmallmatrix}
-  {\left(\begin{smallmatrix}}
-  {\end{smallmatrix}\right)}
-  \newenvironment{bsmallmatrix}
-  {\left[\begin{smallmatrix}}
-  {\end{smallmatrix}\right]}
+	{\left(\begin{smallmatrix}}
+	{\end{smallmatrix}\right)}
+	\newenvironment{bsmallmatrix}
+	{\left[\begin{smallmatrix}}
+	{\end{smallmatrix}\right]}
+	\setcounter{section}{-1}
 \begin{document}
     \maketitle
     \tableofcontents
     \newpage
+	\section{A Few Words}\label{sec-foreword}
+	This is a note on the theory of schemes. It mixed up definitions from various sources. I have tried to pick the most succinct ones so the proofs and statements can be significantly simplified. This note is definitely not a well-written one, and is never intended to be one. It's more like a record of my learning process.
+
+	While reading/reviewing/entertaining using this note, one may observe an increasing use of category-theoretic languages and proofs. This funny pattern is due to my inability to think abstractly when first started reading the texts. The writer has to rely on explicit constructions and expressions to understand certain proofs. But after reading some relevant materials, I became familiar with certain formal properties of the objects, and no longer relied on explicit constructions.
 	\section{Sheaves}\label{sec-sheaf}
     \subsection{Presheaves and sheaves}\label{ssec-sheaf}
     Let $X$ be a topological space and $\Top_X$ be the category of open sets in $X$ with inclusion maps as the only morphisms. Then a \textit{presheaf} on $X$ is just a contravariant functor $\mathscr F:\Top_X\to \mathcal C$ where $\mathcal C$ is an arbitrary category. Contravariant functors $\mathscr F:\mathcal B\to\mathcal C$ can be seen as (covariant) functors $\mathscr F':\mathcal B^\op\to \mathcal C$ such that $Ff=F'f^\op$ (this is how Lean defines presheaves!). Hartshorne requires the functor to preserve initial objects. But this is considered as the "wrong" definition. Grothendieck only defines the presheaves as contravariant functors (see 3.1.1 in the 1971 Springer's version of EGA I).
@@ -497,19 +502,36 @@ A_{f(\mathfrak p)} \arrow[rr, "\varphi_{\mathfrak p}"]                          
 	
 	Let $S_+$ denote the irrelevant ideal $\bigoplus_{d>0} S_d$. We define the \textit{homogeneous spectrum} $\Proj S=\{\mathfrak p\text{ homogeneous prime ideal}:S_+\subsetneq \mathfrak p\}$. It is therefore easy to construct a Zariski topology on $\Proj S$ via closed sets $V_+(\mathfrak a)=\{\mathfrak p\in\Proj S:\mathfrak a\subseteq\mathfrak p\}$ for an arbitrary homogeneous ideal $\mathfrak a$. For any homogeneous element $f$ of positive degree, define the open set $D_+(f)=\{\mathfrak p\in\Proj S:f\notin\mathfrak p\}$. It is easy to see that they are just the induced closed and open sets from $\Spec S$, so they form a subspace topology.
 
-	Here are two very important lemmas we need for the next section.
+	Let $T$ be a multiplicative set of \textbf{homogeneous} elements. Then $T^{-1}S$ gets a natural $\Z$-grading. If $\mathfrak p$ is a homogeneous prime ideal, we consider the set $T$ of all homogeneous elements not in $\mathfrak p$ and denote the localization $T^{-1}S$ by $S_{\mathfrak p}$ and by $S_{(\mathfrak p)}$ the subring $(T^{-1}S)_0$. Then $S_{(\mathfrak p)}$ is a local ring with the unique maximal ideal $\mathfrak pS_p\cap S_0$. The proof of this is pretty much the same as the one that proves the localness of $S_{\mathfrak p}$, with the extra care that if $a/b$ has degree zero then $b/a$ (when it makes sense) also has degree zero.
+
+	For any homogeneous element $f$, the multiplicative set $\{1, f, f^2,\dots\}$ consists of only homogeneous elements. The definition of $S_f$ is therefore the same. Similarly, we denote by $S_{(f)}$ the subring of homogeneous elements of degree zero in $S_f$.
+
 	\begin{lemma}\label{l263}
 		Suppose $S$ is a $\Z$-graded ring with an invertible element $f$ of positive degree. Then the subspace $G$ of homogeneous prime ideals of $S$ is homeomorphic to $\Spec S_0$.
 	\end{lemma}
 	\begin{proof}
-		Assume $f$ has degree $d>0$. We define the map $\varphi:G\to\Spec S_0$ by $\mathfrak p\mapsto\mathfrak p\cap S_0$. Clearly if $\mathfrak p \in G$, $\mathfrak p\cap S_0$ is prime in $S_0$. So it suffices to construct an inverse of this map. For any $\mathfrak p_0\in \Spec S_0$, the ideal $\mathfrak p_0S$
+		Assume $f$ has degree $d>0$. Since $f$ is invertible, its inverse has homogeneous degree $-d$ (which is immediate if we write $f^{-1}$ in homogeneous components). We define the map $\varphi:G\to\Spec S_0$ by $\mathfrak p\mapsto\mathfrak p\cap S_0$. We claim that the inverse of this map is $\psi:\mathfrak p_0\mapsto \sqrt{\mathfrak p_0S}$. Clearly if $\mathfrak p \in G$, $\mathfrak p\cap S_0$ is prime in $S_0$. So it suffices to construct an inverse of this map. For any $\mathfrak p_0\in \Spec S_0$, the ideal $\mathfrak p_0S$ (the set of finite sums of products $ps$ for some $p\in\mathfrak p_0$ and $s\in S$) is homogeneous (generated by the sets $\mathfrak p_0 S_i$ of homogeneous elements).
+
+		It is required to show that $\psi$ is well-defined, that is, $\sqrt{\mathfrak p_0S}$ is indeed prime. Take any two homogeneous elements $a, b$ such that $ab\in \sqrt{\mathfrak p_0S}$, we have $a^nb^n\in\mathfrak p_0S$ for some natural number $n$. Then $a^{dn}b^{dn}/f^{n\deg a+n\deg b}\in\mathfrak p_0$. Then either $a^{dn}/f^{n\deg a}\in\mathfrak p_0$ or $b^{dn}/f^{n\deg b}\in\mathfrak p_0$. This means either $a^{dn}\in\mathfrak p_0S$ or $b^{dn}\in\mathfrak p_0S$, in other words $a\in \sqrt{\mathfrak p_0S}$ or $b\in\sqrt{\mathfrak p_0S}$. By \autoref{l262}, $\sqrt{\mathfrak p_0S}$ is prime.
+		
+		We first check $\psi\circ\varphi=\id$. If $p\in\mathfrak p$ is homogeneous, then $s^d/f^{\deg s}\in \mathfrak p\cap S_0$. Thus, $s^d=f^{\deg s}(s^d/f^{\deg s})\in(\mathfrak p\cap S_0)S$. But recall that $\mathfrak p$ is homogeneous, so $\mathfrak p\subseteq \sqrt{(\mathfrak p\cap S_0)S}$ as the latter is an ideal. The opposite inclusion is immediate: $\sqrt{(\mathfrak p\cap S_0)S}\subseteq\sqrt{\mathfrak pS}=\sqrt{\mathfrak p}=\mathfrak p$.
+	
+		Now we show that $\varphi\circ\psi=\id$. Obverse if $p\in\sqrt{\mathfrak p_0S}\cap S_0$, then since $S$ is graded, $p^n=\sum p_is_i\in\mathfrak p_0$ where $p_i\in\mathfrak p_0$ and $s_i\in S_0$ for some $n$. Then $p^n\in\mathfrak p_0$ implying $p\in\mathfrak p_0$. Therefore, $\mathfrak p_0S\cap S_0=\mathfrak p_0$ as the other inclusion is obvious.
+
+		It remains to show that $\varphi,\psi$ are both open. Take any open set $D'(g)=G\cap D(g)$ of the basis. If $g=\sum g_i$ where $g_i\in S_i$, then $\varphi(D'(g))=\bigcup D(g_i^d/f^i)\subseteq\Spec(S_0)$ (can be proved easily on scratch paper). For an open basis set $D(g_0)$ of $\Spec S_0$ with $g_0\in S_0$, it is easy to see that $\psi(D(g_0))=D'(g_0)$ in $G$, which is open.
 	\end{proof}
+	Here is another lemma on the spectrum of localizations. We omit the proof since it's standard.
+	\begin{lemma}\label{l264}
+		Given a ring $R$ and a multiplicative set $S$, the canonical map $\varphi:R\to S^{-1}R$ induces a homeomorphism between $\Spec S^{-1}R$ and $\{\mathfrak p\in \Spec R:\mathfrak p\cap S=\emptyset\}$ where the latter has a subspace topology induced by the spectrum of $R$ whose inverse is $\mathfrak p\mapsto S^{-1}\mathfrak p$.
+	\end{lemma}
+	In particular, since the localization of a homogeneous ideal is homogeneous, the open set $D_+(f)\subseteq D(f)$ corresponds to the homogeneous prime ideals in $\Spec S_f$ (since $\mathfrak q\in\Spec S_f$ automatically ensures that $f\notin\varphi^{-1}(\mathfrak q)$ and $S_+\not\subseteq \varphi^{-1}(\mathfrak q)$!). And therefore by \autoref{l263}, given a homogeneous element $f$ of positive degree, we get a homeomorphism from $D_+(f)$ to $\Spec(S_{(f)})$.
+
+	\begin{lemma}\label{264}
+		Given a graded ring $S$ and an element $\mathfrak p\in\Proj S$, 
+	\end{lemma}
 
 	\subsection{Projective schemes}\label{ssec-proj-scheme}
-
-	Fix some homogeneous prime ideal $\mathfrak p$. Let $T$ be the set of all homogeneous elements that are not in $\mathfrak p$, which is a multiplicative set. Then the localization $T^{-1}S$ is actually ($\Z$-)graded: for $s\in S_d$ and $t\in T$, let the degree of $s/t$ be $d-\deg t$. Let $S_{(\mathfrak p)}$ denote the elements of degree zero in $T^{-1}S$, i.e., they are of the form $s/t$ where $s, t$ are homogeneous of the same degree except we need $t$ sitting outside $\mathfrak p$ (note that if $S$ is an integral domain then so is $S_{(\mathfrak p)}$).
-
-	We then define the structure sheaf of $\Proj S$ to be the functor $\mathscr O$ which sends an open set $U\subseteq\Proj S$ to the set of functions
+	We define the structure sheaf of $\Proj S$ to be the functor $\mathscr O$ which sends an open set $U\subseteq\Proj S$ to the set of functions
 	\[s:U\to \bigsqcup_{\mathfrak p\in U}S_{(\mathfrak p)},\quad s_{\mathfrak p}\in S_{(\mathfrak p)}\]
 	and for each $\mathfrak p\in U$, there is an open nhds $p\in V\subset U$ and homogeneous $a, f\in S$ of the same degree such that $f\notin \mathfrak q$ for all $\mathfrak q\in V$ and $s_{\mathfrak q}=a/f\in S_{(\mathfrak q)}$ (this is really the same thing as what we did about the spectra of rings, only with the extra degree condition). This presheaf $\mathscr O$ is clearly a sheaf.
 
