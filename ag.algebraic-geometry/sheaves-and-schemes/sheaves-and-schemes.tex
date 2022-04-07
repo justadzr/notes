@@ -527,19 +527,18 @@ A_{f(\mathfrak p)} \arrow[rr, "\varphi_{\mathfrak p}"]                          
 	In particular, since the localization of a homogeneous ideal is homogeneous, the open set $D_+(f)\subseteq D(f)$ corresponds to the homogeneous prime ideals in $\Spec S_f$ (since $\mathfrak q\in\Spec S_f$ automatically ensures that $f\notin\varphi^{-1}(\mathfrak q)$ and $S_+\not\subseteq \varphi^{-1}(\mathfrak q)$!). And therefore by \autoref{l263}, given a homogeneous element $f$ of positive degree, we get a homeomorphism from $D_+(f)$ to $\Spec(S_{(f)})$.
 
 	\begin{lemma}\label{264}
-		Given a graded ring $S$ and an element $\mathfrak p\in\Proj S$, 
+		Given a graded ring $S$ and an element $\mathfrak p\in\Proj S$, take some homogeneous element $f$ of positive degree that is not in $\mathfrak p$ (which exists by our construction of $\Proj$). Let $\mathfrak p'$ be the element in $\Spec(S_{(f)})$ corresponding to $\mathfrak p$, then $S_{(\mathfrak p)}=(S_{(f)})_{\mathfrak p'}$.
 	\end{lemma}
+	\begin{proof}
+		Given any $g/h\in S_{(\mathfrak p)}$, let
+		\[\varphi(g/h)=(gh^{\deg f-1}/f^{\deg g})/(h^{\deg f}/f^{\deg h})\]
+		Then clearly the degrees check out, and $h^{\deg f}/f^{\deg h}\notin\mathfrak p'$ as $h^{\deg f}\notin\mathfrak p$ while $\mathfrak p'=\{a/f^n:\deg a-n\deg f=0, a\in\mathfrak p\}$. To show that this is well-defined \textcolor{purple}{Why?}. It's easy to see that this map is multiplicative and additive. To show that it's actually an isomorphism, we construct the inverse: $\psi:(g/f^{n})/(h/f^{m})\mapsto (gf^{m})/(hf^n)$. \textcolor{purple}{Need details!}
+	\end{proof}
 
 	\subsection{Projective schemes}\label{ssec-proj-scheme}
 	We define the structure sheaf of $\Proj S$ to be the functor $\mathscr O$ which sends an open set $U\subseteq\Proj S$ to the set of functions
 	\[s:U\to \bigsqcup_{\mathfrak p\in U}S_{(\mathfrak p)},\quad s_{\mathfrak p}\in S_{(\mathfrak p)}\]
 	and for each $\mathfrak p\in U$, there is an open nhds $p\in V\subset U$ and homogeneous $a, f\in S$ of the same degree such that $f\notin \mathfrak q$ for all $\mathfrak q\in V$ and $s_{\mathfrak q}=a/f\in S_{(\mathfrak q)}$ (this is really the same thing as what we did about the spectra of rings, only with the extra degree condition). This presheaf $\mathscr O$ is clearly a sheaf.
-
-	For any homogeneous $f\in S_+$, define $D_+(f)=\{\mathfrak p\in\Proj S:f\notin \mathfrak p\}$.
-
-	\begin{remark}
-		The ring $S_{(\mathfrak p)}$ is a local ring with 
-	\end{remark}
 	
 	Similar to \autoref{l213}, the following lemma gives us a scheme $(\Proj S, \mathscr O_{\Proj S})$ called the \textit{homogeneous spectrum of $S$}:
 	\begin{lemma}\label{l271}
