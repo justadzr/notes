@@ -73,6 +73,7 @@
     %\newcommand{\ord}[0]{\operatorname{ord}}
     \newcommand{\comment}[1]{}
     \newcommand{\Top}[0]{\mathsf{Top}}
+	\newcommand{\Sch}[0]{\mathsf{Sch}}
     \newcommand{\op}[0]{\mathsf{op}}
     \newenvironment{psmallmatrix}
 	{\left(\begin{smallmatrix}}
@@ -524,10 +525,10 @@ A_{f(\mathfrak p)} \arrow[rr, "\varphi_{\mathfrak p}"]                          
 	\begin{lemma}\label{l264}
 		Given a ring $R$ and a multiplicative set $S$, the canonical map $\varphi:R\to S^{-1}R$ induces a homeomorphism between $\Spec S^{-1}R$ and $\{\mathfrak p\in \Spec R:\mathfrak p\cap S=\emptyset\}$ where the latter has a subspace topology induced by the spectrum of $R$ whose inverse is $\mathfrak p\mapsto S^{-1}\mathfrak p$.
 	\end{lemma}
-	In particular, since the localization of a homogeneous ideal is homogeneous, the open set $D_+(f)\subseteq D(f)$ corresponds to the homogeneous prime ideals in $\Spec S_f$ (since $\mathfrak q\in\Spec S_f$ automatically ensures that $f\notin\varphi^{-1}(\mathfrak q)$ and $S_+\not\subseteq \varphi^{-1}(\mathfrak q)$!). And therefore by \autoref{l263}, given a homogeneous element $f$ of positive degree, we get a homeomorphism from $D_+(f)$ to $\Spec(S_{(f)})$.
+	In particular, since the localization of a homogeneous ideal is homogeneous, the open set $D_+(f)\subseteq D(f)$ corresponds to the homogeneous prime ideals in $\Spec S_f$ (since $\mathfrak q\in\Spec S_f$ automatically ensures that $f\notin\varphi^{-1}(\mathfrak q)$ and $S_+\not\subseteq \varphi^{-1}(\mathfrak q)$!). And therefore by \autoref{l263}, given a homogeneous element $f$ of positive degree, we get a homeomorphism from $D_+(f)$ to $\Spec(S_{(f)})$, given by $\theta:\mathfrak p\mapsto (\mathfrak pS_f)\cap S_{(f)}$
 
-	\begin{lemma}\label{264}
-		Given a graded ring $S$ and an element $\mathfrak p\in\Proj S$, take some homogeneous element $f$ of positive degree that is not in $\mathfrak p$ (which exists by our construction of $\Proj$). Let $\mathfrak p'$ be the element in $\Spec(S_{(f)})$ corresponding to $\mathfrak p$, then $S_{(\mathfrak p)}=(S_{(f)})_{\mathfrak p'}$.
+	\begin{lemma}\label{l265}
+		Given a graded ring $S$ and an element $\mathfrak p\in\Proj S$, take some homogeneous element $f$ of positive degree that is not in $\mathfrak p$ (which exists by our construction of $\Proj$). Let $\mathfrak p'=\theta(\mathfrak p)$ be the element in $\Spec(S_{(f)})$ corresponding to $\mathfrak p$, then $S_{(\mathfrak p)}=(S_{(f)})_{\mathfrak p'}$.
 	\end{lemma}
 	\begin{proof}
 		Given any $g/h\in S_{(\mathfrak p)}$, let
@@ -549,5 +550,21 @@ A_{f(\mathfrak p)} \arrow[rr, "\varphi_{\mathfrak p}"]                          
 				\[\left(D_+(f), \mathscr O|_{D_+(f)}\right)\cong\Spec S_{(f)}\]
 			where $S_{(f)}$ is the ring of homogeneous elements of degree zero in $S_f$.
 		\end{enumerate}
+	\end{lemma}
+	\begin{proof}
+		(a) The proof of (a) is literally the same as \autoref{l213}, with some extra care of the degrees.
+
+		(b) We have shown in \autoref{ssec-proj} that there is a homeomorphism $\theta:D_+(f)\to \Spec(S_{(f)})$ and an isomorphism $\varphi_{\mathfrak p}$ from $S_{(\mathfrak p)}\to (S_{(f)})_{\theta(\mathfrak p)}$ by \autoref{l265}. Therefore, we get a morphism of sheaves:
+		\[\varphi^\#:\mathscr{O}_{\Spec S_{(f)}}\to \varphi_*\mathscr O|_{D_+(f)}\]
+		defined by for each open $U\subseteq \Spec S_{(f)}$, $s\mapsto (\sqcup \varphi_{\mathfrak p}^{-1})\circ s\circ\varphi$. This map induces $\varphi_{\mathfrak p}^{-1}$ on each stack, which is an isomorphism of local rings. Thus, $\varphi^\#$ is an isomorphism of sheaves by \autoref{t111}, and $(\varphi,\varphi^\#)$ is an isomorphism of locally ringed spaces.
+	\end{proof}
+
+	We have proved that $\Proj S$ is indeed a scheme. If $A$ is a ring, we define the \textit{projective $n$-space} to be the scheme $\mathbb P^n_A=\Proj A[x_0,\dots, x_n]$.
+
+	To relate varieties with schemes, we construct a functor from a category of varieties to a category related to schemes. Suppose $S$ is a fixed scheme. A \textit{scheme over $S$} is a scheme $X$ with a morphism (of locally ringed spaces) $\pi_X:X\to S$. If $X, Y$ are schemes over $S$, then \textit{a morphism of schemes over $S$} is a morphism of schemes $f:X\to Y$ such that $\pi_X=\pi_Y\circ f$. Denote by $\Sch(S)$ the category of schemes over $S$; given a ring $A$, denote by $\Sch(A)$ the category of schemes over $\Spec A$.
+
+	Then the final lemma of this section:
+	\begin{lemma}\label{l272}
+		Let $k$ be an algebraically closed field. Then there is a fully faithful functor $t:\mathsf{Var}(k)\to\Sch(k)$ such that for each variety $V$, its topological space is homeomorphic via $\varphi$ to the set of closed points of the topological space of $t(V)$ and its sheaf of regular functions is isomorphic to the restriction of the structural sheaf of $t(V)$ under $\varphi$.
 	\end{lemma}
 \end{document}
