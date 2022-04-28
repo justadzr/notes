@@ -533,7 +533,11 @@ A_{f(\mathfrak p)} \arrow[rr, "\varphi_{\mathfrak p}"]                          
 	\begin{proof}
 		Given any $g/h\in S_{(\mathfrak p)}$, let
 		\[\varphi(g/h)=(gh^{\deg f-1}/f^{\deg g})/(h^{\deg f}/f^{\deg h})\]
-		Then clearly the degrees check out, and $h^{\deg f}/f^{\deg h}\notin\mathfrak p'$ as $h^{\deg f}\notin\mathfrak p$ while $\mathfrak p'=\{a/f^n:\deg a-n\deg f=0, a\in\mathfrak p\}$. To show that this is well-defined \textcolor{purple}{Why?}. It's easy to see that this map is multiplicative and additive. To show that it's actually an isomorphism, we construct the inverse: $\psi:(g/f^{n})/(h/f^{m})\mapsto (gf^{m})/(hf^n)$. \textcolor{purple}{Need details!}
+		Then clearly the degrees check out, and $h^{\deg f}/f^{\deg h}\notin\mathfrak p'$ as $h^{\deg f}\notin\mathfrak p$ while $\mathfrak p'=\{a/f^n:\deg a-n\deg f=0, a\in\mathfrak p\}$. To show that this is well-defined, let $h_0/g_0=h_1/g_1$. One wants
+		\[\frac{g_0h_0^{\deg f-1}h_1^{\deg f}}{f^{{\deg g_0+\deg h_1}}}=\frac{g_1h_0^{\deg f}h_1^{\deg f-1}}{f^{\deg h_0+\deg g_1}}\]
+		This is clear since $g_0h_0^{\deg f-1}h_1^{\deg f}-g_1h_0^{\deg f}h_1^{\deg f-1}=h_0^{\deg f-1}h_1^{\deg f-1}(g_0h_1-g_1h_0)$ and the degrees of $f$ in the denominators are equal as $\deg h_i=\deg g_i$.
+		
+		It's easy to see that this map is multiplicative and additive. To show that it's actually an isomorphism, we construct the inverse: $\psi:(g/f^{n})/(h/f^{m})\mapsto (gf^{m})/(hf^n)$. \textcolor{purple}{Need details!}
 	\end{proof}
 
 	\subsection{Projective schemes}\label{ssec-proj-scheme}
