@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+    \usepackage{indentfirst}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{amsthm}
+    \usepackage[utf8]{inputenc}
+    \usepackage{geometry}
+    \usepackage{diagbox}
+	\usepackage{enumerate}
+    \usepackage{siunitx}
+    \usepackage{graphicx}
+    \usepackage{multirow}
+    \usepackage{xcolor}
+    \usepackage{tikz-cd}
+    \usepackage{mathrsfs}
+    \usepackage{bm}
+    \usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,]{hyperref}
+    \usepackage{cleveref}
+    \title{Notes on Elliptic Curves}
+    \author{Yourong Zang}
+	\newtheorem{theorem}{Theorem}[subsection]
+	\newtheorem{lemma}{Lemma}[subsection]
+	\newtheorem{corollary}{Corollary}[subsection]
+	\theoremstyle{remark}
+	\newtheorem*{remark}{Remark}
+	\newcommand*{\lemmaautorefname}{Lemma}
+	\newcommand*{\corollaryautorefname}{Corollary}
+    \newcommand{\res}[2]{\underset{#1}{\,\operatorname{Res}\,}#2}
+    \newcommand{\ord}[0]{\operatorname{ord}}
+    \newcommand{\ind}[0]{\operatorname{ind}}
+    \newcommand{\w}[0]{\omega}
+    \newcommand{\ve}[0]{\varepsilon}
+    \newcommand{\s}[0]{\sigma}
+    \newcommand{\D}[0]{\Delta}
+    \newcommand{\Z}[0]{\mathbb{Z}}
+    \newcommand{\R}[0]{\mathbb{R}}
+    \newcommand{\F}[0]{\mathbb{F}}
+    \newcommand{\N}[0]{\mathbb{N}}
+    \newcommand{\Q}[0]{\mathbb{Q}}
+    \newcommand{\C}[0]{\mathbb{C}}
+    \newcommand{\A}[0]{\mathbb{A}}
+    \newcommand{\Lam}[0]{\Lambda}
+    \newcommand{\coker}[0]{\operatorname{coker}}
+    \newcommand{\kp}[0]{\kappa}
+    \newcommand{\doubp}[1]{\left(\left(#1\right)\right)}
+    \newcommand{\lbd}[0]{\lambda}
+    \renewcommand{\Re}[0]{\operatorname{Re}}
+    \renewcommand{\Im}[0]{\operatorname{Im}}
+    \newcommand{\nS}[0]{\mathcal{S}}
+	\newcommand{\M}[0]{\mathcal{M}}
+    \newcommand{\To}[0]{\mathbb{C}/\Lambda}
+    \newcommand{\Too}[0]{\mathbb{C}/\Lambda'}
+    \newcommand{\mtx}[4]{\begin{bmatrix}#1 & #2\\ #3 & #4\end{bmatrix}}
+    \newcommand{\vp}[0]{\varphi}
+    \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+    \newcommand{\proj}[0]{\operatorname{proj}}
+    \newcommand{\lcm}[0]{\operatorname{lcm}}
+    \newcommand{\leg}[2]{\left(\frac{#1}{#2}\right)}
+    \newcommand{\sgn}[0]{\operatorname{sgn}}
+    \newcommand{\mult}[0]{\operatorname{mult}}
+    \newcommand{\ft}[0]{\mathscr{F}}
+    \newcommand{\rad}[0]{\operatorname{rad}}
+    \newcommand{\Spec}[0]{\operatorname{Spec}}
+	\newcommand{\Proj}[0]{\operatorname{Proj}}
+    \newcommand{\MaxSpec}[0]{\operatorname{MaxSpec}}
+    \newcommand{\im}[0]{\operatorname{im}}
+    \newcommand{\Hom}[0]{\operatorname{Hom}}
+    \newcommand{\height}[0]{\operatorname{height}}
+    \newcommand{\id}[0]{\operatorname{id}}
+    %\newcommand{\ord}[0]{\operatorname{ord}}
+    \newcommand{\comment}[1]{}
+    \newcommand{\Top}[0]{\mathsf{Top}}
+	\newcommand{\Sch}[0]{\mathsf{Sch}}
+    \newcommand{\op}[0]{\mathsf{op}}
+    \newenvironment{psmallmatrix}
+	{\left(\begin{smallmatrix}}
+	{\end{smallmatrix}\right)}
+	\newenvironment{bsmallmatrix}
+	{\left[\begin{smallmatrix}}
+	{\end{smallmatrix}\right]}
+	\setcounter{section}{-1}
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \newpage
+	
+\end{document}
