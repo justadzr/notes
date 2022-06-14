@@ -1,3 +1,4 @@
 \contentsline {section}{\numberline {0}Introduction}{2}{section.0}%
 \contentsline {section}{\numberline {1}Basic Constructions}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Geometry}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Varieties}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Curves}{3}{subsection.1.2}%
