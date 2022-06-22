@@ -1,0 +1,17 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[1] Config.pm:310> INFO - Logfile is 'elliptic-curves.blg'
+[189] biber-MSWIN64:340> INFO - === 
+[248] Biber.pm:418> INFO - Reading 'elliptic-curves.bcf'
+[607] Biber.pm:972> INFO - Found 14 citekeys in bib section 0
+[627] Biber.pm:4383> INFO - Processing section 0
+[644] Biber.pm:4574> INFO - Looking for bibtex file 'bibli.bib' for section 0
+[757] bibtex.pm:1713> INFO - LaTeX decoding ...
+[814] bibtex.pm:1518> INFO - Found BibTeX data source 'bibli.bib'
+[970] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[971] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[971] Biber.pm:4203> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[971] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[994] bbl.pm:654> INFO - Writing 'elliptic-curves.bbl' with encoding 'UTF-8'
+[1003] bbl.pm:757> INFO - Output to elliptic-curves.bbl
+[1004] Biber.pm:130> WARN - legacy month field 'Dec' in entry 'Artin1924' is not an integer - this will probably not sort properly.
+[1004] Biber.pm:132> INFO - WARNINGS: 1

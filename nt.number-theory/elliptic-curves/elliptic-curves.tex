@@ -3,6 +3,7 @@
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{amsthm}
+    \usepackage{subcaption}
     \usepackage[utf8]{inputenc}
     \usepackage{geometry}
     \usepackage{diagbox}
@@ -10,6 +11,8 @@
     \usepackage{siunitx}
     \usepackage{graphicx}
     \usepackage{multirow}
+    \usepackage[style=alphabetic]{biblatex}
+    \addbibresource{bibli.bib}
     \usepackage{xcolor}
     \usepackage{tikz-cd}
     \usepackage{mathrsfs}
@@ -18,16 +21,42 @@
             linkcolor = blue,
             urlcolor  = blue,
             citecolor = blue,]{hyperref}
-    \usepackage{cleveref}
-    \title{Notes on Elliptic Curves}
+    \usepackage{cleveref}    
+    
+    %%%%%%%%%%%%%%%%%%
+    % Tile and Authors
+    %%%%%%%%%%%%%%%%%%
+    \title{Elliptic Curves}
     \author{Yourong Zang}
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Use \begin{theorem}/{lemma}/{corollary} to access
+    % Use \begin{proof}...\end{proof}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\newtheorem{theorem}{Theorem}[subsection]
 	\newtheorem{lemma}{Lemma}[subsection]
 	\newtheorem{corollary}{Corollary}[subsection]
+	\newtheorem{proposition}{Proposition}
 	\theoremstyle{remark}
-	\newtheorem*{remark}{Remark}
+	\theoremstyle{definition}
+	\newtheorem{remark}{Remark}[subsection]
+	\newtheorem{example}{Example}[subsection]
+	\newtheorem{definition}{Definition}[subsection]
 	\newcommand*{\lemmaautorefname}{Lemma}
+	\newcommand*{\definitionautorefname}{Definition}
+	\newcommand*{\exampleautorefname}{Example}
+	\newcommand{\remarkautorefname}{Remark}
 	\newcommand*{\corollaryautorefname}{Corollary}
+    \def\subsectionautorefname{Section}
+	
+	
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%% List of macros see macro_list.tex
+    %%% Please update the list after adding 
+    %%% new macros with the date and your name
+    %%% Do NOT use \H for the upper half plane. Define \bbH instead
+    %%% Do NOT change any used macros
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \newcommand{\res}[2]{\underset{#1}{\,\operatorname{Res}\,}#2}
     \newcommand{\ord}[0]{\operatorname{ord}}
     \newcommand{\ind}[0]{\operatorname{ind}}
@@ -38,15 +67,19 @@
     \newcommand{\Z}[0]{\mathbb{Z}}
     \newcommand{\R}[0]{\mathbb{R}}
     \newcommand{\F}[0]{\mathbb{F}}
+    \newcommand{\ecO}[0]{\mathcal O}
     \newcommand{\N}[0]{\mathbb{N}}
     \newcommand{\Q}[0]{\mathbb{Q}}
     \newcommand{\C}[0]{\mathbb{C}}
     \newcommand{\A}[0]{\mathbb{A}}
+    \newcommand{\Pc}{\mathbb{P}}   % Projective
+    \newcommand{\Ac}{\mathbb{A}}   % Affine
     \newcommand{\Lam}[0]{\Lambda}
     \newcommand{\coker}[0]{\operatorname{coker}}
     \newcommand{\kp}[0]{\kappa}
     \newcommand{\doubp}[1]{\left(\left(#1\right)\right)}
     \newcommand{\lbd}[0]{\lambda}
+    \newcommand{\Aut}[0]{\operatorname{Aut}}
     \renewcommand{\Re}[0]{\operatorname{Re}}
     \renewcommand{\Im}[0]{\operatorname{Im}}
     \newcommand{\nS}[0]{\mathcal{S}}
@@ -69,14 +102,17 @@
     \newcommand{\Gal}[0]{\operatorname{Gal}}
     \newcommand{\im}[0]{\operatorname{im}}
     \newcommand{\Hom}[0]{\operatorname{Hom}}
+    \newcommand{\End}[0]{\operatorname{End}}
     \newcommand{\height}[0]{\operatorname{height}}
     \newcommand{\id}[0]{\operatorname{id}}
-    \newcommand{\trdeg}[0]{\operatorname{trdeg}}
-    %\newcommand{\ord}[0]{\operatorname{ord}}
     \newcommand{\comment}[1]{}
     \newcommand{\Top}[0]{\mathsf{Top}}
 	\newcommand{\Sch}[0]{\mathsf{Sch}}
     \newcommand{\op}[0]{\mathsf{op}}
+    \newcommand{\Div}[0]{\operatorname{Div}}
+    \newcommand{\pdiv}[0]{\operatorname{div}}
+    \newcommand{\Pic}[0]{\operatorname{Pic}}
+    \newcommand{\trdeg}[0]{\operatorname{trdeg}}
     \newenvironment{psmallmatrix}
 	{\left(\begin{smallmatrix}}
 	{\end{smallmatrix}\right)}
@@ -91,81 +127,899 @@
     \section{Introduction}\label{sec-intro}
         The main reference of this note is Silverman's \textit{Arithmetic in Elliptic Curves}, and sometimes with examples from \textit{Rational Points on Elliptic Curves} by Silverman \& Tate.
 
-	\section{Basic Constructions}\label{sec-basic}
-        \subsection{Varieties}\label{ssec-geometry-basic}
-        In order to study the rational solutions of a certain type of equations, it is important to construct our geometric objects in a Galois-theoretic flavor. Say $k$ is a perfect field\footnote{Note: to characterize the rational points with Galois theoretic-languages, we would only need a separable and possibly infinite algebraic closure (then it's algebraic and normal) so that the fixed field of the Galois group is exactly the ground field $k$; but I don't know how Silverman would use this condition, so I will leave it here. \textbf{Edit}: this condition is used in \autoref{l122}} and $K$ an algebraic closure of $k$, we denote by $\Gal(K/k)$ the Galois group of $K/k$. We can define a natural group action of $\Gal(K/k)$ on the affine space $\A^n$ over $K$ (we will always reserve the notation with subscripts for the affine schemes) by $(x_1,\dots, x_n)^\s =(x_1^\s,\dots, x_n^\s)$ for any $\s$ in the Galois group.
-
-        Introduce the following notations. The \textit{set of $k$-rational points} $\A^n(k)$ is the invariant set of $\Gal(K/k)$. It is also clear that for any point $P$ and $f\in k[x_1,\dots, x_n]=k[X]$ we have $f(P^\s)=f(P)^\s$ for all $\s\in\Gal(K/k)$ since by constructions all $\s$ restricts to the identity on $k$. Denoted by $V/k$, an algebraic set $V$ \textit{is defined over $k$} if its ideal $I(V)$ is generated by polynomials with coefficients in $k$. The set of $k$-rational points of $V$ is then written as $V(k)$. It is therefore reasonable to define the ideal $I(V/k)=I(V)\cap k[X]$ (for any $V$), from which one can immediately see that $V/k$ iff $I(V)=\left(I(V/k)\right)$.
-
-        If $V/k$, then as $I(V)$ is generated by polynomials in $k[X]$, elements of $\Gal(K/k)$ map points in $V$ to $V$. Therefore, we have $V(K)=V^{\Gal(K/k)}$. We can define the affine coordinate ring of a variety $V/k$ to be
-        \[k[V]=\frac{k[X]}{I(V/k)}\]
-        which is an integral domain if we require varieties to be irreducible. Similarly we define the function field $k(V)$ to be the field of fraction of $k[V]$.
-
-        The Galois group clearly acts on $K[V]$: for any $\sigma\in\Gal(K/k)$ and $f\in K[V]$, $f^{\s}$ is defined to be the polynomial function with $\Gal(K/k)$ acting on $f$'s coefficients. Therefore, for any $f\in K[V]$ and $P\in V$, we have
-        \[\left(f(P)\right)^\s=f^\s\left(P^\s\right)\]
+        \begin{lemma}\label{lemma-cauchy-schwartz}
+            Suppose $A$ is an abelian group and $d:A\to\Z$ a positive definite quadratic form. Then
+            \[|d(a-b)-d(a)-d(b)|\leqslant2\sqrt{d(a)d(b)}\]
+            for all $a, b\in A$.
+        \end{lemma}
+        \begin{proof}
+            If $a=0$ then we are done. Suppose $a\neq 0$. Let $L(a, b)=d(a, b)-d(a)-d(b)$ which is a $\Z$-bilinear form. Then since $d$ is positive definite, for all $m,n\in\Z$,
+            \[0\leqslant d(ma-nb)=m^2d(a)+mnL(a,b)+n^2d(b)\]
+            Let $m=-L(a,b)$ and $n=2d(a)$. We obtain
+            \[d(a)\left(4d(a)d(b)-L(a, b)\right)\geqslant 0\]
+            which gives the result as $a\neq 0$.
+        \end{proof}
+        \section{More on Curves}
+        %%%%%%%%%%%%%%%% subsection %%%%%%%%%%%%%%%%%%%%
+        \subsection{Curves and rational points}\label{sec-rat}
+            We require all varieties in this report to be irreducible.
+            \begin{definition}\label{def-curve}
+                A \textit{curve} is a projective variety of dimension $1$.
+            \end{definition}
+            \noindent Therefore, we are only interested in projective varieties and most of the objects will be constructed in them. In order to study the rational solutions of a certain type of equations (that is, on some curves), it is important to base all geometric constructions on some algebraically closed extension of the field we are interested in. Say $k$ is a perfect field and $K$ an algebraic closure of $k$, we denote by $\Gal(K/k)$ the Galois group of $K/k$ (the fixed field of this group is $k$ as $K$ is an algebraic, separable and normal extension of $k$). We can define a natural group action of $\Gal(K/k)$ on the projective space $\mathbb P^n$ over $K$ by $[x_0:\cdots: x_n]^\sigma =[x_0^\sigma:\cdots: x_n^\sigma]$ for any $\sigma$ in the Galois group. We introduce the following notations/definitions.
+            \begin{definition}
+                The \textit{set of $k$-rational points} $\mathbb P^n(k)$ is the set $\{[x_0:\cdots:x_n]: \forall i, x_i\in k\}$. Given a projective variety $V$, the \textit{$k$-rational points of $V$} is the set $V(k)=V\cap \mathbb P^n(k)$.
+            \end{definition}
+            \begin{definition}
+                A projective variety $V$ is said to be \textit{defined over $k$}, written as $V/k$, if $\mathbb I(V)$ can be generated by homogeneous polynomials with rational coefficients (i.e., in $k[x_0,\dots, x_n]$).
+            \end{definition}
+            \begin{remark}
+                We can also use Galois-theoretic languages:
+                \[\mathbb P^n(k)=\{P\in \mathbb P^n:P^\s = P,\forall\s \in\Gal(K/k)\},\]
+                and
+                \[V(k)=\{P\in V:P^\s = P,\forall\s \in\Gal(K/k)\}\]
+                as the fixed field of the Galois group is $k$.
+            \end{remark}
+            Since we are working with low dimensional cases, it is convenient to define the function field of a projective variety using an affine chart. For any variety $W$ we define 
+            \[k[W]=k[x_0,\dots,x_n]/\mathbb I(W/k)\]
+            where $\mathbb I(W/k)=\mathbb I(W)\cap k[x_0,\dots,x_n]$.
+            \begin{definition}
+                Given a projective variety $V/k$, choose some $U_i=\{x_i\neq 0\}\subseteq \mathbb P^n$. Define the \textit{function field of $V$}, $k(V)$, to be the quotient field of $k[V\cap U_i]$ and the \textit{larger function field of $V$} to be the quotient field of $K[V\cap U_i]$.
+            \end{definition}
+            \begin{remark}
+                The choice of the chart does not matter --- the resulting fields are isomorphic. The elements in $K(V)$ are of the form $f/g$ where $f, g$ are homogeneous polynomials of the same degree in $n+1$ variables, $g\notin\mathbb I(V)$.
+            \end{remark}
+            For some projective variety $V$, we can define a group action of $\Gal(K/k)$ on $K[V]$ sending $f=\sum a_{I}x^I$ to $f^\s=\sum \s(a_I)x^I$, that is, acting on the coefficients of $f$. We can further extend this group action to $K(V)$ by defining $(f/g)^\s=f^\s/g^\s$. It is easy to check that the invariant sets in $K[V]$ and $K(V)$ are $k[V]$ and $k(V)$ respectively.
+            \begin{remark}\label{remark-gal-on-rational}
+                Since $\Gal(K/k)$ consists of field endomorphisms, we have $(f(P))^\s=f^\s(P^\s)$ for all $f$ and points $P$.
+            \end{remark}
+            
+            Suppose $V_1, V_2$ are two projective varieties. For any rational map $\varphi=[f_0:\cdots:f_n]:V_1\to V_2$ where $f_i\in K(V_1)$, we define a group action $\varphi^\s=[f_0^\s:\cdots:f_n^\s]$. And by \autoref{remark-gal-on-rational}, we get $(\varphi(P))^\s=\varphi^\s(P^\s)$.
+            \begin{definition}
+                A rational map $\varphi=[f_0:\cdots:f_n]$ on $V$ is \textit{defined over $k$} if there exists some nonzero $\lambda\in K$ such that $\lambda f_i\in k(V)$ for all $i$. Equivalently, $\varphi^\s=\varphi$ for all $\s\in\Gal(K/k)$.
+            \end{definition}
+            \begin{definition}
+                For any projective variety $V$ and a smooth point $P\in V$, the maximal ideal at $P$ is $\mathfrak m_P=\{f\in K[V]:f(P)=0\}$. The \textit{local ring of $V$ at $P$}, denoted by $K[V]_P$ is the localization $K[V]_{\mathfrak m_P}$ which is simply the local ring
+                \[K[V]_P=\{f/g:f, g\in K[V]\text{ and } g(P)\neq 0\}\]
+                A rational function $f\in K(V)$ is said to be regular at $P$ if $f\in K[V]_P$.
+            \end{definition}
+            \noindent These definitions are equivalent to the mostly seen ones, but it would require some nontrivial arguments to prove the equivalence. See \cite{hartshorne_2010_algebraic} for instance. They also allow us to do most of our explicit computations on affine coordinate rings, while using the projective varieties to make certain huge theorems work.
+            \begin{remark}
+                Since for a projective variety $V$ the closure of $V\cap \A^n$ in $\Pc^n$ is simply $V$, we will always use the affine variety to represent $V$ and other objects on $V$.
+            \end{remark}
+            
+            
+            
+            
+        %%%%%%%% Subsection %%%%%%%%%%%%
+        \subsection{Local rings at smooth points}
+            We reproduce \autoref{def-curve} below.
+            \begin{definition}
+                A \textit{curve} is a projective variety of dimension $1$.
+            \end{definition}
+            In our report, the term curve refers to \textbf{smooth} curves, which are curves with all points smooth. Standard algebraic geometry results show that if $P$ is a smooth point of a projective variety $V$, then the dimension (over $K$) of $\mathfrak m_P/\mathfrak m_P^2$ (\cite{hartshorne_2010_algebraic}) equals the dimension of $V$. Thus, given any curve $C$, we have $\dim_K \mathfrak m_P/\mathfrak m_P^2=1$, which gives us the following commutative algebra result:
+            \begin{lemma}\label{lemma-ord}
+                For all points $P$ in the curve $C$, the local ring $K[C]_P$ is a discrete valuation ring with a valuation defined by
+                \[\ord_P(f)=\sup\{d\in\N:f\in\mathfrak m_P^d\}\]
+                which is a map $K[C]_P\to\N\cup\{\infty\}$. Furthermore, each valuation $\ord_P$ can be extended to $K(C)$ by $\ord_P(f/g)=\ord_P(f/1)-\ord_P(g/1)$. This map is called \textup{the order of $f/g$ at $P$}.
+            \end{lemma}
+            \begin{proof}
+                Prop. 9.2 in \cite{atiyah1994introduction}.
+            \end{proof}
+            \begin{remark}
+                The fraction field of a localization of some ring is isomorphic to the fraction field of the original ring. Therefore, $K(C)$ is the fraction field of $K[C]_P$ for any $P$.
+            \end{remark}
+            \begin{definition}
+                The \textit{uniformizer for $C$ at $P$} is some element $t\in K(C)$ such that $\ord_P(t)=1$.
+            \end{definition}
+            \begin{remark}\label{remark-unif-exist}
+                There certainly exists a uniformizer: since every discrete valuation ring is a principal ideal domain, $\mathfrak m_P=(t)$ for some $t$, which must be of order one as suggested by commutative algebra results.
     
-        The constructions for projective varieties are similar. Since the Galois group consists of field automorphisms, it can act on homogeneous coordinates. For any point $P=[x_0:\cdots:x_n]$ in the $n$-projective space, We define an extra object called the \textit{minimal field of definition for $P$ over $K$}, defined by
-        \[k(P)=k(x_0/x_i,\dots, x_n/x_i)\]
-        for any $x_i\neq 0$.
-        \begin{lemma}
-            Let $H$ be the subgroup of $\Gal(K/k)$ that fixes $P$. Then $k(P)=K^H$.
-        \end{lemma}
-        \begin{proof}
-            \textcolor{red}{\textbf{Insert proof here!}}
-        \end{proof}
+                If $t\in K(C)$ is of order one, then for any $g\in\mathfrak m_P$ (meaning $\ord_P(g)\geqslant 1$), we have
+                \[\ord_P(g/t)=\ord_P (g)-1\geqslant 0\]
+                so $g/t\in K[C]_P$, meaning there exists some $h\in K[C]_P$ such that $g=th$ and thus $\mathfrak m_P=(t)$.
+            \end{remark}
+            \noindent To assist further understandings of this valuation, we present the following example.
+            \begin{example}
+                Consider the curve $y^2=x^3+2x$ over a field $K$ with characteristic not equal to $2$, which is smooth. Let $P=(0, 0)$ then $\mathfrak m_P=(x, y)$ and $\mathfrak m_P^2=(x^2,xy,y^2)$. Since $x=\frac{1}{2}(y^2-x^3)\in\mathfrak m_P^2$ (this also tells us $\ord_P(x)\geqslant 2$), $\mathfrak m_P=(x, y)=(y)$ (in the local ring at $P$). Thus, $\ord_P(y)=1$. Now $y^2=(x^2+2)x$ where $x^2+2\neq 0$ at $P$ which means it's a unit in the local ring, $x=(x^2+2)^{-1}y^2$ and thus
+                \[\ord_P(x)=\ord_P(\text{some unit})+2\ord_P(y)=2\]
+                where the order of unit must be zero by definition (otherwise $\mathfrak m_P$ wouldn't be maximal). Finally for $2y^2-3x=2x^3+x=(2x^2+1)x$, we have
+                \[\ord_P(2y^2-3x)=\ord_P(\text{some unit})+\ord_P(x)=2\]
+                where the equality holds since $2x^2+1\neq 0$ at $P=(0, 0)$, i.e., $2x^2+1$ is a unit.
+            \end{example}
+            Let $k$ be a field of characteristic $p>0$.
+            \begin{lemma}\label{lemma-unif-sep}
+                Given curve $C/k$ and $t\in k(C)$ a uniformizer at a smooth $P\in C(k)$. Then $k(C)$ is a finite separable extension of $k(t)$.
+            \end{lemma}
+            \begin{proof}
+                Since $k(C)$ is a finitely generated $k$-algebra, Zaraski's lemma ensures it's a finite extension of $k$. Clearly $k(t)$ has transcendence degree $1$ ($t\notin k$ otherwise $\ord_P t=0$ for all $P\in C$). Now as the transcendence degree of $k(C)/k$ is $\dim C=1$, $\trdeg k(C)/k(t)=0$, meaning $k(C)$ is an algebraic extension of $k(t)$.
+    
+                Take any $x\in k(C)$ and we aim to show $x$ is separable over $k(t)$. Since $k(C)$ is algebraic, there is some $\Phi(X, T)\in k[X, T]$ such that $\Phi(x, t)=0$. Suppose further that $\Phi$ has minimal degree over $k(t)$.
+    
+                If there is some term $a_{ij}T^iX^j$ in $\Phi$ where $p\nmid j$, then clearly $\partial\Phi(t, X)/\partial X$ is nonzero, meaning $x$ is separable.
+    
+                It remains to check when $\Phi(T, X)=\Psi(T, X^P)$ for some polynomial $\Psi$. Write
+                \[\Phi=\Psi(T, X^p)=\sum_{k=0}^{p-1}\left(\sum_{i,j}b_{ijk}T^{ip}X^{jp}\right)T^k\]
+                Since $k$ is perfect of characteristic $p>0$, every element of $k$ is a $p$th power. Thus, define $c_{ijk}^p=b_{ijk}$ and thus
+                \[\sum_{i,j}b_{ijk}T^{ip}X^{jp}=\sum_{i,j}(c_{ijk}X^iT^j)^p=\left(\sum_{i,j}c_{ijk}X^iT^j\right)^p=\varphi_k(T, X)^p\]
+                
+                Evaluate the order of each summand:
+                \[\ord_P(\varphi_k(t, x)^pt^k)=p\ord_P(\cdots)+k\ord_P(t)\equiv k\pmod{p}\]
+                which means they have different orders, and thus must all vanish as $\Phi(t, x)=0$. There must exist some $k$ such that $\varphi_k$ contains $X$ and $\varphi_k(t, x)=0$. Yet $\Phi(t, X)$ is minimal and $\deg \varphi_k(t, X)^p\leqslant \deg \Phi(t, X)$ so we get a contradiction.
+            \end{proof}
+    
+            \begin{definition}
+                For any point $P$ on a curve $C$ and any $f\in K(C)$, if $\ord_P(f)\geqslant 0$ then $f$ is \textit{regular at $P$}. If $\ord_P(f)>0$ then $f$ has \textit{a zero of order $\ord_P(f)$ at $P$}; if $\ord_P(f)<0$ then $f$ has \textit{a pole of order $-\ord_P(f)$ at $P$}
+            \end{definition}
+            \begin{remark}
+                If $f=g/h$ is regular at $P$, then $f$ corresponds to some element of $K[C]_P$, meaning there exist $g',h'\in K[C]$ such that $h'\neq 0$ near $P$ and thus $f$ is regular at $P$ in the usual sense.
+            \end{remark}
+            The order $\ord_P$ at any point $P$ satisfies a very important property, which is an essential part of our algebraic geometry machine.
+            \begin{theorem}\label{theorem-fin-ord}
+                Let $C$ be a curve and $f\in K(C)$. Then the set $\{P\in C:\ord_P(f)\neq 0\}$ is finite. Furthermore, if $f$ has no poles on $C$, then $f\in K$.
+            \end{theorem}
+            \begin{proof}
+                The proof of this theorem by elementary variety theory is rather long and complicated. A short proof using schemes is available in \cite{hartshorne_2010_algebraic}, II.6.1.
+            \end{proof}
+            
+            
+            
+        %%%%%%%% Subsection %%%%%%%%%%%%
+        \subsection{Morphisms of curves}
+            Let $C_1, C_2$ be two (smooth) curves. A rational map $\varphi: C_1\to C_2$ is a morphism if it's regular at every point on $C_1$. We present a small lemma as an application of $\ord$. The term regular 
+            \begin{lemma}
+                Any rational map $\varphi=[f_0:\cdots:f_m]:C\to V$ from a (smooth) curve to a variety $V\subseteq \mathbb P^m$ is a morphism.
+            \end{lemma}
+            \begin{proof}
+                It suffices to show that for all $P\in C$, there is some $g\in K(C)$ such that each $gf_i$ is regular at $P$. Let $m=\min_{i}\ord_P(f_i)$. As \autoref{remark-unif-exist} suggests, there is a uniformizer at $P$, say $t$, such that $\ord_P(t)=1$. Then $\ord_P( t^{-m}f_i)\geqslant 0$ for all $i$, completing the proof.
+            \end{proof}
+            If $C_1/k$ and $C_2/k$, a nonconstant rational map $\varphi:C_1\to C_2$ defined over $k$ induces an injective pullback $\varphi^*:k(C_2)\to k(C_1)$ fixing $k$. We quote the following theorem:
+            \begin{theorem}\label{theorem-map-fin}
+                Given curves $C_1/k$ and $C_2/k$, the following statements hold:
+                \begin{enumerate}[\normalfont(i)]
+                    \item For any nonconstant rational map $\varphi$, $k(C_1)$ is a finite extension of the pullback of $k(C_2)$, that is, $[k(C_1):\varphi^*k(C_2)]<\infty$.
+                    \item For any injective field homomorphism $\psi:k(C_2)\to k(C_1)$ fixing $k$, there is a nonconstant rational map $\varphi:C_1\to C_2$ such that $\varphi^*=\psi$.
+                \end{enumerate}
+            \end{theorem}
+            \begin{proof}
+                The proof is omitted.
+            \end{proof}
+            \begin{definition}
+                Suppose $\varphi:C_1\to C_2$ is a rational map. If $\varphi$ is constant we define the \textit{degree of $\varphi$}, $\deg\varphi$, to be $0$ and if $\varphi$ is nonconstant, then we define
+                \[\deg\varphi=[k(C_1):\varphi^*k(C_2)]\]
+                In particular, a rational map $\varphi$ is \textit{separable, inseparable or purely inseparable} if the extension $k(C_1)/\varphi^*k(C_2)$ is.
+            \end{definition}
+            \begin{definition}
+                We define the \textit{ramification index of $\varphi$ at $P$} to be the order
+                \[e_\varphi(P)=\ord_P\left(\varphi^*t_{\varphi(P)}\right)\]
+                where $t_{\varphi(P)}$ is any uniformizer at $\varphi(P)$. Note: the choice of $t$ does not matter.
+            \end{definition}
+            Here are some general facts about the ramification index:
+            \begin{lemma}\label{lemma-rami}
+                Suppose $\varphi:C_1\to C_2$ is a nonconstant morphism, then
+                \begin{enumerate}[\normalfont(i)]
+                    \item For all $Q\in C_2$,
+                    \[\sum_{P\in\varphi^{-1}(Q)}e_{\varphi}(P)=\deg \varphi\]
+                    \item For all but finitely many $Q\in C_2$,
+                    \[\#\varphi^{-1}(Q)=\deg_s \varphi\]
+                    where $\deg_s$ is the separable degree
+                    \[[\varphi^*k(C_2)^{\mathrm{sep}}:\varphi^*k(C_2)]\]
+                \end{enumerate}
+                Furthermore, if $\psi:C_2\to C_3$ is another nonconstant map,
+                \[e_{\psi\circ\varphi}(P)=e_{\psi}(\varphi(P))e_{\varphi}(P)\]
+            \end{lemma}
+            \begin{proof}
+                The first two statements are nontrivial and can be found in \cite{hartshorne_2010_algebraic}.
+                
+                For the last statement, let $t_1,t_2$ be uniformizers at at $\varphi(P)$ and $\psi(\varphi(P))$ respectively. Then by definition
+                \[\ord_{\varphi(P)}\left(t_1^{e_{\psi}(\varphi(P))}\right)=e_{\psi}(\varphi(P))=\ord_{\varphi(P)}(\psi^*t_2)\]
+                and thus,
+                \[e_{\varphi\circ\varphi}(P)=\ord_{P}((\psi\circ\varphi)^*t_2)=\ord_{\varphi(P)}(\varphi^*t_1^{e_{\psi}(\varphi(P))})=e_{\psi}(\varphi(P))e_{\varphi}(P)\]
+                which completes the proof.
+            \end{proof}
+        \subsection{The Frobenius map}
+            On a field $K$ of characteristic $p>0$, we have an extremely important map --- \textit{the Frobenius endomorphism} $F:x\mapsto x^p$. It is clear that $F(x+y)=F(x)+F(y)$ since the prime $p$ divides all $\binom{p}{k}$ with $0<k<p$.
+            \begin{remark}
+                The invariant set of the $n$th iterate of the Frobenius endomorphism (that is, $F^n$) is simply $\F_{p^n}$. This property is one of the most essential ``reasons" Weil conjectures holds. 
+            \end{remark}
+            
+            Now for any curve $C/k$ with $\operatorname{char} k=p>0$, we can define a new curve $C^{(q)}$ for any $q=p^m$ to be the zero locus of
+            \[I=\{f^{(q)}:f\in\mathbb I(C)\}\]
+            where $f^{(q)}$ is simply the polynomial resulting from raising the coefficients of $f$ to the $q$th power.
+            \begin{definition}\label{definition-frobenius}
+                Then the map $\varphi:C\to C^{(q)}$ defined by $\varphi=[F^m:\cdots:F^m]$ is called the \textit{$q$th-power Frobenius map}.
+            \end{definition}
+            \noindent It is easy to check that the image of $\varphi$ is indeed inside $C^{(q)}$. Say $f(P)=0$, then 
+            \[f^{(q)}(\varphi(P))=f^{(q)}(x_0^q,\dots, x_n^q)=(f(P))^q=0\]
+            as $k$ is of characteristic $p$. The proof of the following theorem is omitted.
+            \begin{theorem}\label{theorem-deg-frob}
+                We have $\varphi^*k(C^{(q)})=k(C)^q$ which means $\varphi$ is purely inseparable. Furthermore, $\deg\varphi=p$.
+            \end{theorem}
+            \begin{corollary}\label{corollary-frob-decomp}
+                Let $\psi:C_1\to C_2$ be a map between curves over a field of $\operatorname{char} =p>0$. Write $q=\deg_i\psi$. Then there exists separable $\lambda:C_1^{(q)}\to C_2$ such that
+                \[\psi=\lambda\circ\varphi_q\]
+                where $\varphi_q$ is the $q$th power Frobenius map. 
+            \end{corollary}
+            \begin{proof}
+                Let $k^{\text{sep}}$ be the separable closure of $\psi^*k(C_2)$ in $k(C_2)$. Then $k(C_1)/k^{\text{sep}}$ is purely inseparable of degree $q$ which means $k(C_1)^q\subseteq k^{\text{sep}}$. But by \autoref{theorem-deg-frob},
+                \[\varphi_q^*k(C_1^{(q)})=k(C_1)^q,\quad [k(C_1):\varphi_q^*k(C_1^{(q)})]=q\]
+                so we must have $k^{\text{sep}}=\varphi_q^*k(C_1^{(q)})$, which means the extensions satisfy
+                \[k(C_1)/\varphi_q^*k(C_1^{(q)})/\psi^*k(C_2)\]
+                where $\varphi_q^*k(C_1^{(q)})/\psi^*k(C_2)$ is separable. From (ii) in \autoref{theorem-map-fin}, there is a $\lambda$ separable such that $\lambda\circ\varphi_q=\psi$.
+            \end{proof}
+            
+            
+            
+        %%%%%%%% Subsection %%%%%%%%%%%%
+        \subsection{Weil divisors and the Picard groups}\label{ssec-divisor}
+            In this section we introduce an extremely important algebro-geometric tool which would help us in defining and proving many important results. Let $C$ be any curve.
+            \begin{definition}
+                A \textit{Weil divisor $D$ on $C$} is a formal sum
+                \[D=\sum_{P\in C}n_P(P)\]
+                where only finitely many $n_P\in\Z$ are nonzero. The brackets around each point $P$ only emphasizes that the point here is considered as a part of the formal sum, not an actual point.
+            
+                The additive abelian group consisting of all Weil divisors on $C$ is called the \textit{divisor group of $C$}, denoted by $\Div(C)$. The addition inside this group is just the coefficients-wise addition.
+            \end{definition}
+            \noindent The Galois group $\Gal(K/k)$ acts on $D$ by 
+            \[D^\s=\sum_{P\in C}n_P(P^\s)\]
+            We say that a divisor $D$ is \textit{defined over $k$} if $D^\s=D$ for all $\s\in\Gal(K/k)$ and such divisors form a subgroup $\Div_k(C)$.
+            \begin{definition}
+                We define the \textit{degree of a divisor $D$} to be
+                \[\deg D=\sum_{p\in C}n_P\]
+                which makes sense since there are only finitely nonzero $n_P$. The subgroup formed by all divisors of degree $0$ is denoted by $\Div^0(C)$.
+            \end{definition}
+            \begin{remark}
+                By definition, $\deg (D_1+D_2)=\deg D_1+\deg D_2$ and $\deg (-D)=-\deg D$.
+            \end{remark}
+            \begin{example}
+                Here we present a trivial example to assist understanding the idea of a formal sum. Say $P, Q, S$ are three distinct points in $C$. Then let $D_1=2(P)+5(Q)$ and $D_2=-(Q)-7(S)$. Then $D_1+D_2$ is nothing else but $2(P)+4(Q)-(S)$. They do not need to have a specific meaning now. The degree of $D_1$ is $2+5=7$.
+            \end{example}
+            \noindent In the following sections we will refer to Weil divisors as divisors. Given some $f\in K(C)$, we see in \autoref{theorem-fin-ord}, there are only finitely many points $P\in C$ such $\ord_P(f)\neq 0$. Therefore, the order valuation can be used to define a special type of divisors:
+            \begin{definition}
+                For any $f\neq 0\in K(C)$, the \textit{divisor associated to $f$} is
+                \[\pdiv(f)=\sum_{p\in C}\ord_P(f)(P).\]
+                
+                A divisor $D$ on $C$ is a \textit{principal divisor} if there is some $f\neq 0\in K(C)$ such that $D=\pdiv(f)$.
+            \end{definition}
+            \begin{remark}
+                Obviously for all $\s\in\Gal(K/k)$, we have
+                \begin{align*}
+                    (\pdiv(f))^\s&=\sum \ord_P(f)(P^\s)\\
+                    &=\sum\ord_{P^\s}(f^\s)(P^\s)\\
+                    &=\sum \ord_P(f^s)(P)=\pdiv(f^\s)
+                \end{align*}
+                where the second equality comes from the fact that $f^\s(Q^\s)=(f(Q))^\s$ for all $Q\in C$ so the order is invariant under $\s$.
+                
+                Clearly if $f\in k(C)$, $f=f^\s$ so $\pdiv(f)\in\Div_k(C)$.
+            \end{remark}
+            \begin{lemma}\label{lemma-deg-div}
+                For any $f\neq 0\in K(C)$,
+                \begin{enumerate}[\normalfont(i)]
+                    \item $\pdiv f=0$ if and only if $f\in K^\times$.
+                    \item $\deg\pdiv(f)=0$.
+                \end{enumerate}
+            \end{lemma}
+            Two divisors $D_1, D_2$ are equivalent $D_1\sim D_2$ if and only if $D_1-D_2$ is a principal divisor. This equivalence relation gives us a quotient $\Div(C)/\sim$. We denote this group by $\Pic(C)$ and call it the \textit{Picard group of $C$}. Similarly we denote by $\Pic^0(C)$ the \textit{degree-$0$ part of the Picard group of $C$}, that is, $\Div^0(C)/\sim$.
+            
+            Given a nonconstant map $\varphi:C_1\to C_2$, we can define the pullback and pushforward map of $\varphi$ between the divisor groups of $C_i$ as
+            \[\varphi^*:\Div(C_2)\to\Div(C_2),\quad\varphi^*(Q)=\sum_{P\in\varphi^{-1}(Q)}e_\varphi(P)(P)\]
+            and
+            \[\varphi_*:\Div(C_1)\to\Div(C_2),\quad\varphi_*(P)\mapsto (\varphi(P)),\]
+            and extend them linearly.
+            \begin{lemma}\label{lemma-pushforward-hom}
+                The pushforward map $\varphi_*$ preserves principal divisors and divisors of degree $0$. Therefore it defines a homomorphism $\varphi_*:\Pic^0(C_1)\to\Pic^0(C_2)$.
+            \end{lemma}
+            
+        %%%%%%%% Subsection %%%%%%%%%%%%
+        \subsection{Differentials and canonical divisors}\label{ssec-differential}
+            The definition we present for differential forms is extremely simple, but it will do the job for us.
+    
+            Let $C$ be a curve defined on $K/k$. The \textit{space of differential forms on $C$} $\Omega_C$ is defined to be the $K(C)$-vector space generated by all elements satisfying the following definition:
+            \begin{definition}
+                A \textit{differential form on $C$} is an element generated by symbols $dx$ where $x\in K(C)$ such that
+                \begin{enumerate}[(i)]
+                    \item $d(x+y)=dx+dy$.
+                    \item $d(xy)=xdy+ydx$.
+                    \item $dr=0$ for all $r\in K$.
+                \end{enumerate}
+            \end{definition}
+            \begin{remark}
+                Silverman's text contains a typo --- $\Omega_C$ is not only a $K$-vector space but also a $K(C)$-vector space.
+            \end{remark}
+            Every morphism $\varphi:C_1\to C_2$ induces a pullback of differential forms $\varphi^*:\Omega_2\to\Omega_1$ defined by
+            \[\sum f_idx_i\mapsto \sum \varphi^*f_id\left(\varphi^*x_i\right)\]
+            which gives a separability test of $\varphi$ (which we won't prove):
+            \begin{lemma}\label{lemma-sep-criteria}
+                \begin{enumerate}[\normalfont(i)]
+                    \item The space $\Omega_C$ is one-dimensional over $K(C)$ for any curve $C$.
+                    \item A form $dx$ is a basis of $\Omega_C$ if and only if $K(C)/K(x)$ is separable.
+                    \item Suppose $\varphi:C_1\to C_2$ is nonconstant, then $\varphi$ is separable if and only if $\varphi^*:\Omega_2\to\Omega_1$ is an injective map.
+                \end{enumerate}
+            \end{lemma}
+            Suppose $\operatorname{char}k>0$. Then we have the following theorem.
+            \begin{theorem}
+               Let $C$ be a curve, $P\in C$ and $t\in K(C)$ a uniformizer at $P$. Then for every $\w\in\Omega_C$, there is a unique $g\in K(C)$, denoted by $\w/dt$, such that $\w=gdt$. Furthermore, $\ord_P(g)$ is independent of the choice of $t$ and we denote this quantity by $\ord_P(\w)$. In particular, $\ord_P(\w)=0$ for all but finitely many $P\in C$.
+            \end{theorem}
+            \begin{proof}
+                The proof of the first statement is easy. By \autoref{lemma-unif-sep}, $K(C)/K(t)$ is separable so by (ii) in \autoref{lemma-sep-criteria}, $dt$ generates $\Omega_C$ and the statement follows. The proofs of the other two statements are omitted.
+            \end{proof}
+            \begin{definition}
+                For any $\w\neq 0\in\Omega_C$, the divisor associated to $\w/dt$ is called a \textit{canonical divisor}, denoted by $\pdiv(\w)$. As for rational functions, if $\ord_P(\w)\geqslant 0$ for all $P\in C$ then we say $\w$ is \textit{holomorphic} and we say it's nonvanishing if $\ord_P(\w)$ for all $P\in C$.
+            \end{definition}
+            \begin{remark}\label{remark-canonical-equiv}
+                All canonical divisors are equivalent in $\Pic(C)$. Take nonzero $\w_1,\w_2\in\Omega_C$, since the latter space is one-dimensional, we have some $f\in K(C)$ such that $\w_1=f\w_2$. In this case $\ord_P(\w_1)=\ord_P(f)+\ord_P(\w_2)$ and thus by definition $\pdiv(\w_1)=\pdiv(f)+\pdiv(\w_2)$.
+            \end{remark}
         
-        Take any rational map $\varphi=[f_0:\cdots:f_n]:V_1\to V_2$. The group $\Gal(K/k)$ acts on $\varphi$ by $\varphi^\s=[f_0^\s:\cdots:f_n^\s]$. Clearly by our previous discussion, $\varphi(P)^\s=\varphi^\s(P^\s)$. A rational map is said to be \textit{defined over $k$} if there is some nonzero constant $\lambda$ such that $\lambda f_i\in k(V_1)$ for all $i$. Two varieties $V_1/k$ and $V_2/k$ are \textit{isomorphic over $k$} if there exist two morphisms defined over $k$ who compositions are the identity.
-
-        \subsection{Curves}\label{ssec-curves-basic}
-        In this section we construct some necessary tools used to compute or classify elliptic curves. Silverman rarely uses the language of schemes in his book, so all constructions are relatively elementary. This might, however, make theorems and proofs longer. An algebraic curve $C$ is a projective variety of dimension one.
-
-        We denote by $\mathfrak m_P=\{f\in K[V]:f(P)=0\}$ the maximal ideal of any point $P$ in some variety $V$. Denote the local ring at $P$ by $K[V]_P=K[V]_{\mathfrak m_P}$. Now we abuse the notations a little and use $\mathfrak m_P$ again to denote the unique maximal ideal of the local ring at $P$. We first prove the following lemma:
-        \begin{lemma}
-            Let $C$ be a curve and $P\in C$ nonsingular. Then $K[C]_P$ is a discrete valuation ring.
-        \end{lemma}
-        \begin{proof}
-            The dimension over $\mathfrak m_P$'s residue field of the tangent space $\mathfrak m_P/\mathfrak m_P^2$ is precisely $\dim C=1$. Since $K[C]_P$ has Krull dimension one (since $0<\dim K[C]_P\leqslant \dim K[C]=1$), every prime ideal in it is maximal but the only maximal ideal is $\mathfrak m_P$. Therefore, the radical of any proper ideal, being the intersection of all prime ideals containing that ideal, is simply $\mathfrak m_P$. Thus, all ideals are $\mathfrak m_P$-primary. Standard commutative results show that each ideal equals to $(x^r)$ for some unique $r$ where $\mathfrak m_P=(x)$. The uniqueness comes from the fact that the ring of interests is non-Artinian. Thus, we can define a discrete valuation $v:a\mapsto k_a$ where $(a)=(x^{k_a})$. We can extend this valuation to the field of fractions of $K[C]_P$ (which is simply $K(C)$) by $v(a/b)=v(a)-v(b)$. Then $K[C]_P$ is the valuation ring of $v$ and thus a DVR.
-        \end{proof}
-        The valuation defined above clearly coincides with
-        \[\ord_P(f)=\sup \{d\in\hat{\mathbb N}:f\in \mathfrak m_P^d\}\]
-        which can be extended to $K(C)$ in the same fashion. When a rational function $r\in K(C)$ has order $1$ at $P$, we call it a \textit{uniformizer for $C$ at $P$}. The valuation above is the \textit{order of $f$ at $P$}; if the order is positive then $f$ has a zero, and a pole if $\ord_P(f)<0$. If $\ord_P(f)\geqslant 0$ then $f$ is \textit{regular} at $P$ (which coincides with the definition of rational functions being regular at a point).
-
-        \begin{lemma}
-            If $P\in C(k)$, then there is a uniformizer $t$ at $P$ for $C$ in $k(C)$.
-        \end{lemma}
-        \begin{proof}
-            \textcolor{red}{\textbf{Insert proof here}}
-        \end{proof}
         
-        We quote the following result, which admits proofs with or without schemes:
-        \begin{theorem}
-            If $C$ is nonsingular and $f\in K(C)$ nonzero. Then the set $\{P\in C:\ord_P(f)\neq 0\}$ is finite. Further, if $f$ is regular on $C$, then $f\in K$.
+        
+        %%%%%%%% Subsection %%%%%%%%%%%%
+        \subsection{The Riemann-Roch theorem for curves}
+            In this section, we will state the superbly powerful Riemann-Roch theorem without introducing the concept of differentials. This means some objects associated to a curve will not be defined but some of their special properties will be provided.
+    
+            Given a curve $C$ and a divisor $D$ on $C$, we say $D$ is \textit{positive} if all $n_P\geqslant 0$. We denote this by $D\geqslant 0$. Given two divisors we write $D_1\geqslant D_2$ if $D_1-D_2\geqslant 0$.
+            \begin{remark}\label{remark-L}
+                The definition above might not be so trivial as they seem to be. Given any $f\neq 0\in K(C)$, if it is regular everywhere except at finitely many points $P_1,\dots,P_n$ with poles of order less than or equal to $a_1,\dots, a_n$ (which means $\ord_P(f)\geqslant 0$ for $P\neq P_i$ and $\ord_{P_i}(f)\geqslant -a_i$), we can write
+                \[\pdiv(f)\geqslant \sum_{i\leqslant n}-a_i(P_i)\]
+                Similarly, if $f$ has a zero at $Q$, then one may write $\pdiv(f)\geqslant (Q)$, which is quite convenient.
+                
+                Also, it is clear that if $D_1\geqslant D_2$, then $\deg D_1\geqslant \deg D_2$.
+            \end{remark}
+            \begin{definition}
+                For a divisor $D$, define a $K$-vector space:
+                \[\mathcal L(D)=\{f\neq 0\in K(C):\pdiv(f)\geqslant -D\}\cup\{0\}\]
+                This vector space is actually finite-dimensional (nontrivial result; proof omitted), and we write
+                \[l(D)=\dim_K\mathcal L(D).\]
+            \end{definition}
+            \begin{lemma}\label{lemma-neg-deg}
+                For any $D\in\Div(C)$,
+                \begin{enumerate}[\normalfont(i)]
+                    \item If $\deg D<0$ then $\mathcal L(D)=0$.
+                    \item For another $D'\in\Div(C)$, if $D\equiv D'$ in $\Pic(C)$, then $\mathcal L(D)\cong\mathcal L(D')$ and as a consequence $l(D)=l(D')$.
+                \end{enumerate}
+            \end{lemma}
+            \begin{proof}
+                 For (i) we quote \autoref{lemma-deg-div}. Since $\deg D<0$ and for any nonzero $f\in K(C)$, $f\in\mathcal L(C)$ if $\deg \pdiv(f)\geqslant -\deg D>0$. Yet the LHS is zero, so $\mathcal L(C)=0$.
+                 
+                 For (ii), suppose $D-D'=\pdiv(g)$. We have an isomorphism
+                 \[\alpha:\mathcal L(D)\to\mathcal L(D')\]
+                 defined by $f\mapsto fg$ (one only needs to check that this map and its inverse $f\mapsto f/g$ are both well-defined, which is an easy argument on orders).
+            \end{proof}
+            Let $K_C$ be a canonical divisor. By \autoref{remark-canonical-equiv}, when dealing with the $\mathcal L$ space of these divisors, we can always use the notation $K_C$ to represent any canonical divisor on $C$ as $l(K_C)$ are always the same.
+            \begin{theorem}[Riemann-Roch]\label{theorem-rr}
+                Let $C$ be a curve and $K_C$ the canonical divisor on $C$. There is an integer $g\geqslant 0$ called the \textup{genus of $C$} such that for any $D\in\Div(C)$,
+                \[l(D)-l(K_C-D)=\deg D-g+1\]
+            \end{theorem}
+            \begin{proof}
+                Proof omitted. See \cite{hartshorne_2010_algebraic} for example.
+            \end{proof}
+            \begin{remark}
+                The term $l(K_C-D)$ is sometimes called the correction term. Since $l(K_C-D)\geqslant 0$ for any $D$, we have
+                \[l(D)\geqslant \deg D-g+1\]
+                which is called Riemann's inequality.
+            \end{remark}
+            \begin{corollary}\label{corollary-rr-simple}
+                The followings hold:
+                \begin{enumerate}[\normalfont(i)]
+                    \item $l(K_C)=g$.
+                    \item $\deg K_C=2g-2$ (which is $-\chi$ where $\chi$ is the Euler characteristic of $C$).
+                    \item If $\deg D>2g-2$, then $l(D)=\deg D-g+1$
+                \end{enumerate}
+            \end{corollary}
+            \begin{proof}
+                For (i) take $D=0$ then by \autoref{remark-L} any $f\in \mathcal L(D)$ has no poles, i.e., they are just constants by \autoref{theorem-fin-ord}. Thus, $\mathcal L(D)=K$ and therefore $l(D)=\dim_K K=1$. Plugging this into Riemann-Roch we get the result.
+                
+                For (ii) take $D=K_C$. Then $l(D)=g$ and thus $l(D)-l(0)=\deg K_C-g+1$. Since $l(0)=1$ we get $\deg K_C=2g-2$.
+                
+                For (iii), $\deg D>2g-2$ together with (ii) suggests $\deg(K_C-D)<0$. Thus, $\mathcal L(K_C-D)=0$ by \autoref{lemma-neg-deg}. This means $l(D)=\deg D-g+1$.
+            \end{proof}
+            
+            
+            
+            
+            
+            
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%% Section %%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        \section{More on Elliptic Curves}
+            %%%%%%%%%%%%%%%% subsection %%%%%%%%%%%%%%%%%%%%
+            \subsection{Curves of genus one}
+            In this section we present a more abstract definition of elliptic curves, and show that this definition is equivalent to the one using Weierstrass normal forms.
+            \begin{definition}
+                An \textit{elliptic curve} is a pair $(E, \mathcal O)$ where $E$ is a (smooth) curve of genus $1$ and $\mathcal O\in E$. We say that \textit{$E$ is defined over $k$} if $E/k$ and $\mathcal O\in E(k)$.
+            \end{definition}
+            \begin{remark}
+                The selected $k$-rational base point $\ecO$ is extremely important in the definition of elliptic curves. There are several reasons for taking it: first, many smooth projective curves of genus one does NOT have rational points. For example, the curve $y^2=1-17x^4$ has no rational points (and it violates the Hasse principle) over $\mathbb Q$ \cite{Poonen}. Second, we need the rationality of this base point to generate the $\mathcal L$-space of $n(\ecO)$ with elements in $k(C)$, see the proof of (i) in \autoref{theorem-ecg1}; we want that, for all elliptic curves defined above, there is some Weierstrass equation with $k$-rational coefficients. 
+            \end{remark}
+            \begin{theorem}\label{theorem-ecg1}
+            Suppose $E/k$ is an elliptic curve with a base point $\mathcal O$, then
+            \begin{enumerate}[\normalfont(i)]
+                \item There exists $f, g\in k(E)$ such that the map
+                \[\varphi:E\to\Pc^2,\quad P\mapsto [f(P):g(P):1]\]
+                is an isomorphism onto a curve given by some Weierstrass equation
+                \[C:y^2+a_1xy+a_3y=x^3+a_2x+a_4x+a_6\]
+                with $k$-rational coefficients and $\varphi(\mathcal O)=[0:1:0]$. In this case, $f, g$ are called the \textit{Weierstrass coordinate of $E$}.
+                \item Any two Weierstrass equations of $E$ are related by a linear change of variables.
+                \item All curves defined by Weierstrass equations with $k$-rational coefficients are elliptic curves with the base point $[0:1:0]$.
+            \end{enumerate}
+            \end{theorem}
+            \begin{proof}
+                We only prove (i) partially and omit the remaining.
+                
+                (i) For $E$, $2g-2=0$ so $\deg n(\mathcal O)=n>2g-2$ for all $n\geqslant 1$. Then by \autoref{corollary-rr-simple} (iii), $l(n(\mathcal O))=n$. Let $\{1, f\}\subseteq k(E)$ (we can take the fact that if $D\in\Div_k(C)$ then $\mathcal L(D)$ has a basis of elements in $k(C)$) be a basis of $\mathcal L(2(\mathcal O))$, and extending it to a basis $\{1,f,g\}$ of $\mathcal L(3(\mathcal O))$. Here $\ord_{\mathcal O}(f)=-2$ and $\ord_{\mathcal O}(g)=-3$ (proof omitted). Now $f^2, f^3, fg, g^2$ all have order $\geqslant -6$ at $\mathcal O$, so they are all in $\mathcal L(6(\mathcal O))$. But then we would have seven functions $\{1,f,g,f^2,f^3,fg,g^2\}$ in a $K$-vector space of dimension $6$ (so its dimension over $k$ must be at most $6$). Thus, there are $A_1,\dots, A_7\in k$ such that
+                \[A_1+A_2f+A_3g+A_4f^2+A_5fg+A_6g^2+A_7f^3=0\]
+                where $A_6,A_7\neq 0$ or else all elements remaining will have different orders at $\mathcal O$. Replace $f,g$ by $-A_6A_7f$ and $A_6A_7^2g$,
+                \[A_1-A_2A_6A_7f+A_3A_6A_7^2g-A_4A_6^2A_7^2f^2-A_5A_6^2A_7^3fg+A_6^3A_7^4g^2-A_6^3A_7^4f^3=0\]
+                and rescaling gives us the map
+                \[\varphi:P\mapsto[f(P):g(P):1]\]
+                under which $\im \varphi$ is contained in some zero locus $V$ of an Weierstrass equation. However since $\varphi$ is nonconstant and it's a morphism as $E$ is smooth, it must be surjective (standard algebraic geometry result). Thus, $\im \varphi=V$ is defined by an Weierstrass equation.
+                
+                By definition, the pullback of $k(C)$ under $\varphi$ is just $k(f, g)$. We claim that $[k(E):k(x, y)]=\deg \varphi=1$. Since the orders of $f, g$ at $\mathcal O$ are $-2,-3$ respectively, $[k(E):k(f)]=2$, $[k(E):k(g)]=3$. This means $\deg\varphi$ must divide two coprime numbers and thus it's one. We will take for granted that $\im\varphi$ is smooth, and morphisms between smooth curves of degree $1$ are isomorphism. Thus, $\varphi$ is an isomorphism.
+                
+                (ii) Suppose $\{f,g\},\{f',g'\}$ are two sets of Weierstrass coordinates, then $\{1,f\}$, $\{1,f'\}$ ($\{1,f,g\}$,$\{1,f',g'\}$) are both bases of $\mathcal L(2(\ecO))$ ($\mathcal L(3(\ecO))$). We therefore have $u_1,u_2\in k^\times$ and $r, t, s_2\in k$ such that 
+                \[x=u_1x'+r,\quad y=u_2y'+s_2x'+t.\]
+                Yet, $x, y$ satisfy the Weierstrass equation so $u_1^3=u_2^2$ and after a change of variables, we get the result.
+                
+                (iii) Recall that every curve defined by a Weierstrass equation we have a nonzero, regular, nonvanishing differential form called the invariant differential:
+                \[\w=\frac{dx}{2y-a_1x+a_3}\]
+                Since we know that it's regular and nonvanishing, we get a canonical divisor $K_E=\pdiv(\w)=0$. Thus, by (ii) in \autoref{corollary-rr-simple}, we get
+                \[0=\deg K_E=2g-2\]
+                which means the curve $E$ has genus one, completing the proof.
+            \end{proof}
+            
+            
+            
+            
+        %%%%%%%%%%%%%%%% subsection %%%%%%%%%%%%%%%%%%%%
+        \subsection{The algebraic group law}\label{ssec-alg-group}
+            Recall in \autoref{ssec-divisor}, we defined something call the Picard group of a curve, by modding out principal divisors from the group of divisors. In this section we use the subgroup $\Pic^0(E)$ to derive a group structure on $E$. To prepare for the main construction, we start with an easy lemma
+            \begin{lemma}\label{lemma-equiv-eq}
+                Suppose $E$ is an elliptic curve. Then for any two points $P, Q\in E$, $(P)\sim (Q)$ if and only if $P=Q$.
+            \end{lemma}
+            \begin{proof}
+                Let $f\neq 0\in K(C)$ such that $\pdiv(f)=(P)-(Q)$. Clearly $\pdiv(f)\geqslant -(Q)$ so $\pdiv(f)\in\mathcal L((Q))$. But since the genus of $E$ is $g=1$, $\deg (Q)=1>2g-2$. Thus, by \autoref{corollary-rr-simple} (iii), $l((Q))=\deg (Q)=1$. Therefore, as $1\in \mathcal L((Q))$, $f\in K$ and $\pdiv(f)=0$. This means $P=Q$ (otherwise the formal sum cannot cancel).
+            \end{proof}
+            Consider any divisor $D\in \Div^0(E)$ of degree $0$. We have $l(D+(\mathcal O))=\deg (D+(\mathcal O))=1$ by \autoref{corollary-rr-simple} (iii). Let $f$ be a nonzero element of $K(E)$ that spans $\mathcal L(D+(\mathcal O))$. Then we have $\pdiv(f)\geqslant -D-(\mathcal O)$. But by \autoref{lemma-deg-div}, $\deg\pdiv(f)=0$, we have some $P\in E$ such that $\pdiv(f)=-D-(\mathcal O)+(P)$ To deduce the last statement, We must think about the formal sum. The inequality above tells us that the coefficients in $\pdiv f$ before $(Q)$ and each term in $D$ must be larger than $-1$ and the coefficient of each term in $-D$; but the coefficient before $\mathcal O$ in $\pdiv(f)$ cannot be positive, otherwise we cannot cancel it in the degree, as the other coefficients must be nonnegative. Thus the degree of $\pdiv(f)=0$ suggests that there is one single point (or else the degree of the part other than $-D-(\mathcal O )$ would be >1, which is impossible to cancel in $\deg\pdiv(f)$) such that $\pdiv(f)=-D-(\mathcal O)+(P)$ (it could be $\mathcal O$ of course). Then if $P'$ is another such point, we have $(P')\sim D+(\mathcal O)\sim (P)$ which by \autoref{lemma-equiv-eq} gives $P=P'$.
+            
+            Let $\s:\Div^0(E)\to E$ be the map sending $D$ to the unique point $P$ found above.
+            \begin{theorem}\label{theorem-alg-group}
+                The map $\s$ induces a bijection $\s:\Pic^0(E)\to E$, with its inverse being $\kp:E\to\Pic^0(E)$ defined by $P\mapsto [(P)-(\mathcal O)]$. Therefore we can impose $E$ with a group structure by defining
+                \[P+Q=\kp^{-1}(\kp(P)+\kp(Q)).\]
+            \end{theorem}
+            \begin{proof}
+                For any point $P\in E$, the divisor $(P)-(\mathcal O)$ has degree $0$. Therefore by construction $\s((P)-(\mathcal O))=P$, which means $\s$ is surjective.
+    
+                We now prove that $\s(D_1)=\s(D_2)$ if and only if $D_1\sim D_2$. Suppose $P=\s(D_1)=\s(D_2)$. Then $D_i\sim (P)-(\ecO)$ imply $D_1-D_2\sim(P)-(P)=0$ and thus $D_1\sim D_2$. Conversely if $D_1\sim D_2\sim (P)-(\ecO)$ for a unique $P$, by definition, $\s(D_1)=\s(D_2)=P$. Thus, we have a bijection:
+                \[\s:\Pic^0(E)\to E\]
+                and the inverse map is deduced when we proved $\s$'s surjectivity.
+            \end{proof}
+            \begin{theorem}\label{theorem=same-law}
+                The algebraic group law and the geometric group law defined on an elliptic curve are the same thing.
+            \end{theorem}
+            \begin{proof}
+                It suffices to show that $\kp(P+Q)=\kp(P)+\kp(Q)$ (where the first addition is the addition from the geometric group law). Let $L=\mathbb V(f)$ be the line passing through $P,Q$; let $R$ be the third point of intersection of this line and $E$; let $L'=\mathbb V(f')$ be the line passing through $R,\ecO$. Then since $Z=0$ intersects with $E$ at $\ecO$ with multiplicity $3$ (so that $\ord_\ecO (Z)=3$), we have
+                \[\pdiv(f/Z)=(P)+(Q)+(R)-3(\ecO),\quad \pdiv(f'/Z)=(R)+(P+Q)+(\ecO)-3(\ecO)\]
+                where we know for example $\ord_P(f)=1$ since $f$ is a polynomial of degree $1$ and the maximal ideal $\mathfrak m_P$ is generated by some nonconstant polynomial so we cannot have $f\in \mathfrak m_P^d$ for any $d>1$. This means
+                \[\pdiv(f'/f)=(P+Q)-(P)-(Q)+(\ecO)\]
+                which is principal so equivalent to $0$. But in $\Pic^0(E)$,
+                \[\kp(P+Q)-\kp(P)-\kp(Q)=(P+Q)-(\ecO)-(P)+(\ecO)-(Q)+(\ecO)\equiv 0\]
+                which completes the proof.
+            \end{proof}
+            \begin{corollary}\label{corollary-principal-criterion}
+                Given a divisor $D\in\Div(E)$, it is principal if and only if
+                \[\deg D=0,\quad \sum [n_p]P=0\]
+                where we write $D=\sum n_P(P)$.
+            \end{corollary}
+            \begin{proof}
+                If $D$ is principal then by \autoref{lemma-deg-div}, $\deg D=0$. Also, using the $\s$ map defined in \autoref{theorem-alg-group}, we have $D\sim 0$ implies $\s([D])=\ecO$ which means
+                \[\sum[n_P]\s[(P)-(\ecO)]=\sum [n_P]P=\ecO\]
+                where we used the definition that $\s[(P)-(\ecO)]=P$.
+                
+                Now if $D\in\Div^0(E)$ and $\sum [n_P]P=\ecO$, then $\s(D)=\ecO$ and thus $D\sim 0$.
+            \end{proof}
+            \begin{lemma}\label{lemma-add-morph}
+                The addition and negation map on an elliptic curve are morphisms of elliptic curves.
+            \end{lemma}
+            \begin{proof}
+                Simply use the explicit formulas.
+            \end{proof}
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%% Section %%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        \section{Constructions on Elliptic Curves}
+            In this section we talk about several important objects on elliptic curves.
+    
+        %%%%%%%% Subsection %%%%%%%%%%%%
+        \subsection{Isogenies}    
+        \begin{definition}
+            Given two elliptic curves $E_1,E_2$, a morphism $\varphi:E_1\to E_2$ is an \textit{isogeny} if it preserves the base point, that is, $\varphi(\ecO)=\ecO$. Two elliptic curves are called \textit{isogenous} if there is a nonconstant isogeny from $E_1$ to $E_2$.
+        \end{definition}
+        \begin{remark}
+            If $\varphi\neq[0]$ (where $[0]$ is the trivial isogeny sending everything to $\ecO$) is an isogeny, then $\varphi$ is surjective. We define the degrees of $\varphi$ as before. We define $\deg[0]=0$ so that we would have $\deg(\psi\circ\varphi)=\deg\psi\deg\varphi$.
+        \end{remark}
+        Let the Hom-space of elliptic curves to be $\Hom(E_1,E_2)=\{\text{isogeny }:E_1\to E_2\}$ and $\operatorname{End}(E)=\Hom(E_1,E_2)$.
+        \begin{definition}
+            The \textit{multiplication-by-m isogeny} $[m]$ is the map sending $P$ to the sum of $|m|$ numbers of $\sgn(m)P$.
+        \end{definition}
+        The proof of the following lemma is tedious so it is omitted.
+        \begin{lemma}
+            The map $[m]$ is nonconstant for $m>0$.
+        \end{lemma}
+        The abelian group $\Hom(E_1, E_2)$ forms a $\Z$-module by defining $m\varphi=[m]\circ\varphi$. Then if $m\varphi=0$, $0=\deg m\varphi=\deg[m]\deg\varphi$. Now if $\deg\varphi\neq 0$ (which means $\varphi=[0]$) then $\deg[m]=0$ which implies $m=0$ as $[m]$ is nonconstant for $m>0$. Thus, $\Hom(E_1,E_2)$ is torsion free. Using the same argument we can show that $\End(E)$ is an integral domain of characteristic $0$.
+        \begin{definition}
+            The \textit{$m$-torsion subgroup} of $E$ is denoted by $E[m]$. The \textit{torsion subgroup of $E$} is the union
+            \[E_{\text{tor}}=\bigcup_{m\geqslant 1}E[m]\]
+            We use the notation $E[m](k)$ and $E_{\text{tor}}(k)$ to denote the corresponding rational torsion points.
+        \end{definition}
+        \begin{remark}
+            If a point $P\neq\mathcal{O}$ has order 2, then $[2]P=\mathcal{O}$, which is equivalent to $P=-P$, so $(x,y)=-(x,y)=(x,-y)$, indicating $y=0$. This shows that the rational points of order 2 are given by $y=0$, namely $\{\mathcal{O},(x_1,0),(x_2,0),(x_3,0)\}$, where $x_i\in K$ are (distinct) solutions to the elliptic curve's Weierstrass equation.
+             
+            If a point $P\neq\mathcal{O}$ has order 3, then $[3]P=\mathcal{O}$, which is equivalent to $[2]P=[-1]P$. This happens if and only if the $x$-coordinate of $P$ satisfies $x(P)=x([2]P)$. Using the explicit duplication formula, it can be shown that every elliptic curve has exactly nine points of order dividing three, forming a group isomorphic to $\Z/3\Z\times\Z/3\Z$.
+        \end{remark}
+        \begin{remark}
+            If $k=\F_q$ and $E/k$, then the Frobenius map defined in \autoref{definition-frobenius} is an endomorphism since $E^{(q)}=E$ for all $q=p^r$, so it's now called the \textit{Frobenius endomorphism} and denoted by $\varphi_q$. The fixed points of this endomorphism are precisely $E(\F_q)$.
+        \end{remark}
+        %%%%%%% Maybe not
+        \comment{
+        \begin{example}
+            It might be interesting to present a ``visualization" of the Frobenius endomorphism on some cubic over finite fields. Take $k=\F_2$ and $K=\overline{\F_2}$ (all finite fields are perfect). We consider the subgroup $E(\F_{64})$. Note that we have intermediate fields with the following relation:
+            \[\begin{tikzcd}
+                                      & \mathbb F_{64} \arrow[ld, no head] \arrow[rd, no head] &                                 \\
+    \mathbb F_{8} \arrow[rd, no head] &                                                        & \mathbb F_4 \arrow[ld, no head] \\
+                                      & \mathbb F_2                                            &                                
+    \end{tikzcd}\]
+        \end{example}}
+        \begin{lemma}\label{lemma-iso-hom}
+            Every isogeny $\varphi:E_1\to E_2$ is a homomorphism of groups.
+        \end{lemma}
+        \begin{proof}
+            If $\varphi=[0]$ then we are done. Suppose $\varphi\neq[0]$. Then by \autoref{lemma-pushforward-hom}, there is a homomorphism $\varphi_*:\Pic^0(E_1)\to\Pic^0(E_2)$ defined by
+            \[\left[\sum n_P(P)\right]\mapsto\left[\sum n_P(\varphi(P))\right]\]
+            Recall the isomorphisms $\kp_i:E_i\to \Pic^0(E_i)$ defined by $P\mapsto [(P)-(\ecO)]$. They satisfy
+            \[\varphi_*\kp_1(P)=[(\varphi(P))-(\varphi(\ecO))]=[(\varphi(P))-(\ecO)]=\kp_2(\varphi(P))\]
+            since $\varphi(\ecO)=\ecO$. Therefore $\varphi=\kp_2^{-1}\circ\varphi_*\circ\kp_1$ is a group homomorphism.
+        \end{proof}
+        \noindent The kernel $\ker\varphi=\varphi^{-1}(\ecO)$ is therefore a subgroup of $E_1$ and finite by \autoref{lemma-rami}.
+        
+        There are two important results on the size of kernel stated below. The proofs of these two results require some complicated constructions that we do not want to know in this report. Therefore, we will take the theorems for granted.
+        \begin{theorem}\label{theorem-size-ker-iso}
+            Let $\varphi:E_1\to E_2$ be an isogeny. Then for all $Q\in E_2$, $\#\varphi^{-1}(Q)=\deg_s\varphi$ and for all $P\in E_1$, $e_\varphi(P)=\deg_i\varphi$. In particular, if $\varphi$ is separable, $\#\ker\varphi=\deg\varphi$.
+        \end{theorem}
+        \begin{theorem}\label{theorem-frob-sep}
+            If $\varphi_q$ is the $q$th-power Frobenius map on some elliptic curve $E/\F_q$ of characteristic $p>0$, then all maps $m+n\varphi_q:E\to E$ where $p\nmid m$ are separable.
+        \end{theorem}
+        \begin{remark}
+            By \autoref{theorem-frob-sep}, $1-\varphi_q$ is always separable. Therefore, the fixed points of $\varphi_q$, $\{P\in E:(1-\varphi_q)(P)=\ecO\}$, has size $\deg(1-\varphi_q)$.
+        \end{remark}
+        \begin{remark}\label{remark-translation}
+            For a fixed point $Q\in E$, we define the map $\tau_Q:P\mapsto P+Q$ to be the \textit{translation by $Q$} morphism. For any morphism $F:E_1\to E_2$ of elliptic curves, we have
+            \[\varphi=\tau_{-F(\ecO)}\circ F\in\Hom(E_1,E_2)\]
+            as $\varphi(\ecO)=F(\ecO)-F(\ecO)=\ecO$. Therefore, every morphism can be expressed as a composition of a translation and an isogeny.
+        \end{remark}
+        Still without a proof, we have the following decomposition theorem:
+        \begin{theorem}\label{theorem-isogeny-decomp}
+            Suppose $\varphi:E_1\to E_2$ and $\psi:E_1\to E_3$ are nonconstant isogenies. Further assume that $\varphi$ is separable and $\ker\varphi\subseteq\ker\psi$. Then there exits a unique $\pi:E_2\to E_3$ such that $\psi=\pi\circ\varphi$.
+        \end{theorem}
+        
+        
+        %%%%%%%%%%%%%%%% subsection %%%%%%%%%%%%%%%%%%%%
+        \subsection{Dual isogenies}
+        In this section we introduce another important object on elliptic curves. The construction of dual isogenies is not that obvious from a geometric point of view. Consider two elliptic curves $E_1, E_2$ and a nonconstant isogeny (thus surjective) $\varphi:E_1\to E_2$. Recall that the isogeny induces an homomorphism $\varphi^*:\Pic^0(E_2)\to\Pic^0(E_1)$ defined by
+        \[\left[(Q)\right]\mapsto \left[\sum_{P\in\varphi^{-1}(Q)}e_{\varphi}(P)(P)\right]\]
+        where $e_\varphi$ is $\varphi$'s ramification index at $P$. Now if $\kp_i:E_i\to \Pic^0(E_i)$ be the bijection we constructed in \autoref{ssec-alg-group}. Then let's investigate the composition $\kp_1^{-1}\circ\varphi^*\circ\kp_2$. Take some $Q\in E_2$ and some $P$ such that $\varphi(P)=Q$. Then
+        \begin{align*}
+            \left(\kp_1^{-1}\circ\varphi^*\circ\kp_2\right)(Q)&=\left(\kp_1^{-1}\circ\varphi^*\right)[(Q)-(\ecO)]&\\
+            &=\kp_1^{-1}\left[\sum[e_\varphi(P')(P')]-\sum[e_{\varphi}(T)(T)]\right]&\\
+            &=\sum_{P'\in \varphi^{-1}(Q)}[e_\varphi(P')]P'-\sum_{T\in \varphi^{-1}(\ecO)}[e_{\varphi}(T)]T&\\
+            &=[\deg_i\varphi]\left(\sum_{P'\in\varphi^{-1}(Q)}P'-\sum_{T\in\varphi^{-1}(\ecO)}T\right)&\text{by \autoref{theorem-size-ker-iso}}\\
+            &=[\deg_i\varphi\cdot\#\ker\varphi] P&\\
+            &=[\deg_i\varphi\cdot\deg_s\varphi]P=[\deg\varphi]P&\text{by \autoref{theorem-size-ker-iso}}
+        \end{align*}
+        where the second last equality holds since all $P'\in \varphi^{-1}(Q)$ are of the form $P+T$ for a distinct $T\in \ker\varphi^{-1}({Q})$. However, we do not know if this composition is an isogeny. Therefore, it is reasonable to construct the following object:
+        \begin{theorem}\label{theorem-dual-iso-exist}
+            Let $\varphi:E_1\to E_2$ be an isogeny and $\deg\varphi=m$. Then there exists a unique isogeny $\hat\varphi:E_2\to E_1$, called \textup{the dual isogeny of $\varphi$}, such that $\hat\varphi\circ\varphi=[m]$.
         \end{theorem}
         \begin{proof}
-            The first statement is rather hard to prove without schemes, so the proof won't be reproduced here. The second statement follows from the known fact that $\mathscr O(C)$, the sheaf of regular functions on the projective variety $C$, is just $K$.
+            We first prove uniqueness. Suppose $\hat\varphi,\hat\varphi'$ are two dual isogenies, then \[\left(\hat\varphi-\hat\varphi'\right)\circ\varphi=[m]-[m]=[0].\] 
+            This means $\hat\varphi-\hat\varphi'$ must be a constant, namely $\hat\varphi=\hat\varphi'$.
+    
+            To simplify the proof of existence, we use \autoref{corollary-frob-decomp}. Say $\varphi=\psi\circ\varphi_q$ where $\varphi_q$ is a Frobenius map of degree $q$ and $\psi$ separable. Suppose $\varphi$ and $\psi$ are two maps of degree $m,n$ respectively whose dual isogenies exist. Then 
+            \[(\hat{\varphi}\circ\hat\psi)\circ(\psi\circ\varphi)=\hat\varphi\circ[n]\circ\varphi=[n]\circ\hat\varphi\circ\varphi=[nm]\]
+            where the third equality holds since $\varphi$ is a homomorphism. By uniqueness, $\widehat{\psi\circ\varphi}=\hat{\varphi}\circ\hat\psi$. This means if we can prove that the two maps from the Frobenius decomposition have dual isogeny, then the composition of their dual isogeny is the dual isogeny of the original map.
+            
+            \textit{Case 1: }$\varphi$ is separable. Since $\varphi$ has degree $m$, we have $\#\ker\varphi=\deg_s\varphi=\deg\varphi=m$. This suggests the extremely crucial conclusion that every element of $\ker\varphi$ has order dividing $[m]$. Thus, $\ker\varphi\subseteq \ker[m]$. By \autoref{theorem-isogeny-decomp}, there is a unique $\hat\varphi$ such that $[m]=\hat\varphi\circ\varphi$.
+            
+            \textit{Case 2: }$\varphi$ is the $q$th power Frobenius map $\varphi_q$ with $q=p^e$, then $\varphi_q=\varphi_p^e$. Thus it suffices to reduce to the case $p$th power Frobenius map. We use the fact that if $\w$ is an invariant differential, then $[m]^*\w=m\w$, which means $[p]^*\w=p\w=0$. This means the map $[p]$ is not separable, otherwise it violates (iii) in \autoref{lemma-sep-criteria}. Thus we can decompose $[p]=\psi\circ\varphi_p^d$ for some integer $d\geqslant 1$ (otherwise $[p]$ would be separable!). Then taking $\hat\varphi=\psi\circ\varphi_p^{d-1}$, one gets the dual isogeny.
         \end{proof}
-
-        
-        Let $k$ be a field of characteristic $p>0$.
-        \begin{lemma}\label{l122}
-            Given curve $C/k$ and $t\in k(C)$ a uniformizer at a nonsingular $P\in C(k)$. Then $k(C)$ is a finite separable extension of $k(t)$.
+        \begin{lemma}\label{lemma-dual-prop}
+            Suppose $\varphi:E_1\to E_2$ is an isogeny. Then
+            \begin{enumerate}[\normalfont(i)]
+                \item $\varphi\circ\hat\varphi=[m]$.
+                \item If $\psi:E_1\to E_2$ is another isogeny. Then $\widehat{\varphi+\psi}=\hat\varphi+\hat\psi$.
+                \item For all $m\in\Z$, $\widehat{[m]}=[m]$ which suggests $\deg\; [m]=m^2$.
+                \item $\deg\hat\varphi=\deg\varphi$ and $\hat{\hat\varphi}=\varphi$.
+            \end{enumerate}
         \end{lemma}
         \begin{proof}
-            Since $k(C)$ is a finitely generated $k$-algebra, Zaraski's lemma ensures it's a finite extension of $k$. Clearly $k(t)$ has transcendence degree $1$ ($t\notin k$ otherwise $\ord_P t=0$ for all $P\in C$). Now as the transcendence degree of $k(C)/k$ is $\dim C=1$, $\trdeg k(C)/k(t)=0$, meaning $k(C)$ is an algebraic extension of $k(t)$.
-
-            Take any $x\in k(C)$ and we aim to show $x$ is separable over $k(t)$. Since $k(C)$ is algebraic, there is some $\Phi(X, T)\in k[X, T]$ such that $\Phi(x, t)=0$. Suppose further that $\Phi$ has minimal degree over $k(t)$.
-
-            If there is some term $a_{ij}T^iX^j$ in $\Phi$ where $p\nmid j$, then clearly $\partial\Phi(t, X)/\partial X$ is nonzero, meaning $x$ is separable.
-
-            It remains to check when $\Phi(T, X)=\Psi(T, X^P)$ for some polynomial $\Psi$. Write
-            \[\Phi=\Psi(T, X^p)=\sum_{k=0}^{p-1}\left(\sum_{i,j}b_{ijk}T^{ip}X^{jp}\right)T^k\]
-            Since $k$ is perfect of characteristic $p>0$, every element of $k$ is a $p$th power. Thus, define $c_{ijk}^p=b_{ijk}$ and thus
-            \[\sum_{i,j}b_{ijk}T^{ip}X^{jp}=\sum_{i,j}(c_{ijk}X^iT^j)^p=\left(\sum_{i,j}c_{ijk}X^iT^j\right)^p=\varphi_k(T, X)^p\]
+            (i) We have $(\varphi\circ\hat\varphi)\circ\varphi=\varphi\circ[m]=[m]\circ\varphi$. But since $\varphi$ is nonconstant, $\varphi\circ\hat\varphi=[m]$
             
-            Evaluate the order of each summand:
-            \[\ord_P(\varphi_k(t, x)^pt^k)=p\ord_P(\cdots)+k\ord_P(t)\equiv k\pmod{p}\]
-            which means they have different orders, and thus must all vanish as $\Phi(t, x)=0$. There must exist some $k$ such that $\varphi_k$ contains $X$ and $\varphi_k(t, x)=0$. Yet $\Phi(t, X)$ is minimal and $\deg \varphi_k(t, X)^p\leqslant \deg \Phi(t, X)$ so we get a contradiction.
+            (ii) The proof of this part is lengthy and difficult, so we omit it.
+            
+            (iii) Using (ii), $\widehat{[m+1]}=\widehat{[m]}+\widehat{[1]}$. Yet $[0]\circ[0]=[0]=[\deg[0]]$ so $\widehat{[0]}=[0]$, which gives the base case of the induction. Let $d=\deg\;[m]$, then $[d]=[m^2]$, which means $d=m^2$ as $\End(E)$ is torsion-free.
+            
+            (iv), (v) are easy using (iii).
         \end{proof}
-
-        Due to the existence of uniformizers, every rational map is regular at smooth points.
+        \begin{remark}\label{remark-torsion-struct}
+            Suppose $\operatorname{char} k=p>0$. We have collected all necessary properties of the isogeny $[m]$. Thus, we could investigate the structure of $E[m]$, which is the kernel of $[m]$. Taking $n=0$ in \autoref{theorem-frob-sep}, if $p\nmid m$, then $[m]$ is separable. Thus, by \autoref{theorem-size-ker-iso}, $\# E[m]=\#\ker[m]=\deg\;[m]=m^2$. And since $p$ is prime, for every $d\mid m$, we have $p\nmid d$. Thus, $\# E[d]=d^2$. By looking at the classification of $E[m]$ as a finitely generated group, it must follow that $E[m]\cong\Z/m\Z\times\Z/m\Z$.
+            
+            Now consider the case where $m=p^e$ for some $e\geqslant 1$. Then 
+            \[\# E[p^e]=\#\ker [p^e]=\deg_s[p^e]=\left(\deg_s(\hat{\varphi_p}\circ\varphi_p)\right)^e\]
+            But since $\varphi_p$, the $p$th power Frobenius map is purely inseparable by \autoref{theorem-deg-frob}, the RHS equals $(\deg_s(\hat{\varphi_p})^e$. If $\hat{\varphi_p}$ is inseparable, then $\# E[p^e]=1$ which implies $E[p^e]=\{\ecO\}=0$. If $\hat{\varphi_p}$ is separable, then $\# E[p^e]=p^e$ and writing out $E[p^e]$'s decomposition as a finite group, we get $E[p^e]\cong \Z/p^e\Z$.
+        \end{remark}
+        \begin{corollary}\label{corollary-deg-pos-quadratic}
+            For elliptic curves $E_1, E_2$, the function
+            \[\deg:\Hom(E_1,E_2)\to\Z\]
+            is a positive definite quadratic form.
+        \end{corollary}
+        \begin{proof}
+            By definition $\deg\varphi=0$ if and only if $\varphi=[0]$ so it is positive definite. Also, we have $\deg(m\varphi)=\deg[m]\cdot\deg\varphi=m^2\deg\varphi$ for all $m\in\Z$. So it remains to prove that the polar form of $\deg$:
+            \[\langle\varphi,\psi\rangle=\deg(\varphi+\psi)-\deg\varphi-\deg\psi\]
+            is $\Z$-bilinear. 
+            
+            Note the map $[]:\Z\to\End(E_1)$ is an injection, so
+            \begin{align*}
+                [\langle\varphi,\psi\rangle]&=[\deg(\varphi+\psi)]-[\deg\varphi]-[\deg\psi]\\
+                &=(\hat\varphi+\hat\psi)\circ(\varphi+\psi)-\hat\varphi\circ\varphi-\hat\psi\circ\psi\\
+                &=\hat\varphi\circ\psi+\hat\psi\circ\varphi
+            \end{align*}
+            Since $\hat\varphi\circ\psi$ and $\hat\psi\circ\varphi$ are both $\Z$-linear (easy to check) in $\varphi$ and $\psi$ and $[]$ is an injection, the polar form is $\Z$-bilinear. Thus, $\deg$ is a positive definite quadratic form. 
+        \end{proof}
+        %%%%%%%%%%%%%%%% subsection %%%%%%%%%%%%%%%%%%%%
+        \subsection{Tate modules}
+            In this section, we get a little bit more ``Galois", and see what we can do with the group action $\Gal(K/k)$ on the elliptic curve. Let $E$ be an elliptic curve over $K/k$. Recall that the explicit formula for $[2]$ shows that if $E/k$ then $[2]$ is also defined over $k$, meaning for all $\s\in\Gal(K/k)$, $[2]^\s=[2]$. Thus we know, for any $P\in E$
+            \[[m]P^\s=[m]^\s P^\s=([m]P)^\s\]
+            which means $\Gal(K/k)$ acts on each $E[m]$!
+            
+            Therefore, the group action induces a representation (or in certain texts the group action is itself a representation):
+            \[\rho:\Gal(K/k)\to\Aut(E[m])=\operatorname{GL}_2(\Z/m\Z)\]
+            But the ring $\Z/m\Z$ has characteristic $>0$, which is hard to work with. Thus, we want some ring of characteristic $0$ where the representation would live.
+            
+            Note that $\Z_l$, the ring of $l$-adic numbers, is the completion of $\Z_{(p)}$, meaning
+            \[\Z_l=\varprojlim\Z/l^n\Z\]
+            where the obvious inverse system is given by maps of the form $\Z/l^{n+m}\Z\xrightarrow{\cdot l^m}\Z/l^n\Z$. Indeed, this ring has characteristic zero, and it relates very closely to the quotients $\Z/l^n\Z$. So it is ideal to make our representations live on this ring.  Meanwhile, note that we also have an inverse system of $l^n$-torsion subgroups of an elliptic curves, namely
+            \[E[l^{n+m}]\xrightarrow{[l]^m}E[l^n]\]
+            We can take 
+            \begin{definition}
+                The inverse limit of all $l^n$-torsion subgroups:
+                \[T_l(E)=\varprojlim E[l^n]\]
+                to be the \textit{$l$-adic Tate module of $E$}.
+            \end{definition}
+            \begin{remark}
+                Note that if $l$ is a prime number different from the characteristic of $p$, then $E[l^n]\cong \Z/l^n\Z\times\Z/l^n\Z$ (\autoref{remark-torsion-struct}), which is a free $\Z/l^n\Z$-module of rank 2. Thus,
+                \[T_l(E)\cong \Z_l\times\Z_l\]
+                which is a $\Z_l$-module, with the canonical Krull topology.
+                
+                Similarly, if $l=p=\operatorname{char}k$, then $T_l(E)=0$ or $\Z_p$.
+            \end{remark}
+            \begin{remark}
+                The Galois group also acts on $T_l(E)$. To see this, take some element $(,,,,a_2,a_1)\in T_l(E)$. Then we want to show $(...,a_2^\s,a_1^\s)$ is also in $T_l(E)$ for all $\s\in\Gal(K/k)$. This is clear since $a_j=[l]^{j-i}a_i$ suggests
+                \[a_j^\s=([l]^{j-i}a_i)^\s=[l]^{j-1}a_i^\s\]
+                so the property is still preserved.
+            \end{remark}
+            Thus we have a group representation:
+            \begin{definition}
+                The representation induced by the group action
+                \[\rho:\Gal(K/k)\to \Aut(T_l(E))\]
+                is the \textit{$l$-adic Galois representation attached to $E$}.
+            \end{definition}
+            \begin{remark}
+                For any isogeny $\varphi:E_1\to E_2$ between elliptic curves (which are homomorphisms so they preserve the torsion subgroups), we have induced maps $\varphi:E_1[l^n]\to E_2[l^n]$ which induce a map
+                \[\varphi_l:T_l(E_1)\to T_l(E_2)\]
+                If $E_1=E_2=E$, the map $\varphi\mapsto\varphi_l$ is a homomorphism of rings
+                \[\rho:\End(E)\to\End(T_l(E))\]
+            \end{remark}
+            The following lemma is an exercise in \cite{silverman_2009_the}. We reproduce and solve it here.
+            \begin{lemma}\label{lemma-tate-map-inj}
+                The map $\rho:\End(E)\to\End(T_l(E))$ defined by $\varphi\mapsto\varphi_l$ is injective.
+            \end{lemma}
+            \begin{proof}
+                Suppose $\varphi\in\ker\rho$. Then $\left.\varphi\right|_{E[l^n]}=0$ for all $n$ by the construction of $\varphi_l$, which means $\#\ker\varphi\geqslant\#E[l^n]=l^{2n}$ for all $n$. But note that $\#\ker\varphi=\deg_s\varphi$ which is finite if $\varphi$ is nonconstant. Thus, $\varphi\equiv\ecO$, suggesting $\rho$ is injective.
+            \end{proof}
+            
+        
+        %%%%%%%%%%%%%%%% subsection %%%%%%%%%%%%%%%%%%%%
+        \subsection{Weil pairings}
+            Selecting a basis of $E[m]$, which is a $\Z/m\Z$-module, we could define a determinant map $\det:E[m]\times E[m]\to\Z/m\Z$ by selecting a basis $\{T_1,T_2\}$ and letting
+            \[\det(aT_1+bT_2, cT_2+dT_2)=ad-bc.\]
+            But this determinant might not be Galois invariant. So we define a pairing that's more complicated but nicer.
+            
+            Take some $T\in E[m]$. Then there is some $f\in K(E)$ such that $\pdiv(f)=m(T)-m(O)$ (since $\kp([m]T)=m\kp(T)\equiv\ecO$ in the Picard group). Take $T'$ such that $[m]T'=T$. Then there is some $g\in K(E)$ such that
+            \[\pdiv(g)=m^*(T)-m^*(O)=\sum_{R\in E[m]}(T'+R)-(R)\]
+            It can be checked that $f\circ[m]=g^m$ after multiplying $f$ with a constant. Now fix any $S\in E[m]$. We observe that for all $X\in E$,
+            \[g(X+S)^m=f([m]X+[m]S)=f([m]X)=g(X)^m\]
+            which means for each $X$ the function $g(X+S)/g(X)$ only takes finitely many values which are all $m$th roots of unity. Also, the rational function $\varphi:E\to \Pc^1$ defined by $S\mapsto[g(X+S)/g(X):1]$ is not surjective, meaning it's a constant. Therefore, we can define the pairing
+            \begin{definition}
+                \[e_m(S, T)=\frac{g(X+S)}{g(X)}\]
+                called the \textit{Weil $e_m$-pairing}.
+            \end{definition}
+            We will only state the following properties of $e_m$ and will omit the proof as it is superbly lengthy but there is not enough space for it.
+            \begin{lemma}\label{lemma-weil-pairing-prop}
+                The Weil $e_m$-pairing satisfies:
+                \begin{enumerate}[\normalfont(i)]
+                    \item The paring is bilinear: $e_m(S_1+S_2,T)=e_m(S_1,T)e_m(S_2, T)$ and similarly for the other entry.
+                    \item The pairing is alternating: $e_m(T, T)=1$ and thus $e_m(S, T)=e_m(T, S)^{-1}$.
+                    \item The pairing is Galois invariant: $e_m(S, T)^\s=e_m(S^\s, T^\s)$.
+                    \item The pairing is nondegenerate: if $e_m(S, T)=1$ for all $S\in E[m]$ then $T=\ecO$.
+                    \item For all $S\in E[mm'], T\in E[m]$, $e_{mm'}(S, T)=e_m([m']S, T)$.
+                    \item There exist $S, T\in E[m]$ such that $e_m(S, T)$ is a primitive $m$th root of unity, namely if $E[m]\subseteq E(k)$ then $\boldsymbol{\mu}_m\subseteq k^\times$ where $\boldsymbol{\mu}_m$ is the set of $m$th roots of unity in $K$.
+                    \item The adjointness of $\hat\varphi$: $e_m(S, \hat\varphi(T))=e_m(\varphi(S), T)$.
+                \end{enumerate}
+            \end{lemma}
+            We want to create a pairing on $T_l(E)$ too. This would be a map from $T_l(E)\times T_l(E)$ to $T_l(\boldsymbol{\mu})=\varinjlim\boldsymbol{\mu}_{l^n}$. Note that the map $\boldsymbol{\mu}_{l^{n+1}}\xrightarrow{z\mapsto z^l}\boldsymbol{\mu}_{l^n}$ form the inverse system of the latter inverse limit. By bilinearity and (v) in \autoref{lemma-weil-pairing-prop},
+            \[e_{l^{n+1}}(S, T)^l=e_{l^{n+1}}(S, [l]T)=e_{l^n}([l]S, [l]T)\]
+            So we have
+            \begin{definition}
+                The map induced by $e_m$
+                \[e:T_l(E)\times T_l(E)\to T_l(\boldsymbol{\mu})\]
+                is called the \textit{$l$-adic Weil pairing}.
+            \end{definition}
+            \begin{remark}
+                Suppose we select a $\Z_l$-basis of $T_l(E)$. Then we can compute the trace and determinant of $\varphi_l$ for each $\varphi\in\End(E)$. These functions take values in $\Z_l$ and they are independent of the choice of basis.
+            \end{remark}
+            And finally we use the $l$-adic Weil pairing to deduce the most important formula in this report:
+            \begin{theorem}\label{theorem-map-deg-tr}
+                Let $\varphi\in \End(E)$ and $\varphi_l=\rho(\varphi)\in\End(T_l(E))$. Then
+                \[\det(\varphi_l)=\deg\varphi,\quad\operatorname{tr}(\varphi_l)=1+\deg\varphi-\deg(1-\varphi)\]
+            \end{theorem}
+            \begin{proof}
+                The latter formula is immediate from the first formula ($a+d=1+ad-bc-(1-a)(1-d)+bc$). So it suffices to prove the first formula.
+                
+                Let $\{v_1,v_2\}$ be a $\Z_l$-basis of $T_l(E)$ and write
+                \[\varphi_l=\begin{bmatrix}
+                a & b\\
+                c & d
+                \end{bmatrix}\]
+                Then
+                \begin{align*}
+                    e(v_1,v_2)^{\deg\varphi}&=e([\deg\varphi]v_1,v_2)&\text{by bilinearity}\\
+                    &=e(\hat\varphi\varphi v_1,v_2)&\text{by construction}\\
+                    &=e(\varphi v_1,\varphi v_2)&\text{by adjointness}\\
+                    &=e(v_1,v_2)^{ad-bc}&\text{by bilinearity and the alternating property}\\
+                    &=e(v_1,v_2)^{\det(\varphi_l)}&
+                \end{align*}
+                and since $e(v_1,v_2)$ is nondegenerate, $e(v_1,v_2)\neq 1$ so $\deg\varphi=\det(\varphi_l)$.
+            \end{proof}
+        \section{The $p$-Riemann Hypothesis}
+        The prominent and difficult Riemann Hypothesis was first presented by Riemann himself in 1859 \cite{riemann_1859_ueber}, concerning the real part of the nontrivial zeros of the analytic continuation of the zeta function
+        \[\zeta(s)=\sum_{n\geqslant 1}\frac{1}{n^s}\]
+        The mathematical genius Euler proved that
+        \[\zeta(s)=\prod_{p\text{ prime}}\frac{1}{1-p^{-s}}\]
+        in 1740. 
+        
+        While people had no idea about how one might prove or disprove the Riemann Hypothesis, Emil Artin studied a generalized version of this zeta function. Let $R$ be an algebra of finite type over $\Z$ (we don't care what this means). Then for any maximal ideal ideal $\mathfrak m\lhd R$, the residue field $R/\mathfrak m$ is finite. Artin then defined a generalized zeta function by
+        \[\zeta_R(s)=\prod_{\mathfrak m\text{ maximal}}\frac{1}{1-\#(R/\mathfrak m)^{-s}}\]
+        Note that if $R=\Z$ then the maximal ideals are of the form $p\Z$ and then $\zeta_\Z(s)$ is just the regular Riemann zeta function. Unfortunately this definition did not provide the mathematicians with anything special or useful for Riemann Hypothesis \cite{oort_2014_wei}. In his Ph.D. thesis, Emil Artin presented an analogous definition of the zeta function $Z(V;T)$ on algebraic curves $V$ over finite fields \cite{Artin1924}. This zeta function is also called the Hasse–Weil zeta function. This new zeta function then proved to be fruitful, and led to some fruitful developments in geometry and number theory.
+        
+        With this new zeta function on algebraic curves over a finite field $\F_q$ of characteristic $p>0$, German mathematicians were able to produce a similar version of Riemann Hypothesis, called the \textit{$p$-Riemann Hypothesis}, on the properties of $Z(V;T)$. The zeta function $Z(V;T)$ is essentially a generating function of the sizes of the sets $V(\F_{q^n})$ representing the $\F_{q^n}$-rational points in $V$. 
+        
+    %%%%%%%%%%%%%%%% subsection %%%%%%%%%%%%%%%%%%%%
+    \subsection{The Hasse bound}\label{ssec-hasse-bound}
+        Suppose $E/\F_q$ is an elliptic curve and $q$ is a power of some prime $p$.
+        \begin{theorem}[Hasse bound]\label{theorem-hasse}
+            Let $E/\F_q$. Then
+            \[|\# E(\F_q)-q-1|\leqslant 2\sqrt{q}\]
+        \end{theorem}
+        \begin{proof}
+            Let $\varphi_q:E\to E$ be the $q$th Frobenius map. Since the Galois group $\Gal(\overline{\F_q}/\F_q)$ is topologically generated by the Frobenius endomorphism $F:x\mapsto x^q$ (that the cyclic group $\langle F\rangle$ is dense in $\Gal(\overline{\F_q}/\F_q)$ with respect to its Krull topology).; equivalently, the restriction of every $\s\in\Gal(\overline{\F_q}/\F_q)$ to $\F_{q^n}$ is a power of $F$. Thus,
+            \[P\in E(\F_q)=E^{\Gal(\overline{\F_q}/\F_q)}\text{ if and only if }\varphi_q(P)=\varphi\]
+            which means $E(\F_q)=\ker(1-\varphi_q)$. By \autoref{theorem-frob-sep} and \autoref{theorem-size-ker-iso}, $\# E(\F_q)=\deg(1-\varphi_q)$. Since $\deg [1]=1^2=1$ and $\deg \varphi_q=q$, by \autoref{corollary-deg-pos-quadratic} and \autoref{lemma-cauchy-schwartz},
+            \[|\# E(\F_q)-q-1|=|\deg(1-\varphi_q)-\deg[1]-\deg\varphi_q|\leqslant 2\sqrt{\deg[1]\cdot\deg\varphi_q}=2\sqrt{q}\]
+            which completes the proof.
+        \end{proof}
+        \begin{example}
+            Let $f(x)=ax^3+bx^2+cx+d$ be a cubic with distinct roots in $\F_q[x]$. Let $\chi:\F_q^\times\to\{\pm 1\}$ be the character which determines if an element is a square in $\F_q$. One immediately sees that the number of solutions to $E:y^2=f(x)$ is (with the point at infinity)
+            \[\# E(\F_q)=1+\sum_{x\in \F_q}\left[1+\chi\left(f(x)\right)\right]=1+q+\sum_{x\in\F_q}\chi\left(f(x)\right)\]
+            which suggests
+            \[\left|\sum_{x\in\F_q}\chi\left(f(x)\right)\right|\leqslant 2\sqrt{q}\]
+            by \autoref{theorem-hasse}.
+        \end{example}
+    %%%%%%%%%%%%%%%% subsection %%%%%%%%%%%%%%%%%%%%
+    \subsection{Weil conjectures}
+        The Weil conjectures consist of several conjectures concerning the properties of the zeta function defined on algebraic varieties (which was primarily defined by Emil Artin in his Ph.D. thesis, mentioned in \autoref{sec-intro}). Given a smooth projective variety $V/\F_q$, we define similarly the set of $\F_{q^r}$-rational points on $V$, denoted by $N_r=\# V(\F_{q^r})$.
+        \begin{definition}
+            The \textit{zeta function of $V/\F_q$} is the power series
+            \[Z(V/\F_q;T)=\exp\left(\sum_{r=1}^\infty \frac{N_r}{r}T^r\right)\]
+            where the exponential of a power series with no constant term is defined by
+            \[\exp(F(T))=\sum_{k=0}^\infty \frac{F(T)^k}{k!}\]
+        \end{definition}
+        \begin{remark}
+            If we know the zeta function, we could recover each $N_r$ from it:
+            \[N_r=\frac{1}{(r-1)!}\left.\frac{d^r}{dT^r}\log Z(V/\F_q;T)\right|_{T=0}\]
+        \end{remark}
+        \begin{example}
+            Let's try an easy example. Consider the projective space $V=\Pc^n$. Then the number of points in $V(\F_{q^r})$ is simply $N_r=\frac{q^{r(n+1)-1}}{q^r-1}=\sum_{i=0}^nq^{ir}$ (discard the zero tuple and dividing out the equivalence classes). Thus, we have
+            \[\log Z(V/\F_q;T)=\sum_{r=1}^\infty \sum_{i=0}^n\frac{(q^iT)^r}{n}=\sum_{i=0}^n-\log(1-q^iT)\]
+            where the second equality holds by exchanging the summation. Thus,
+            \[Z(V/\F_q;T)=\frac{1}{(1-T)\cdots (1-q^nT)}\]
+        \end{example}
+        \begin{remark}
+            What is the set $E(\F_{q^n})$ essentially? Similar to what was argued in \autoref{theorem-hasse}, $E(\F_{q^n})$ is the set of fixed points of the $n$th iterate of the $q$th power Frobenius map $\varphi_{q}$. Therefore, we have $\# E(\F_{q^n})=\ker(1-\varphi_q^n)$, which opens a path way to proving a particular case of the Weil conjectures Hasse used in 1936 \cite{Hasse1936}.
+        \end{remark}
+        The history of the Weil conjectures is also quite interesting. Hasse solved the $p$-Riemann Hypothesis for curves of genus one, i.e., elliptic curves, and proved \autoref{theorem-hasse}. Weil was aware of this result, and announced an outline of the proof for curves of genus $g$ in 1940, when he was a prisoner ``in a French military prison for failing to report for duty" \cite{baez_2019_the}! In 1941 Weil published a proof of a generalization of the Hasse bound. Weil then studied equations of the form
+        \[a_0x_0^{m_0}+\cdots+a_rx_r^{m_r}=b\]
+        over some finite fields, and when $b=0$, Weil found that
+        \[\sum_{n=1}^\infty N_nT^{n-1}=\frac{d}{dT}\log\left(\frac{1}{(1-T)\cdots (1-q^rT)}\right)+(-1)^r\frac{d}{dT}\log P(T)\]
+        for some polynomial $P$ \cite{milne_2016_the}. Weil then wrote, in \cite{weil_1949_numbers}, that his observation of the homogeneous equations over finite fields might lead to some ``conjectural statements", which are rephrased and restate below. These famous statements are the so-called ``Weil conjectures". A brief remark on the name of the last statement is in \autoref{remark-p-rh}.
+        \begin{theorem}[Weil conjectures]
+            Let $V/\F_q$ be a smooth projective variety of dimension $N$. Then
+            \begin{enumerate}[\normalfont(i)]
+                \item Rationality: $Z(V/\F_q;T)\in\mathbb Q(T)$.
+                \item Functional equation: there is an integer $\ve$ --- the Euler characteristic of $V$ --- such that $Z(V/\F_q;1/q^NT)=\pm q^{N\ve/2}T^{\ve}Z(V/\F_q;T)$.
+                \item $p$-Riemann Hypothesis:
+                \[Z(V/\F_q;T)=\frac{P_1(T)P_3(T)\cdots P_{2N-1}(T)}{P_0(T)P_2(T)\cdots P_{2N}(T)}\]
+                where $P_i\in\Z[T]$, $P_0(T)=1-T$ and $P_{2N}=1-q^NT$. Furthermore, each $P_i$ factors over $\C$ with roots $\alpha_{ij}$ satisfying $|\alpha_{ij}|=q^{1/2}$ for all $i, j$. The degree of $P_i$, $b_i$, is the $i$th \textup{Betti number of $V$}. 
+            \end{enumerate}
+        \end{theorem}
+        As noted before, a baby version of these ``conjectures" was proved by Hasse in 1930s. In 1950s, Weil proved these statements for abelian varieties --- varieties with an abelian structures but, unlike elliptic curves, are of arbitrary genus and dimension. Grothendieck proved the first two statements for general projective varieties using his theory of étale cohomology, but was unable to prove the $p$-Riemann Hypothesis. In 1973, Deligne presented his first proof of Weil conjectures \cite{deligne1}; in 1980, Deligne presented another proof \cite{deligne2}. Deligne's proof was described by Gowers as a ``surprise" from Weil's belief of the need of ``standard conjectures". Deligne took a ``different route", in spite of using Grothendieck's cohomology theory \cite{gowers_2013}.
+    %%%%%%%%%%%%%%%% subsection %%%%%%%%%%%%%%%%%%%%
+    \subsection{Hasse's proof for elliptic curves}
+        Due to the extreme difficulty of the Weil conjectures for general varieties and the level of knowledge required to understand them, we only present the proof of Weil conjectures for elliptic curves --- smooth projective varieties of genus one and dimension one. This proof is due to Hasse and was done years before Weil conjectures.
+        \begin{lemma}\label{lemma-the-last}
+            Let $E/\F_q$ be an elliptic curve. Let $\varphi_q$ be the $q$th power Frobenius map and suppose
+            \[a=q+1-\# E(\F_q)\]
+            Then
+            \begin{enumerate}[\normalfont(i)]
+                \item Let $\alpha,\beta\in\C$ be roots of $T^2-aT+q$. Then $\beta=\bar{\alpha}$ and $|l\alpha|=|\beta|=\sqrt{q}$ and for all $n\geqslant 1$,
+                \[N_n=\# E(\F_{q^n})=q^n+1-\alpha^n-\beta^n\]
+                \item The characteristic polynomial of $\varphi$ is $T^2-aT+q$.
+            \end{enumerate}
+        \end{lemma}
+        \begin{proof}
+            By \autoref{theorem-frob-sep}, $1-\varphi_q$ is separable and by \autoref{theorem-size-ker-iso},
+            \[\# E(\F_q)=\#\ker(1-\varphi_q)=\deg(1-\varphi_q)\]
+            By \autoref{theorem-map-deg-tr}, for any prime $l\neq p$
+            \[\det(\varphi_{q,l})=\deg\varphi_q=q,\quad\operatorname{tr}(\varphi_{q,l})=1+\deg\varphi_q-\deg(1-\varphi_q)=1+q-\# E(\F_q)=a\]
+            Thus by the degree-trace formula, $\varphi_{p,l}$ has characteristic polynomial $\det(T-\varphi_{p,l})=T^2-aT+q$, which factors over $\C$ as $(T-\alpha)(T-\beta)$.
+            
+            (i) Since for all $m/n\in\mathbb Q$, if $T=m/n$ then by \autoref{theorem-map-deg-tr},
+            \[\det(T-\varphi_{p,l})=\frac{\det(m-n\varphi_{p,l})}{n^2}=\frac{\deg(m-n\varphi_{p,l})}{n^2}\geqslant 0,\]
+            the quadratic function is also nonnegative for all reals. Thus, the roots must be the same or they must be two complex conjugates. In either case, we have $|\alpha|=|\beta|$. But since $\alpha\beta=\det(\varphi_{p,l})=q$, we get $|\alpha|=|\beta|=\sqrt{q}$.
+            
+            Similarly, $E(\F_{q^n})$ is the fixed field of $\varphi_{q}^n$. Then as $\varphi_{p,l}$ is equivalent to $\operatorname{diag}(\alpha,\beta)$ or $J_2(\alpha)$, the Jordan canonical normal form of $\varphi_{p,l}^n$ is always $\operatorname{diag}(\alpha^n,\beta^n)$ or $J_2(\alpha^n)$. Thus,
+            \[\# E(\F_{q^n})=\deg(1-\varphi_{q}^n)=\det(1-\varphi_{q,l}^n)=1-\alpha^n+\beta^n+q^n\]
+            
+            (ii) We have by Cayley–Hamilton,
+            \[\deg(\varphi_q^2-a\varphi_q+q)=\det(\varphi_{q,l}^2-a\varphi_{q,l}+q)=0\]
+            which by the positive definiteness of the quadratic form $\deg$, $\varphi_q^2-a\varphi_q+q$=0.
+        \end{proof}
+        \begin{theorem}[Weil conjectures for elliptic curves]\label{theorem-the-last}
+            Let $E/\F_q$ be an elliptic curve. Then there is an $a\in\Z$ such that
+            \[Z(E/\F_q;T)=\frac{1-aT+qT^2}{(1-T)(1-qT)}\]
+            and (the Euler characteristic is zero; which is already known since $2-2g=0$)
+            \[Z(E/\F_q;1/qT)=Z(E/\F_q;T)\]
+            and finally
+            \[1-aT+qT^2=(1-\alpha T)(1-\beta T),\quad|\alpha|=|\beta|=\sqrt{q}\]
+        \end{theorem}
+        \begin{proof}
+            With all our works, the proof is surprisingly easy.
+            \begin{align*}
+                \log Z(E/\F_q;T)={}&\sum_{n=1}^\infty\frac{N_nT^n}{n} &\text{by definition}\\
+                ={}&\sum_{n=1}^\infty\frac{(1-\alpha^n-\beta^n+q^n)T^n}{n}&\text{by \autoref{lemma-the-last}}\\
+                ={}&-\log(1-T)+\log(1-\alpha T)\\
+                &+\log(1-\beta T)-\log(1- qT)
+            \end{align*}
+            Thus,
+            \[Z(E/\F_q;T)=\frac{(1-\alpha T)(1-\beta T)}{(1-T)(1-qT)}\]
+            and the other results are then obvious.
+        \end{proof}
+        \begin{remark}\label{remark-p-rh}
+            Define a function $\zeta_{E/\F_q}(s)$ on $\C$ to be
+            \[\zeta_{E/\F_q}(s)=Z(E/\F_q;q^{-s})=\frac{1-aq^{-s}+q^{1-s}}{(1-q^{-s})(1-q^{1-s})}\]
+            Then we have $\zeta_{E/\F_q}(s)=\zeta_{E/\F_q}(1-s)$, which is derived from the functional equation. Furthermore, $\zeta_{E/\F_q}(s)=0$ if and only if $q^{-s}=\alpha$ or $\beta$. This means $|q^{s}|=q^{\Re(s)}=\sqrt{q}$ or $\Re(s)=\frac{1}{2}$. This why the last statement is called the $p$-Riemann Hypothesis!
+        \end{remark}
+        \newpage
+        \section{References}
+        \renewcommand{\section}[2]{\vskip 0.01em}
+        \printbibliography
 \end{document}

@@ -1,0 +1,505 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global}
+    \entry{atiyah1994introduction}{book}{}
+      \name{author}{2}{}{%
+        {{hash=feb3593a7d423b4961148cc3cc6c0231}{%
+           family={Atiyah},
+           familyi={A\bibinitperiod},
+           given={M.F.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a16c1f3219ee3501467aab0bc1c3a1b3}{%
+           family={MacDonald},
+           familyi={M\bibinitperiod},
+           given={I.G.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Avalon Publishing}%
+      }
+      \strng{namehash}{da0fe93a9f9148b2d341a69f9ad11fc6}
+      \strng{fullhash}{da0fe93a9f9148b2d341a69f9ad11fc6}
+      \strng{bibnamehash}{da0fe93a9f9148b2d341a69f9ad11fc6}
+      \strng{authorbibnamehash}{da0fe93a9f9148b2d341a69f9ad11fc6}
+      \strng{authornamehash}{da0fe93a9f9148b2d341a69f9ad11fc6}
+      \strng{authorfullhash}{da0fe93a9f9148b2d341a69f9ad11fc6}
+      \field{labelalpha}{AM94}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780813345444}
+      \field{series}{Addison-Wesley series in mathematics}
+      \field{title}{Introduction To Commutative Algebra}
+      \field{year}{1994}
+      \verb{urlraw}
+      \verb https://books.google.co.uk/books?id=HOASFid4x18C
+      \endverb
+      \verb{url}
+      \verb https://books.google.co.uk/books?id=HOASFid4x18C
+      \endverb
+    \endentry
+    \entry{Artin1924}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b9b51a6ca145b2345d2a8b8e55e88c96}{%
+           family={Artin},
+           familyi={A\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9b51a6ca145b2345d2a8b8e55e88c96}
+      \strng{fullhash}{b9b51a6ca145b2345d2a8b8e55e88c96}
+      \strng{bibnamehash}{b9b51a6ca145b2345d2a8b8e55e88c96}
+      \strng{authorbibnamehash}{b9b51a6ca145b2345d2a8b8e55e88c96}
+      \strng{authornamehash}{b9b51a6ca145b2345d2a8b8e55e88c96}
+      \strng{authorfullhash}{b9b51a6ca145b2345d2a8b8e55e88c96}
+      \field{labelalpha}{Art24}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1432-1823}
+      \field{journaltitle}{Mathematische Zeitschrift}
+      \field{month}{12}
+      \field{number}{1}
+      \field{title}{Quadratische Körper im Gebiete der höheren Kongruenzen. I.}
+      \field{volume}{19}
+      \field{year}{1924}
+      \field{pages}{153\bibrangedash 206}
+      \range{pages}{54}
+      \verb{doi}
+      \verb 10.1007/BF01181074
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/BF01181074
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/BF01181074
+      \endverb
+    \endentry
+    \entry{baez_2019_the}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=329807354727630303631f4116854467}{%
+           family={Baez},
+           familyi={B\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {The n-Category Café}%
+      }
+      \strng{namehash}{329807354727630303631f4116854467}
+      \strng{fullhash}{329807354727630303631f4116854467}
+      \strng{bibnamehash}{329807354727630303631f4116854467}
+      \strng{authorbibnamehash}{329807354727630303631f4116854467}
+      \strng{authornamehash}{329807354727630303631f4116854467}
+      \strng{authorfullhash}{329807354727630303631f4116854467}
+      \field{labelalpha}{Bae19}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Riemann Hypothesis (Part 3)}
+      \field{urlday}{20}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://golem.ph.utexas.edu/category/2019/09/the_riemann_hypothesis_part_3.html
+      \endverb
+      \verb{url}
+      \verb https://golem.ph.utexas.edu/category/2019/09/the_riemann_hypothesis_part_3.html
+      \endverb
+    \endentry
+    \entry{deligne1}{article}{}
+      \name{author}{1}{}{%
+        {{hash=876d32ddd7383ddfb7c5ca89662b261d}{%
+           family={Deligne},
+           familyi={D\bibinitperiod},
+           given={Pierre},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {fr}%
+      }
+      \list{publisher}{1}{%
+        {Institut des Hautes Études Scientifiques}%
+      }
+      \strng{namehash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{fullhash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{bibnamehash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{authorbibnamehash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{authornamehash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{authorfullhash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \field{extraname}{1}
+      \field{labelalpha}{Del74}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Publications Mathématiques de l'IHÉS}
+      \field{title}{La conjecture de {Weil} : {I}}
+      \field{volume}{43}
+      \field{year}{1974}
+      \field{pages}{273\bibrangedash 307}
+      \range{pages}{35}
+      \verb{urlraw}
+      \verb http://www.numdam.org/item/PMIHES_1974__43__273_0/
+      \endverb
+      \verb{url}
+      \verb http://www.numdam.org/item/PMIHES_1974__43__273_0/
+      \endverb
+    \endentry
+    \entry{deligne2}{article}{}
+      \name{author}{1}{}{%
+        {{hash=876d32ddd7383ddfb7c5ca89662b261d}{%
+           family={Deligne},
+           familyi={D\bibinitperiod},
+           given={Pierre},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {fr}%
+      }
+      \list{publisher}{1}{%
+        {Institut des Hautes Études Scientifiques}%
+      }
+      \strng{namehash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{fullhash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{bibnamehash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{authorbibnamehash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{authornamehash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \strng{authorfullhash}{876d32ddd7383ddfb7c5ca89662b261d}
+      \field{extraname}{2}
+      \field{labelalpha}{Del80}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Publications Mathématiques de l'IHÉS}
+      \field{title}{La conjecture de {Weil} : {II}}
+      \field{volume}{52}
+      \field{year}{1980}
+      \field{pages}{137\bibrangedash 252}
+      \range{pages}{116}
+      \verb{urlraw}
+      \verb http://www.numdam.org/item/PMIHES_1980__52__137_0/
+      \endverb
+      \verb{url}
+      \verb http://www.numdam.org/item/PMIHES_1980__52__137_0/
+      \endverb
+    \endentry
+    \entry{gowers_2013}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=fca789c8d8642fdcf0c24e26455ba279}{%
+           family={Gowers},
+           familyi={G\bibinitperiod},
+           given={W.\bibnamedelimi T.},
+           giveni={W\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{fca789c8d8642fdcf0c24e26455ba279}
+      \strng{fullhash}{fca789c8d8642fdcf0c24e26455ba279}
+      \strng{bibnamehash}{fca789c8d8642fdcf0c24e26455ba279}
+      \strng{authorbibnamehash}{fca789c8d8642fdcf0c24e26455ba279}
+      \strng{authornamehash}{fca789c8d8642fdcf0c24e26455ba279}
+      \strng{authorfullhash}{fca789c8d8642fdcf0c24e26455ba279}
+      \field{labelalpha}{Gow13}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Gowers's Weblog}
+      \field{title}{The Work of Pierre Deligne}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://gowers.files.wordpress.com/2013/03/peterd.pdf
+      \endverb
+      \verb{url}
+      \verb https://gowers.files.wordpress.com/2013/03/peterd.pdf
+      \endverb
+    \endentry
+    \entry{hartshorne_2010_algebraic}{book}{}
+      \name{author}{1}{}{%
+        {{hash=ee65baaab88f9233fbad3d51c399ee25}{%
+           family={Hartshorne},
+           familyi={H\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{fullhash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{bibnamehash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{authorbibnamehash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{authornamehash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{authorfullhash}{ee65baaab88f9233fbad3d51c399ee25}
+      \field{labelalpha}{Har10}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Algebraic Geometry}
+      \field{year}{2010}
+    \endentry
+    \entry{Hasse1936}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7c11cfc495532869d41f6e9b7c71991b}{%
+           family={Hasse},
+           familyi={H\bibinitperiod},
+           given={Helmut},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{7c11cfc495532869d41f6e9b7c71991b}
+      \strng{fullhash}{7c11cfc495532869d41f6e9b7c71991b}
+      \strng{bibnamehash}{7c11cfc495532869d41f6e9b7c71991b}
+      \strng{authorbibnamehash}{7c11cfc495532869d41f6e9b7c71991b}
+      \strng{authornamehash}{7c11cfc495532869d41f6e9b7c71991b}
+      \strng{authorfullhash}{7c11cfc495532869d41f6e9b7c71991b}
+      \field{labelalpha}{Has36}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal für die reine und angewandte Mathematik}
+      \field{title}{Zur Theorie der abstrakten elliptischen Funktionenkörper III. Die Struktur des Meromorphismenrings. Die Riemannsche Vermutung.}
+      \field{volume}{175}
+      \field{year}{1936}
+      \field{pages}{193\bibrangedash 208}
+      \range{pages}{16}
+      \verb{urlraw}
+      \verb http://eudml.org/doc/149968
+      \endverb
+      \verb{url}
+      \verb http://eudml.org/doc/149968
+      \endverb
+      \keyw{Algebra,number theory}
+    \endentry
+    \entry{milne_2016_the}{inbook}{}
+      \name{author}{1}{}{%
+        {{hash=1c48e53e44d3122db018aff3b6321bd6}{%
+           family={Milne},
+           familyi={M\bibinitperiod},
+           given={J.\bibnamedelimi S.},
+           giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=03ec295a2def32200fa423cac79c9156}{%
+           family={Ji},
+           familyi={J\bibinitperiod},
+           given={Lizhen},
+           giveni={L\bibinitperiod}}}%
+        {{hash=53ca34395445f5245df4d506320535fa}{%
+           family={Oort},
+           familyi={O\bibinitperiod},
+           given={Frans},
+           giveni={F\bibinitperiod}}}%
+        {{hash=2238b78e6ce727843bf0d4139b9542d3}{%
+           family={Yau},
+           familyi={Y\bibinitperiod},
+           given={Shing-Tung},
+           giveni={S\bibinithyphendelim T\bibinitperiod}}}%
+      }
+      \list{organization}{2}{%
+        {The Legacy of Bernhard Riemann after One Hundred}%
+        {Fifty Years}%
+      }
+      \list{publisher}{1}{%
+        {International Press of Boston, Inc.}%
+      }
+      \strng{namehash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{fullhash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{bibnamehash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{authorbibnamehash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{authornamehash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{authorfullhash}{1c48e53e44d3122db018aff3b6321bd6}
+      \strng{editorbibnamehash}{d93fb9afa49d31a98bfa11da2c8f9e5d}
+      \strng{editornamehash}{d93fb9afa49d31a98bfa11da2c8f9e5d}
+      \strng{editorfullhash}{d93fb9afa49d31a98bfa11da2c8f9e5d}
+      \field{labelalpha}{Mil16}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{The Legacy of Bernhard Riemann after One Hundred and Fifty Years}
+      \field{title}{The Riemann Hypothesis over Finite Fields: From Weil to the Present Day}
+      \field{year}{2016}
+      \field{pages}{487\bibrangedash 566}
+      \range{pages}{80}
+    \endentry
+    \entry{oort_2014_wei}{article}{}
+      \name{author}{1}{}{%
+        {{hash=53ca34395445f5245df4d506320535fa}{%
+           family={Oort},
+           familyi={O\bibinitperiod},
+           given={Frans},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{53ca34395445f5245df4d506320535fa}
+      \strng{fullhash}{53ca34395445f5245df4d506320535fa}
+      \strng{bibnamehash}{53ca34395445f5245df4d506320535fa}
+      \strng{authorbibnamehash}{53ca34395445f5245df4d506320535fa}
+      \strng{authornamehash}{53ca34395445f5245df4d506320535fa}
+      \strng{authorfullhash}{53ca34395445f5245df4d506320535fa}
+      \field{labelalpha}{Oor14}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nieuw Archief Voor Wiskunde}
+      \field{title}{Wei Conjectures}
+      \field{urlday}{20}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{volume}{1}
+      \field{year}{2014}
+      \field{urldateera}{ce}
+      \field{pages}{211}
+      \range{pages}{1}
+      \verb{urlraw}
+      \verb http://www.nieuwarchief.nl/serie5/pdf/naw5-2014-15-3-211.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.nieuwarchief.nl/serie5/pdf/naw5-2014-15-3-211.pdf
+      \endverb
+    \endentry
+    \entry{Poonen}{article}{}
+      \name{author}{1}{}{%
+        {{hash=431e6f90528021b69e26ef43cce177fa}{%
+           family={Poonen},
+           familyi={P\bibinitperiod},
+           given={Bjorn},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{431e6f90528021b69e26ef43cce177fa}
+      \strng{fullhash}{431e6f90528021b69e26ef43cce177fa}
+      \strng{bibnamehash}{431e6f90528021b69e26ef43cce177fa}
+      \strng{authorbibnamehash}{431e6f90528021b69e26ef43cce177fa}
+      \strng{authornamehash}{431e6f90528021b69e26ef43cce177fa}
+      \strng{authorfullhash}{431e6f90528021b69e26ef43cce177fa}
+      \field{labelalpha}{Poo99}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{An explicit algebraic family of genus-one curves violating the Hasse principle}
+      \field{year}{1999}
+      \verb{doi}
+      \verb 10.48550/ARXIV.MATH/9910124
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/math/9910124
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/math/9910124
+      \endverb
+      \keyw{Number Theory (math.NT),Algebraic Geometry (math.AG),FOS: Mathematics,FOS: Mathematics,11G05 (Primary) 11G35,14G05,14J20 (Secondary)}
+    \endentry
+    \entry{riemann_1859_ueber}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b44bcc0b393ee89e95e9eec08fbedf81}{%
+           family={Riemann},
+           familyi={R\bibinitperiod},
+           given={Bernard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{b44bcc0b393ee89e95e9eec08fbedf81}
+      \strng{fullhash}{b44bcc0b393ee89e95e9eec08fbedf81}
+      \strng{bibnamehash}{b44bcc0b393ee89e95e9eec08fbedf81}
+      \strng{authorbibnamehash}{b44bcc0b393ee89e95e9eec08fbedf81}
+      \strng{authornamehash}{b44bcc0b393ee89e95e9eec08fbedf81}
+      \strng{authorfullhash}{b44bcc0b393ee89e95e9eec08fbedf81}
+      \field{labelalpha}{Rie59}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Monatsberichte der Königlich Preußischen Akademie der Wissenschaften zu Berlin}
+      \field{title}{Ueber die Anzahl der Primzahlen unter einer gegebenen Grösse}
+      \field{year}{1859}
+    \endentry
+    \entry{silverman_2009_the}{book}{}
+      \name{author}{1}{}{%
+        {{hash=9b408ab4d6636cf13a892a83656d6ccb}{%
+           family={Silverman},
+           familyi={S\bibinitperiod},
+           given={Joseph\bibnamedelima H},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{9b408ab4d6636cf13a892a83656d6ccb}
+      \strng{fullhash}{9b408ab4d6636cf13a892a83656d6ccb}
+      \strng{bibnamehash}{9b408ab4d6636cf13a892a83656d6ccb}
+      \strng{authorbibnamehash}{9b408ab4d6636cf13a892a83656d6ccb}
+      \strng{authornamehash}{9b408ab4d6636cf13a892a83656d6ccb}
+      \strng{authorfullhash}{9b408ab4d6636cf13a892a83656d6ccb}
+      \field{labelalpha}{Sil09}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Arithmetic of Elliptic Curves}
+      \field{year}{2009}
+    \endentry
+    \entry{weil_1949_numbers}{article}{}
+      \name{author}{1}{}{%
+        {{hash=f5987f3b70bd698e3c1139b23bb8026b}{%
+           family={Weil},
+           familyi={W\bibinitperiod},
+           given={André},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{fullhash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{bibnamehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{authorbibnamehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{authornamehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{authorfullhash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \field{labelalpha}{Wei49}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bulletin of the American Mathematical Society}
+      \field{title}{Numbers of Solutions of Equations in Finite Fields}
+      \field{urlday}{20}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{volume}{55}
+      \field{year}{1949}
+      \field{urldateera}{ce}
+      \field{pages}{497\bibrangedash 508}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1090/s0002-9904-1949-09219-4
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
