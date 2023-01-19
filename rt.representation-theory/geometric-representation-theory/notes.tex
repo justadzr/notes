@@ -1,0 +1,900 @@
+\documentclass[12pt]{report}
+    \usepackage{indentfirst}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{amsthm}
+    \usepackage{subcaption}
+    \usepackage[utf8]{inputenc}
+    \usepackage{geometry}
+    \usepackage{diagbox}
+    \usepackage{stmaryrd}
+	\usepackage{enumerate}
+    \usepackage{siunitx}
+    \usepackage{graphicx}
+    \usepackage{bbm}
+    \usepackage{multirow}
+    \usepackage{xcolor}
+    \usepackage{tikz-cd}
+    \usepackage{mathrsfs}
+    \usepackage{bm}
+    \usepackage{epic}
+    \usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,]{hyperref}
+    \usepackage{cleveref}
+    \usepackage[style=alphabetic, backend=bibtex]{biblatex}
+    \addbibresource{ref.bib}
+
+    %%%%%%%%%%%%%%%%%%
+    % Tile and Authors
+    %%%%%%%%%%%%%%%%%%
+    \title{Geometric Representation Theory}
+    \author{}
+    \date{}
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Use \begin{theorem}/{lemma}/{corollary} to access
+    % Use \begin{proof}...\end{proof}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newtheorem{theorem}{Theorem}[section]
+	\newtheorem{lemma}{Lemma}[section]
+	\newtheorem{corollary}{Corollary}[section]
+	\newtheorem{proposition}{Proposition}
+	\theoremstyle{remark}
+	\theoremstyle{definition}
+	\newtheorem{remark}{Remark}[section]
+    \newtheorem{fact}{Fact}[section]
+	\newtheorem{example}{Example}[section]
+	\newtheorem{definition}{Definition}[section]
+	\newcommand*{\lemmaautorefname}{Lemma}
+	\newcommand*{\definitionautorefname}{Definition}
+	\newcommand*{\exampleautorefname}{Example}
+	\newcommand{\remarkautorefname}{Remark}
+	\newcommand*{\corollaryautorefname}{Corollary}
+    \newcommand*{\factautorefname}{Fact}
+    \def\subsectionautorefname{Section}
+	
+	
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%% List of macros see macro_list.tex
+    %%% Please update the list after adding 
+    %%% new macros with the date and your name
+    %%% Do NOT use \H for the upper half plane. Define \bbH instead
+    %%% Do NOT change any used macros
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \newcommand{\res}[2]{\underset{#1}{\,\operatorname{Res}\,}#2}
+    \newcommand{\ord}[0]{\operatorname{ord}}
+    \newcommand{\ind}[0]{\operatorname{ind}}
+    \newcommand{\w}[0]{\omega}
+    \newcommand{\ve}[0]{\varepsilon}
+    \newcommand{\s}[0]{\sigma}
+    \newcommand{\D}[0]{\Delta}
+    \newcommand{\Z}[0]{\mathbb{Z}}
+    \newcommand{\R}[0]{\mathbb{R}}
+    \newcommand{\F}[0]{\mathbb{F}}
+    \newcommand{\ecO}[0]{\mathcal O}
+    \newcommand{\N}[0]{\mathbb{N}}
+    \newcommand{\Q}[0]{\mathbb{Q}}
+    \newcommand{\C}[0]{\mathbb{C}}
+    \newcommand{\A}[0]{\mathbb{A}}
+    \newcommand{\G}[0]{\mathbb{G}}
+    \newcommand{\Pc}{\mathbb{P}}   % Projective
+    \newcommand{\Ac}{\mathbb{A}}   % Affine
+    \newcommand{\Lam}[0]{\Lambda}
+    \newcommand{\coker}[0]{\operatorname{coker}}
+    \newcommand{\kp}[0]{\kappa}
+    \newcommand{\doubp}[1]{\left(\left(#1\right)\right)}
+    \newcommand{\lbd}[0]{\lambda}
+    \newcommand{\Aut}[0]{\operatorname{Aut}}
+    \renewcommand{\Re}[0]{\operatorname{Re}}
+    \renewcommand{\Im}[0]{\operatorname{Im}}
+    \newcommand{\nS}[0]{\mathcal{S}}
+	\newcommand{\M}[0]{\mathcal{M}}
+    \newcommand{\To}[0]{\mathbb{C}/\Lambda}
+    \newcommand{\Too}[0]{\mathbb{C}/\Lambda'}
+    \newcommand{\mtx}[4]{\begin{bmatrix}#1 & #2\\ #3 & #4\end{bmatrix}}
+    \newcommand{\vp}[0]{\varphi}
+    \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+    \newcommand{\proj}[0]{\operatorname{proj}}
+    \newcommand{\lcm}[0]{\operatorname{lcm}}
+    \newcommand{\leg}[2]{\left(\frac{#1}{#2}\right)}
+    \newcommand{\sgn}[0]{\operatorname{sgn}}
+    \newcommand{\mult}[0]{\operatorname{mult}}
+    \newcommand{\ft}[0]{\mathscr{F}}
+    \newcommand{\rad}[0]{\operatorname{rad}}
+    \newcommand{\Spec}[0]{\operatorname{Spec}}
+	\newcommand{\Proj}[0]{\operatorname{Proj}}
+    \newcommand{\Sym}[0]{\operatorname{Sym}}
+    \newcommand{\MaxSpec}[0]{\operatorname{MaxSpec}}
+    \newcommand{\Gal}[0]{\operatorname{Gal}}
+    \newcommand{\im}[0]{\operatorname{im}}
+    \newcommand{\Hom}[0]{\operatorname{Hom}}
+    \newcommand{\End}[0]{\operatorname{End}}
+    \newcommand{\height}[0]{\operatorname{height}}
+    \newcommand{\id}[0]{\operatorname{id}}
+    \newcommand{\comment}[1]{}
+    \newcommand{\Top}[0]{\mathsf{Top}}
+    \newcommand{\Aff}[0]{\mathsf{Aff}}
+	\newcommand{\Sch}[0]{\mathsf{Sch}}
+    \newcommand{\Set}[0]{\mathsf{Set}}
+    \newcommand{\op}[0]{\mathsf{op}}
+    \newcommand{\Rep}[0]{\mathsf{Rep}}
+    \newcommand{\Div}[0]{\operatorname{Div}}
+    \newcommand{\pdiv}[0]{\operatorname{div}}
+    \newcommand{\Pic}[0]{\operatorname{Pic}}
+    \newcommand{\trdeg}[0]{\operatorname{trdeg}}
+    \newcommand{\Stab}[0]{\operatorname{Stab}}
+    \newcommand{\Span}[0]{\operatorname{Span}}
+    \newcommand{\Ind}{\operatorname{Ind}}
+    \newcommand{\pt}{\operatorname{pt}}
+    \newcommand{\Ext}{\operatorname{Ext}}
+    \newcommand{\gl}{\operatorname{\mathfrak{gl}}}
+    \newcommand{\ad}{\operatorname{ad}}
+    \newcommand{\tr}{\operatorname{tr}}
+    \newcommand{\Lie}{\operatorname{Lie}}
+    \newenvironment{psmallmatrix}
+	{\left(\begin{smallmatrix}}
+	{\end{smallmatrix}\right)}
+	\newenvironment{bsmallmatrix}
+	{\left[\begin{smallmatrix}}
+	{\end{smallmatrix}\right]}
+    \setcounter{section}{-1}
+\begin{document}
+    \maketitle
+    \renewcommand{\abstractname}{Acknowledgements}
+    \begin{abstract}
+
+        This is a set of notes for the geometric representation theory learning seminar led by Dr. Travis Schedler at Imperial College London in summer 2022. 
+        
+        The seminar consists of a series of talks given by (in chronological order of their first talks) Dr. Travis Schedler (18/07), Gabriel Ng (19/07), Alex Weiler (29/07, 02/08), Lukas Juozulynas (11/08 joint), Siao Chi Mok (15/08 joint, 18/08, 01/09, 05/09), Isa Colorado (22/08), Dr. Haiping Yang (08/09), Tiziano Gaibisso (12/09) and Ken Lee (15/09). At the beginning of each part, the author of this summary will acknowledge the relevant talk(s). 
+        
+        The notes were written by Yourong Zang as an informal reading project, based on the talks in the seminar, their slides and external sources. The author would like to thank Dr. Travis Schedler for organizing this great seminar and guiding the author through the reading project, and all the lecturers for giving their wonderful, inspirational talks.
+    \end{abstract}
+    
+    \tableofcontents
+    \chapter{Preliminaries}
+    In this chapter we will revisit some basic notions that would be useful in other sections. We will begin with some category theory.
+    \section{Derived Categories}
+    \textcolor{red}{TODO.}
+    %\section{Algebraic Groups and their Representations}
+    \section{General Representation Theory}
+    \textcolor{red}{TODO.}
+    \section{Lie Algebras}\label{sec-lie-alg}
+    The classification of Lie algebras is an intriguing problem that attracts generations of mathematicians to tackle. A special case of this problem, namely the classification of semisimple Lie algebras, has a full answer. In this section we will build the basic theory of Lie algebras and construct objects which would be of great use. A half of this section was covered by the talk of Alex Weiler. Some proofs are omitted since those are not the focus of this seminar. See the main references of this section, \cite{humphreys_2010_introduction} and \cite{Humphreys2008}, for proofs.
+    \subsection{General theory}
+    Take any field $k$.
+    \begin{definition}
+        A \textbf{Lie algebra} $\mathfrak g$ over $k$ is a vector space over $k$ with a $k$-bilinear map $[\cdot, \cdot]:\mathfrak g\times\mathfrak g\to\mathfrak g$ called the \textbf{Lie bracket} such that $[x, x]=0$ for all $x\in \mathfrak g$ which satisfies the Jacobi identity:
+        \[[x, [y, z]]+[y,[z, x]]+[z,[x, y]]=0\]
+        for all $x, y, z\in\mathfrak g$. A Lie algebra is \textbf{abelian} if $[x, y]=0$ for all $x, y$.
+    \end{definition}
+    A homomorphism of Lie algebras is just a $k$-linear map compatible with the Lie bracket. We denote by $\gl(V)$ the vector space of endomorphisms on any vector space $V$.
+    \begin{example}
+        Given a Lie algebra $\mathfrak g$, the space $\gl(\mathfrak g)$ is also a Lie algebra, with the Lie bracket given by $[\varphi, \psi]=\varphi\circ\psi-\psi\circ\varphi$.
+    \end{example}
+    \begin{definition}
+        An \textbf{ideal} $\mathfrak i$ if a Lie algebra $\mathfrak g$ is a subspace such that $[\mathfrak i, \mathfrak g]\subseteq\mathfrak g$. A Lie algebra is \textbf{simple} if it has no proper ideal.
+    \end{definition}
+    \begin{definition}
+        A \textbf{representation} of Lie algebra is a homomorphism $\rho:\mathfrak g\to\gl(\mathfrak g)$. The \textbf{adjoint representation} is defined to be the map $\ad:\mathfrak g\to\gl(\mathfrak a)$ sending $x$ to $[x,\cdot]$.
+    \end{definition}
+    Define the derived series of $\mathfrak g$ to be $\mathfrak g^{(0)}=\mathfrak g$ and $\mathfrak g^{(i+1)}=[\mathfrak g^{i},\mathfrak g^{i}]$. We define the lower central series of $\mathfrak g$ to be $\mathfrak g^{[0]}=\mathfrak g$ and $\mathfrak g^{[i+1]}=[\mathfrak g,\mathfrak g^{[i]}]$.
+    \begin{definition}
+        A Lie algebra is \textbf{solvable} if $\mathfrak g^{(n)}=0$ for some $n$. A Lie algebra is \textbf{nilpotent} if $\mathfrak g^{[n]}=0$ for some $n$.
+    \end{definition}
+    \begin{definition}
+        An element of $\mathfrak g$ is \textbf{nilpotent} if $\ad(x)$ is nilpotent. 
+    \end{definition}
+    \begin{remark}
+        Clearly if a Lie algebra is nilpotent then all elements in are nilpotent. The Engel's theorem proves the converse.
+    \end{remark}
+    \begin{theorem}[Engel]
+        If all elements of a Lie algebra are nilpotent then the Lie algebra is nilpotent.
+    \end{theorem}
+    \begin{remark}
+        Note that if $I, J$ are two solvable ideals then $I+J$ is also solvable. Therefore, in any finite dimensional Lie algebra there exists a maximal solvable ideal, by taking the one with the maximal dimension.
+    \end{remark}
+    \begin{definition}
+        The maximal solvable idea is called the \textbf{radical of $\mathfrak g$}, denoted by $\rad\mathfrak g$. If $\rad\mathfrak g=0$ then we say $\mathfrak g$ is semisimple.
+    \end{definition}
+    Now we consider Lie algebras over an algebraically closed field of characteristic zero.
+    \begin{theorem}[Lie]
+        Let $\mathfrak g$ be a solvable subalgebra of $\gl(V)$ for some finite dimensional nontrivial $V$. Then $V$ contains a common eigenvector for all endomorphisms in $\mathfrak g$.
+    \end{theorem}
+    \begin{definition}
+        The Killing form of a finite dimensional Lie algebra $\mathfrak g$ is the symmetric bilinear form $\kappa(x, y)=\tr(\ad(x)\circ\ad(y))$.
+    \end{definition}
+    \begin{theorem}
+        A Lie algebra is semisimple if and only if its Killing form is nondegenerate.
+    \end{theorem}
+    \begin{definition}
+        A \textbf{Poisson algebra} is is a commutative, associative $k$-algebra $A$ with 1 and multiplication $\cdot$ with a $k$-bilinear anti-symmetric bilinear form $\{\cdot,\cdot\}$ such that (1) $A$ is a Lie algebra wrt $\{\cdot,\cdot\}$ and (2) the bracket satisfies the Leibniz rule for all $a,b,c\in A$:
+        \[\{a,b\cdot c\}=\{a, b\}\cdot c+b\cdot \{a, c\}\]
+    \end{definition}
+    \subsection{Root systems}
+    \begin{definition}
+        An element of $\gl(V)$ where $V$ is finite dimensional is \textbf{semisimple} if it is diagonalizable over the algebraic closure of the base field.
+    \end{definition}
+    \begin{theorem}[Jordan decomposition]
+        Suppose $V$ is a finite dimensional vector space and $x\in\gl(V)$. Then there exist unique semisimple $x_s$ and nilpotent $x_n$ such that $x=x_s+x_n$ and $x_s\circ x_n=x_n\circ x_s$. We call $x_s$ the \textup{semisimple part of $x$} and $x_n$ the \textup{nilpotent} part. 
+    \end{theorem}
+    Now we focus on semisimple Lie algebras. Here are some significant properties of semisimple Lie algebras.
+    \begin{theorem}[Weyl]
+        Let $\varphi:\mathfrak g\to\gl(V)$ be a finite dimensional representation of a semisimple Lie algebra $\mathfrak g$. Then $\varphi$ is completely reducible.
+    \end{theorem}
+    \begin{definition}
+        A \textbf{toral subalgebra} of a semisimple Lie algebra $\mathfrak g$ is a subalgebra whose elements are all semisimple.
+    \end{definition}
+    \begin{lemma}
+        A toral subalgebra $\mathfrak t$ of a Lie algebra over an algebraically closed field is abelian. 
+    \end{lemma}
+    \begin{proof}
+        It suffices to show that $\ad(x)=0$ for all $x\in\mathfrak t$. Since $x$ is semisimple and $k$ is algebraically closed, $\ad(x)$ is diagonalizable. Suppose $[x, y]=ay$ for some nonzero $a\in k$ and $y\in\mathfrak t$. Then $\ad(y)x=-ay$ is an eigenvector of $\ad(y)$ of zero eigenvalue. Since $\ad(y)$ is also diagonalizable, $x$ can be written as a combination of eigenvectors of $\ad(y)$. Thus, the terms in $\ad(y)x$ are eigenvectors of nonzero eigenvalues, which contradicts the previous result.
+    \end{proof}
+    From now we assume the base field is algebraically closed of characteristic zero.
+    \begin{definition}
+        The maximal toral subalgebra $\mathfrak h$ is called the \textbf{Cartan subalgebra} of $\mathfrak g$.
+    \end{definition}
+    \begin{example}
+        If $\mathfrak g=\mathfrak{sl}(n, k)$, a Cartan subalgebra could be the set of diagonal matrices of trace zero.
+    \end{example}
+    \begin{corollary}
+        Fix a Cartan subalgebra $\mathfrak h$ of $\mathfrak g$. The space $\ad(\mathfrak h)$ is simultaneously diagonalizable, meaning if we write 
+        \[\mathfrak g_\alpha=\{x:[h, x]=\alpha(h)x,\forall h\in\mathfrak h\}\]
+        for any $\alpha\in\mathfrak h^*=\Hom(\mathfrak h, k)$, $\mathfrak g$ is the direct sum of all these spaces.
+    \end{corollary}
+    \begin{proof}
+        The subalgebra $\mathfrak h$ is abelian so all elements of $\ad(\mathfrak h)$ commute. Endomorphisms that commute can be diagonalized by the same linear map.
+    \end{proof}
+    \begin{remark}
+        The Cartan subalgebra exists for all finite dimensional Lie algebras over infinite fields.
+    \end{remark}
+    \begin{definition}
+        The spaces $\mathfrak g_\alpha$ are called \textbf{root spaces}, and the linear functions $\alpha$ such that $\mathfrak g_\alpha\neq 0$ are called \textbf{roots}, whose set is denoted by $\Phi$. We therefore have the \textbf{Cartan decomposition} 
+        \[\mathfrak g=C_{\mathfrak g}(\mathfrak h)\oplus\bigoplus_{\alpha\in\Phi}\mathfrak g_\alpha\]
+    \end{definition}
+    \begin{definition}
+        Given a representation $\rho$ of Lie algebra $\mathfrak g$ and a subalgebra $\mathfrak h$. A \textbf{weight} $\lambda$ of $\rho$ with respect to $\mathfrak h$ is a linear functional on $\mathfrak h$ such that
+        \[\mathfrak g_\lambda=\{g:\rho(h)(g)=\lambda(h)g,\forall h\in\mathfrak h\}\]
+        is nontrivial. Such a space is called a \textbf{weight space}.
+    \end{definition}
+    \begin{remark}
+        Clearly roots are just weights of the adjoint representation.
+    \end{remark}
+    \begin{lemma}
+        The restriction of the Killing form to $C_{\mathfrak g}(\mathfrak h)$ is nondegenerate.
+    \end{lemma}
+    \begin{proof}
+        We first show that for all $\alpha,\beta\in \mathfrak h^*$, $[\mathfrak g_\alpha, \mathfrak g_\beta]\subseteq \mathfrak g_{\alpha+\beta}$. Take $x\in\mathfrak g_\alpha$ and $y\in \mathfrak g_\beta$. By the Jacobi identity, one has $\ad(h)[x, y]=[[h, x], y]+[x, [h, y]]$ which is just $(\alpha+\beta)(h)[x, y]$. Now since $\mathfrak g$ is finite dimensional, if $\alpha\neq 0\in\mathfrak h^*$, $\mathfrak g_\alpha$ is nilpotent. 
+        
+        If $\alpha +\beta\neq 0$, there is some $h\in\mathfrak h$ for which $(\alpha+\beta)(h)\neq 0$. Then $\kp([h, x], y)=-\kp(x, [h, y])$ meaning $(\alpha+\beta)(h)\kappa(x, y)=0$ for arbitrary $x\in\mathfrak g_\alpha$ and $y\in \mathfrak g_\beta$. Therefore $\mathfrak g_\alpha$ and $\mathfrak g_\beta$ are orthogonal wrt the Killing form if $\alpha+\beta\neq 0$.
+
+        Therefore, $\mathfrak g_0$ is orthogonal to all $\mathfrak g_\alpha$ for $\alpha\in\Phi$. If some $x\in \mathfrak g_0$ is orthogonal to $\mathfrak g_0$, we have $x\in \mathfrak g^\perp$ which forces $x=0$ as the Killing form is nondegenerate.
+    \end{proof}
+    \subsection{Classification of Lie algebras}
+    \textcolor{red}{TODO: axiomatization of root systems, classifications of semisimple Lie algebras}
+    Here is a theorem that would be extremely useful in further sections.
+    \begin{theorem}[Jacobson-Morozov]\label{thm-jm}
+        Let $\mathfrak g$ be a semisimple Lie algebra and $x$ a nilpotent element of $\mathfrak g$. Then there is a homomorphism from $\mathfrak{sl}_2\to\mathfrak g$ such that $x$ is the image of a nilpotent element. Equivalently, $x$ can be extended to a $\mathfrak{sl}_2$-triple in $\mathfrak g$, namely three elements ${e, f, h}$ of $\mathfrak g$ such that
+        \[[h, e]=2e, [h, f]=-2f, [e, f]=h\]
+    \end{theorem}
+    \subsection{Universal enveloping algebra}
+    Let $\mathfrak g$ be a Lie algebra over a field $k$.
+    \begin{definition}
+        An \textbf{enveloping algebra} is a pair $(U,\varphi)$ where $U$ is a unital associative algebra equipped with the Lie bracket $[a, b]=ab-ba$ and $\varphi:\mathfrak g\to U$ a Lie algebra homomorphism. A \textbf{universal enveloping algebra} is an enveloping algebra $(U(\mathfrak g), \Phi)$ with the universal property (in the category of associative unital algebras).
+    \end{definition}
+    Clearly a universal enveloping algebra is unique up to isomorphism if it exists.
+    \begin{lemma}
+        There exists a universal enveloping algebra of any Lie algebra $\mathfrak g$.
+    \end{lemma}
+    \begin{proof}
+        Let $T(\mathfrak g)$ to be the tensor algebra (infinite dimensional if $\mathfrak g\neq 0$; noncommutative if $\mathfrak g$ is not abelian) defined by $k\oplus \mathfrak g\oplus(\mathfrak g\times\mathfrak g)\oplus\cdots$. Let $J(\mathfrak g)$ be the two-sided ideal generated by elements of the form $a\otimes b-b\otimes a-[a, b]$. Define $U(\mathfrak g)=T(\mathfrak g)/J(\mathfrak g)$. We claim that it is a universal enveloping algebra with the canonical map $\Phi$ sending an element of $\mathfrak g$ to its image in $U(\mathfrak g)$.
+
+        Clearly this is an enveloping algebra since $\Phi([a, b])-[\Phi(a),\Phi(b)]=[a, b]-a\otimes b-b\otimes a=0$. 
+
+        Let $(U,\varphi)$ be another enveloping algebra. Define the map $f:T(\mathfrak g)\to U$ by 
+        \[f\left(\bigotimes a_i\right)=\bigotimes\varphi(a_i)\]
+        extended linearly. Then 
+        \[f([a,b]-a\otimes b-b\otimes a)=\varphi([a, b])-\varphi(a)\varphi(b)-\varphi(b)\varphi(a)=0\]
+        as $\varphi:\mathfrak g\to U$ is a Lie algebra homomorphism. Thus, $f$ is a well-defined algebra homomorphism such that $f\circ\Phi=\varphi$. Now if $f':U(\mathfrak g)\to U$ is another homomorphism, we get $f'(1)=f(1)=1$ and $f(a)=f'(a)$ for all $a\in\mathfrak g$. Thus, $f=f'$ meaning $f$ is unique, completing the proof.
+    \end{proof}
+    The following theorem is extremely important in representation theory.
+    \begin{theorem}[Poincaré-Birkhoff-Witt]
+        Given a Lie algebra $\mathfrak g$ and an ordered basis $(x_1,x_2,\dots)$, the monomials $x_{i_1}^{e_1}\cdots x_{i_r}^{e_r}$ form a basis of $U(\mathfrak g)$, where $i_r\leqslant \cdots\leqslant i_r$ and $e_1,\dots, e_r>0$.
+    \end{theorem}
+    \section{Algebraic Groups}
+    \subsection{Conventions}
+    For convenience, let $k$ be an algebraically closed field.
+    \begin{definition}
+        An \textbf{algebraic scheme over $k$} is a scheme covered by \textit{finitely many} affine $k$-schemes, that is, a scheme of finite type over $k$.
+    \end{definition}
+    \begin{definition}
+        A \textbf{group $S$-scheme} is simply an $S$-scheme $G/S$ that is an group object in the category of $S$-schemes. In other words, there are morphisms $m:G\times_S G\to G$, $i:G\to G$ and $e:S\to G$ such that
+        \begin{enumerate}
+            \item[(i)] $m\circ (m\times \id)=m\circ(\id\times m)$.
+            \item[(ii)] $m\circ (\id\times i)\circ\D=m\circ (i\times \id)\circ\D=e\circ\pi$ where $\pi$ is the structure morphism $G\to S$.
+            \item[(iii)] $m\circ(e\times \id)=m\circ(\id\times e)=\id$ where $G$ is regarded as $S\times_S G$ and $G\times_S S$.
+        \end{enumerate}
+    \end{definition}
+    \begin{definition}
+        An \textbf{algebraic group over $k$} is a group $k$-scheme which is also an integral algebraic scheme over $k$ (an algebraic variety).
+    \end{definition}
+    In this entire paper, we assume all algebraic groups are linear (i.e., affine).
+    \subsection{Basic properties}
+    Fix an algebraic group $G$.
+    \begin{definition}
+        The irreducible (or equivalently, connected) component of $G$ containing $G$, denoted by $G^\circ$, is the \textbf{identity component}
+    \end{definition}
+    \begin{lemma}
+        The identity component is a unique closed normal subgroup of finite index. Furthermore, any closed subgroup of $G$ of finite index contains $G^\circ$.
+    \end{lemma}
+    \begin{proof}
+        We first prove its uniqueness. Suppose there are distinct identity components $G^1,\dots, G^m$. Then $G^1\cdots G^m$ must also be an irreducible closed subset that contains $e$. But then $G^1\cdots G^m$ lies in some $G^i$, yet $G^i$ is clearly contained in the former. Thus, $m=1$ and the identity component is unique.
+
+        Clearly for any $x\in G^\circ$, $x^{-1}G^\circ$ is also irreducible which contains $e$. This means $G^\circ=(G^\circ)^{-1}$ and thus $G^\circ G^\circ=G^\circ$. Thus, $G^\circ$ is a closed subgroup of $G$. With a similar argument on $x^{-1}G^\circ x$, $G^\circ$ is normal. The fact that $G^\circ$ has finite index comes from the fact that each coset of $G^\circ$ is an irreducible component in $G$ and as a Noetherian space, $G$ has finitely many of them.
+
+        Say $H$ is a closed subgroup of finite index. Then the finitely many cosets of $H$ excluding $H$ have a closed union. This means $H$ is also open. Thus, as $G^\circ$ is connected and meets $H$, we must have $G^\circ \subseteq H$.
+    \end{proof}
+    \begin{remark}
+        In fact $\G_m$ and the classical groups are connected, meaning they coincide with their identity components.
+    \end{remark}
+    \begin{definition}
+        A variety $X$ is a $G$-space if $G$ acts on $X$ and the group action is a morphism of varieties. In the cases where the action is transitive, we call $X$ a \textbf{homogeneous space for $G$}.
+    \end{definition}
+    \subsection{Tori and solvable groups}
+    \begin{definition}
+        An \textbf{$n$-dimensional torus} is an algebraic group isomorphic to the diagonal subgroup $D_n$ of $GL_n$.
+    \end{definition}
+    Define the \textbf{character group} $X(G)=\Hom(G, \G_m)$.
+    \begin{definition}
+        A group $G$ is said to be \textbf{diagonalizable} if the set $X(G)$ spans $\mathcal O(G)$.
+    \end{definition}
+    \begin{lemma}
+        An algebraic group is diagonalizable if and only if it's isomorphic to a closed subgroup of some $D_n$.
+    \end{lemma}
+    \begin{definition}
+        An algebraic group $G$ is \textbf{solvable} if the derived series defined by $D^0G=G$ and $D^{i+1}G=[D^iG,D^iG]$ terminates with the identity $\{e\}$. 
+    \end{definition}
+    Clearly, the commutator subgroup of a connected group is closed and connected, and therefore we could apply the abstract definition to the case of algebraic groups.
+    \subsection{Borel subgroups and reductive groups}
+    \begin{definition}
+        A \textbf{Borel subgroup} of a linear algebraic group $G$ is a maximal element of the connected solvable subgroups of $G$.
+    \end{definition}
+    \begin{remark}
+        Note that a Borel subgroup exists since we can take the connected solvable subgroup of $G$ of maximum dimension. Then the connectedness of this subgroup gives us what we need.
+    \end{remark}
+    \begin{lemma}
+        Given a Borel subgroup $B$ of $G$, all Borel subgroups are conjugates of $B$.
+    \end{lemma}
+    \begin{definition}
+        A \textbf{parabolic subgroup} $P$ of $G$ is a closed subgroup such that $G/P$ is a projective. Given a minimal parabolic subgroup $P_0$, a parabolic subgroup $P$ is \textbf{standard} if it contains $P_0$.
+    \end{definition}
+    \begin{example}
+        The (geometric points of a) standard parabolic subgroup of $GL_n$ is the subgroup consisting of matrices of the form $P_\alpha=M_\alpha N_\alpha$ where $\alpha=(\alpha_1,\dots,\alpha_r)$ is a partition of $n$ and
+        \[M_\alpha=\bigoplus_{i=1}^r GL_{\alpha_i},\quad N_\alpha=\begin{bmatrix}
+            I_{\alpha_1} & * & \cdots & *\\
+            0 & I_{\alpha_2} & \cdots & *\\
+            \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & \cdots & I_{\alpha_r}
+        \end{bmatrix}\]
+        This decomposition is usually called the Levi decomposition of $P$. Note that $P_{(1,1,\dots,1)}$ is a Borel subgroup of $GL_n$ called the standard Borel subgroup.
+    \end{example}
+    \begin{lemma}
+        A closed subgroup is parabolic if and only if it contains a Borel subgroup.
+    \end{lemma}
+    \begin{definition}
+        An algebraic group is said to be \textbf{unipotent} if every nonzero representation of $G$ has a nonzero fixed vector. The \textbf{unipotent radical} of $G$, $R_u(G)$, is the largest connected normal unipotent closed subgroup of $G$.
+    \end{definition}
+    \begin{definition}
+        A group $G$ is said to be reductive if $R_u(G_{\bar k})=\{e\}$ where $G_{\bar k}$
+    \end{definition}
+    \begin{example}
+        The group $GL_n$ is reductive.
+    \end{example}
+    \subsection{Lie algebras of algebraic groups}
+    Take an affine scheme $X$ over $k$. Let $k[\ve]$ be the $k$-algebra $k[x]/x^2$. Then there is a map $k[\ve]\to k$ and thus defines a map $\varphi: X(k[\ve])\to X(k)$. It can be shown that for any $k$-rational point $P\in X(k)$, the tangent space is
+    \[T_PX=(\mathfrak m_P/\mathfrak m_P^2)^*=\{Q\in X(k(\ve)):\varphi(Q)=P\}\]
+    \begin{definition}
+        Given an algebraic group $G$, the \textbf{Lie algebra} of $G$ is given by the functor of points
+        \[\mathfrak g(k)=T_eX=\ker[G(k[\ve])\to G(k)]\]
+    \end{definition}
+    We now define the Lie bracket on each $\mathfrak g(k)$. Take any $P_1\in G(k[\ve_1])$, $P_2\in G(k[\ve_2])$. Consider the natural $k$-algebra homomorphisms $k[\ve_i]\hookrightarrow k[\ve_1, \ve_2]$. We therefore can think $P_i$ in $G(k[\ve_1,\ve_2])$. Note that the commutator $Q=[P_1, P_2]$ is mapped to zero in both $G(k[\ve_1])$. Therefore, $Q$ factors through $\Spec k[\ve_1\cdot\ve_2]$, and the new point $R\in G(k[\ve_1\cdot\ve_2])$ would be the definition of $[P_1,P_2]$. Clearly $[P_1,P_2]$ is in the kernel of the previously define $\varphi$ so it's in $\mathfrak g(k)$. Denote by $\Lie(\cdot)$ the functor that sends a $k$-group to $\mathfrak g(k)$.
+
+    \section{Geometric Invariant Theory}
+    In this section we will go over basic definitions and results in geometric invariant theory. The primary resources for this section are \cite{mumford_1994_geometric} and \cite{mukai_2003_an}. Readers should refer to the two texts for the motivation and insights behind the theory.
+    \subsection{Conventions}
+    We would also focus on algebraic groups over a fixed field $k$ (possibly not algebraically closed or has positive characteristic) instead of group schemes over some arbitrary scheme. Take such a group $G$ and a scheme $X/k$.
+    \begin{definition}
+        An \textbf{action} of $G$ on $X$ is a morphism of $k$-schemes $\s:G\times_k X\to X$ such that
+        \[\s\circ(\id_G\times\s)=\s\circ (\mu\times \id_X)\]
+        where $\mu$ is the multiplication map of $G$, and given the identity $e$ of $G$,
+        \[\s\circ(e\times \id_X):X=\Spec k\times_k X\to X\]
+        is the identity map.
+    \end{definition}
+    If $X/k$ then $X_k$ is the set of points $x$ such that $\kappa(x)=k$.
+    \subsection{Geometric quotients}
+    \begin{definition}\label{def-c-q}
+        Given an action $\s$ of $G$ on $X$, a pair $(Y,\varphi:X\to Y)$ is a \textbf{categorical quotient} of $X$ by $G$ if (i) $\varphi\circ\s=\varphi\circ p_2$ and (ii) it has the universal property.
+    \end{definition}
+    Define $\Phi:G\times X\to X\times X$ as the map $(\s\circ (\id_G\times \id_X), p_2)$.
+    \begin{definition}
+        A \textbf{geometric quotient} is a pair $(Y, \varphi)$ satisfying 
+        \begin{enumerate}[(i)]
+            \item (i) in \autoref{def-c-q}
+            \item The morphism $\varphi$ is surjective and the image of $\Phi$ is $X\times_Y X$ (equivalently the fibers of $\varphi$ over geometric points are the orbits of geometric points of $X$ over an algebraically closed field of high transcendence degree)
+            \item The morphism $\varphi$ is submersive: $U\subseteq Y$ is open if and only if $\varphi^{-1}(U)$ is open
+            \item For all open $U$, $\Gamma(U,\mathcal O_Y)$ is isomorphic to $\Gamma(U, \varphi^*\mathcal O_X)^G$ via the map $\varphi^*$.
+        \end{enumerate}
+    \end{definition}
+    \begin{definition}
+        A pair $(Y, \varphi)$ is a \textbf{uniform categorical (resp. geometric) quotient} if for all flat morphisms $Y'\to Y$, if $X'=X\otimes_Y Y'$ and $\varphi'=p_2$, then $(Y', \varphi')$ is a categorical (resp. geometric) quotient. If this holds for all morphisms $Y'\to Y$, then we say it's a \textbf{universal categorical (resp. geometric) quotient}
+    \end{definition}
+    Suppose we have a representation $\rho:G\to GL_n$ of an algebraic group $G$. This morphism gives the following action
+    \begin{definition}
+        If $G$ is linear, let $S=\Gamma(G, \mathcal O_X)$. Let $\mu:S\to S\otimes S$ and $\ve:S\to k$ be the induced multiplication and identity. Let $R$ be a $k$-algebra. A \textbf{dual action} of $G$ on $R$ is a homomorphism of algebras:
+        \[\hat{\s}:R\to R\otimes_k R\]
+        such that 
+        \[(\mu\otimes\id_R)\circ\hat\s=(\id_S\otimes\hat\s)\circ\hat\s\]
+        and $(\ve\otimes \id_R)\circ\hat\s=\id_R$.
+    \end{definition}
+    The following theorem is a significant result on reductive groups:
+    \begin{theorem}[Nagata]
+        If $A$ is a finitely generated $k$-algebra and a reductive group $G$ defines a dual action on $A$. Then $A^G$ is finitely generated.
+    \end{theorem}
+    With this result, we can construct uniform category quotients of affine schemes:
+    \begin{theorem}
+        Let $X$ be an affine scheme over $k$ and $G$ a reductive algebraic group. Then there exists a uniform categorical quotient $(Y,\varphi)$ of $X$ by $G$ where $Y$ is an affine scheme. Moreover, if $\operatorname{char} k=0$ then this is a universal categorical quotient.
+    \end{theorem}
+    \begin{proof}
+        Take $Y=\Spec \Gamma(X,\mathcal O_X)^G$.
+    \end{proof}
+    \begin{lemma}
+        Furthermore, the $(Y, \varphi)$ in the above setting is a geometric quotient if and only if the action of $G$ on $X$ is closed.
+    \end{lemma}
+    \subsection{Linearization}
+    \begin{definition}
+        Let $G$ be an algebraic group, $X$ an algebraic scheme, $\s$ the action of $G$ on $X$ and $L$ an invertible sheaf. Then a \textbf{$G$-linearization} of $L$ is an isomorphism
+        \[\varphi:\s^*L\to p_2^*L\]
+        where $p_2:G\times X\to X$ is the projection map such that given $m$ and $e$ the multiplication and identity of $G$, the following diagram commutes:
+        \[
+        \begin{tikzcd}
+                {[\sigma\circ(\id_G\times\sigma)]^*L} \arrow[r, "(\id_G\times\sigma)^*\varphi"] \arrow[d,Rightarrow, no head] & {[p_2\circ(\id_G\times\sigma)]^*L} \arrow[r, Rightarrow, no head] & (\sigma\circ p_{23})^*L \arrow[d, "p_{23}^*\varphi"] \\
+                {[\s\circ(m\times \id_X)]^*L} \arrow[rr, "(m\times\id_X)^*\varphi"]                                            &                                                                   & (p_2\circ p_{23})^*L                                
+        \end{tikzcd}
+        \]
+    \end{definition}
+    \begin{remark}
+        Of course we could replace the invertible sheaf $L$ with its corresponding line bundle $L$ (an abuse of notation), in which case we have an isomorphism $\Phi:(G\times X)\times_X  L\to (G\times X)\times_X L$ ($\dagger$) where the first fiber product is defined using $p_2:G\times X\to X$ and the second uses $\s:G\times X\to X$. Then we define $\Sigma=p_2\circ\Phi$ which is an isomorphism of bundles and $\pi\circ\Sigma=\s\circ(\id_G\times\pi)$ ($\ddagger$). We also have a commutative cube
+        \[
+            \begin{tikzcd}
+                G\times G\times L \arrow[rd, "\id_G\times\Sigma"] \arrow[dd] \arrow[rr, "m\times\id_L"] &                                           & G\times L \arrow[rd, "\Sigma"] \arrow[dd] &              \\
+                                                                                                        & G\times L \arrow[rr, "\Sigma"] \arrow[dd] &                                           & L \arrow[dd] \\
+                G\times G\times X \arrow[rd, "\id_G\times\s"'] \arrow[rr, "m\times\id_X"]               &                                           & G\times X \arrow[rd, "\s"]                &              \\
+                                                                                                        & G\times X \arrow[rr, "\s"]                &                                           & X           
+                \end{tikzcd}
+        \]
+    \end{remark}
+    \begin{remark}
+    Note that ($\dagger$) corresponds to condition (2) in Newstead's book and ($\ddagger$) corresponds to condition (1). This means $G$ now acts on the line bundle $L$. From this point of view, a $G$-linearization is actually \textit{an extension of $G$'s action} to a line bundle over $X$.
+    \end{remark}
+    Since pullbacks commute with tensor products, the $G$-linearizations of invertible sheafs are preserved under tensor products. Therefore, we have a group of $G$-linearized invertible sheaves, and thus we could define
+    \begin{definition}
+        Define $\Pic^G(X)$ to be the abelian group of $G$-linearized invertible sheaves modulo isomorphisms.
+    \end{definition}
+    \subsection{Stability of points}
+    With the help of linearizations, one would then be able to define the stability of points. We would still define this with schemes and then compare it with definitions in Newstead.
+    \begin{definition}
+        We say a geometric point $x\in X$ is \textbf{semi-stable} with respect to an invertible sheaf with a $G$-linearization $\varphi$ if there exists a global section $s$ of $L^{\otimes r}$ for some $r$ such that $s(x)\neq 0$, $s$ is invariant in the sense that if $\varphi_r:\s^*L^{\otimes r}\to p_2^*L^{\otimes r}$ defined by $\varphi$ (recall how the $G$-linearizations of invertible sheaves are preserved) then $\varphi_r(\s^*(s))=p_2^*(s)$, and $X_s$ is affine. The set of semi-stable points is denoted by $X^{SS}(L)$.
+
+        A geometric point $x$ is \textbf{stable} if there is a global section of $L^{\otimes r}$ such that $s(x)\neq 0$, $X_s$ is affine, $s$ is invariant and $G$ is closed on $X_s$. The set of such points is $X^S(L)$.
+
+        If the dimension of the stabilizer of a stable point is zero, we call that point \textbf{properly stable}, whose set is denoted by $X^S_0(L)$.
+    \end{definition}
+    In terms of line bundles and varieties, the global sections are then invariant in the sense that $G$ acts on $L$ (recall the remark where we argued that a linearization is an extension of the action of $G$).
+    \begin{definition}
+        We say a geometric point $x\in X$ is \textbf{semi-stable} with respect to a $G$-linearized line bundle $L$ if there is an invariant section $f$ of $L^{\otimes r}$ for some $r$ such that $f(x)\neq 0$ and $X_f=\{x:f(x)\neq 0\}$ is affine.
+
+        A semi-stable point $x$ is \textbf{stable} if furthermore the action of $G$ is closed on $X_s$.
+
+        If the dimension of the stabilizer of a stable point is zero, we call that point \textbf{properly stable}, whose set is denoted by $X^S_0(L)$.
+    \end{definition}
+    \begin{remark}
+        What is an invariant section in the previous definition? Consider the following diagram:
+        \[
+            \begin{tikzcd}
+                {H^0(X, L)} \arrow[r, "\s^*"] & {H^0(G\times X,\s^* L)} \arrow[r, "\varphi"] & {H^0(G\times X, p_2^*L)}
+            \end{tikzcd}
+        \]
+        Where the RHS is isomorphic to $H^0(G, \mathcal O_G)\otimes H^0(X, L)$ by Kunneth formula and the fact that $p_1^*\mathcal O_G\otimes_{\mathcal O_{G\times X}}p_2^*L=p_2^*L$. Therefore the linearization $\varphi$ defines an action of $G$ on the global sections of $L$ which thus allows us to speak of invariant sections of $L$.
+    \end{remark}
+    By the following general fact:
+    \begin{lemma}
+        Let $G$ be an algebraic group acting on a variety $X$. For any $x\in X$, $\dim O(x)=\dim G-\dim G_x$ where $G_x$ is the stabilizer of $x$. Furthermore, for any integer $n$, the set $\{x\in X:\dim O(x)\geqslant n\}$ is open.
+    \end{lemma}
+    we notice that the dimension condition in the previous definition simply says $\dim O(x)=\dim G$.
+    \begin{remark}
+        From the definition, the set $X^{SS}(L)$ and $X_0^S(L)$ are both stable, where the latter conclusion can be deduced from the second part of the general fact above.
+    \end{remark}
+    
+    We have argued that, although one can glue the good/geometric quotients of an affine cover of a variety together if such covers exist, it is in general not possible to find such covers. Therefore, we turn to an open set of $X$ where a good quotient exists. Hence the ultimate theorem (in schemes) of this section is presented below
+    \begin{theorem}
+        Let $X$ be an algebraic scheme over $k$ and let $G$ be a reductive algebraic group acting on $X$. Suppose $L$ is a $G$-linearized invertible sheaf on $X$. Then
+        \begin{enumerate}[\normalfont(i)]
+            \item There exists a good quotient $(Y,\varphi)$ of $X^{SS}(L)$ by $G$;
+            \item $Y$ is quasi-projective
+            \item There exists an open subset $\tilde{Y}$ of $Y$ such that $\varphi^{-1}(\tilde Y)=X^S(L)$ and $(\tilde Y, \varphi|_{X^S(L)})$ is a geometric quotient of $X^S(L)$;
+            \item For $x_1$ and $x_2$ semi-stable points,
+                \[\varphi(x_1)=\varphi(x_2)\iff\overline{O(x_1)}\cap\overline{O(x_2)}\cap X^{SS}(L)\neq\emptyset;\]
+            \item For $x\in X^{SS}(L)$,
+                \[x\in X^S_0(L)\iff\dim O(x)=\dim G,\quad O(x)\text{is closed in }X^{SS}(L)\] 
+        \end{enumerate}
+    \end{theorem}
+    The last conditions in the theorem is the second part of Amplification 1.11 in GIT. Condition (iv) is immediate from our previous discussion of good quotients.
+    \begin{proof}
+        (i) Since $X$ is Noetherian, there exists some $N$ and a finite set of invariant sections of $L^{\otimes N}$ such that $U_i=X_{s_i}$ is affine and $X^{SS}(L)=\cup U_i$. By the existence of good quotients for affine schemes, we have affine good quotients $(V_i,\varphi_i)$ for $U_i$ and $\varphi_i^*$ is an isomorphism from $\mathcal O(V_i)$ to $\mathcal O(U_i)^G$. Therefore we can define
+        \[\s_{ij}=\varphi_i^*(s_j/s_i)\in\mathcal O(V_i)\]
+        and we write $V_{ij}=\{y\in V_i:\s_{ij}(y)\neq 0\}$. It is obvious that
+        \[\varphi_i^{-1}(V_{ij})=U_i\cap U_j=\varphi_j^{-1}(V_{ji})\]
+        Thus $V_{ij}$ and $V_{ji}$ are both categorical quotients of $U_i\cap U_j$ by the localness of quotients. There is a unique isomorphism $\psi_{ij}:V_{ij}\to V_{ji}$. Then we can patch together each piece into a good quotient.
+
+        (ii) The proof of this part is omitted. We simply argue that the transition functions define a invertible sheaf $M$ which is ample on $Y$ such that $L^{\otimes N}=\varphi^*(M)$. Therefore $Y$ is quasi-projective.
+
+        (iii) Enlarge the set of sections $\{s_i\}$ if necessary. We can assume that $\s$ is closed on each $U_i$ for certain $i$ and that $X^S(L)=\cup U_i$. Then $X^S(L)=\varphi^{-1}(\cup V_i)$ and if $\tilde Y=\cup V_i$, the local property of geometric quotients completes the proof.
+
+        (iv) This is immediate.
+        
+        (v) Proof omitted.
+    \end{proof}
+    But why do we consider these points? The following theorem (without proof) gives a partial answer to this question.
+    \begin{theorem}
+        Let $X$ be a connected nonsingular algebraic scheme over $k$ and $G$ be a connected reductive algebraic group acting on $X$. If $U$ is an invariant open subset of $X$, then $U$ has a quasi-projective geometric quotient if and only if there are some invertible sheaf $L\in\Pic^G(X)$ such that $U\subseteq X^S(L)$. 
+    \end{theorem}
+    Thus it is a fairly natural idea to consider these stable points of a scheme, as they are the only points that can stay in an open set with geometric quotient in a fairly nice situation.
+    \textcolor{red}{The general case}
+
+
+    \section{Symplectic Geometry}
+    Some of the concepts here were briefly introduced by Siao Chi Mok.
+    There are various excellent choices for the reference of this section. But to keep the flow, the writer chose to base his writing on the beginning of \cite{chriss_2009_representation} and Chapter 8 of \cite{mumford_1994_geometric}.
+    \subsection{Basic constructions}
+    Let $X$ be a smooth real manifold or a holomorphic complex manifold, or a complex algebraic variety. Let $\mathcal O(X)$ denote the algebra of smooth functions/holomorphic functions/the global section of $X$. For all cases we call the elements in it regular functions. We denote by $TX$ and $T^*X$ the tangent and cotangent bundles on $X$.
+    \begin{definition}
+        A symplectic structure on $X$ is a closed, nondegenerate 2-form $\w$.
+    \end{definition}
+    Let $(M, \w)$ be a symplectic manifold. Since $\w$ is nondegenerate, it induces an isomorphism from the tangent bundle to the cotangent bundle of $M$ (assuming finite dimensions). We could therefore define, in a canonical way, a unique linear map $\partial:\mathcal O(M)\to \mathscr{X}(M)$ as $f\mapsto \xi_f$ if $\w(\cdot, \xi_f)=df$. By definition we have $\w(\xi_f,\eta)=-\eta f$ for any vector field $\eta$. Define $\{f, g\}=\w(\xi_f,\xi_g)=-\xi_gf=\xi_fg$.
+    
+    \begin{definition}
+        A vector field $\xi$ is \textbf{symplectic} if its flow preserves the symplectic structure, or equivalently $\mathcal L_\xi \w=d(\iota_\xi\w)=0$ by Cartan's magic formula.
+    \end{definition}
+    \begin{lemma}
+        Given any $f\in\mathcal O(M)$, the vector field $\xi_f=\partial(f)$ is symplectic.
+    \end{lemma}
+    \begin{proof}
+        It suffices to show $d(\iota_{\xi_f}\w)=0$ by Cartan's magic formula. By definition of $\xi_f$ we have $\iota_{\xi_f}\w=-df$, which immediately gives us $d(\iota_{\xi_f}\w)=-d(df)=0$.
+    \end{proof}
+    \begin{lemma}
+        The map $f\mapsto\xi_f$ intertwines with $\{\cdot, \cdot\}$ with the commutator of symplectic vector fields. 
+    \end{lemma}
+    \begin{proof}
+        To show that $\xi_{\{f,g\}}=[\xi_f,\xi_g]$. Since $L_\xi\w=0$, 
+        \[\xi_f\cdot\w(\xi_g,\eta)=\w([\xi_f,\xi_g],\eta)+\w(\xi_g,[\xi_f,\eta])\]
+        for any vector field $\eta$. Therefore,
+        \[-\xi_f\eta g=\w([\xi_f,\xi_g],\eta)-\xi_f\eta g+\eta\xi_f g\]
+        This gives $\w([\xi_f,\xi_g],\eta)=-\eta\{f, g\}$. Since $\eta$ is arbitrary, we have completed the proof.
+    \end{proof}
+    \begin{lemma}
+        The bracket $\{\cdot, \cdot\}$ is a Poisson structure on $M$.
+    \end{lemma}
+    \begin{proof}
+        Note that $[\xi_f,\xi_g]h=\xi_{\{f, g\}}h=\{\{f. g\}, h\}$ and
+        \[[\xi_f,\xi_g]h=\xi_f\xi_gh-\xi_g\xi_fh=\{f,\{g,h\}\}-\{g,\{f,h\}\}\]
+        which means the bracket satisfies the Jacobi identity. Since vector fields are derivations on $\mathcal O(M)$, the Leibniz rule follows immediately.
+    \end{proof}
+    \subsection{Moment map}
+    Let $G$ be a Lie group or a linear algebraic group acting (regularly) on a symplectic manifold $M$.
+    \begin{definition}
+        The action of $G$ on $M$ is a \textbf{symplectic action} if each map $\varphi_g:m\mapsto g\cdot m$ is a symplectomorphism, i.e, $\varphi_g^*\w=\w$.
+    \end{definition}
+    Let $\mathfrak g=\Lie(G)$. Then every element $a$ of $\mathfrak g$ defines a vector field on $M$, called the infinitesimal action of $\mathfrak g$. This is given by 
+    \[\xi_a:m\mapsto \left.\frac{d}{dt}[\exp(-ta)\cdot m]\right|_{t=0}\]
+    Fix a Lie algebra homomorphism $H:\mathfrak g\to \mathcal O(M)$.
+    \begin{remark}
+        Note that this is a symplectic vector field since its flow is given by $\Phi_t:m\mapsto \exp(-ta)\cdot m$ which is a symplectomorphism on $M$.
+    \end{remark}
+    \begin{definition}
+        A symplectic action $G$ of $M$ is said to be \textbf{Hamiltonian} if $\xi_{H_a}=\xi_a$ for all $a\in\mathfrak g$. The lifting $H$ is called the \textbf{Hamiltonian}.
+    \end{definition}
+    \begin{definition}
+        The moment map (associated to $H$) is defined to be $\mu:M\to \mathfrak g^*$ which sends $m$ to the linear map $x\mapsto H_x(m)$.
+    \end{definition}
+    \begin{lemma}
+        For any $x\in\mathfrak g$, we have $H_x=\mu^*x$ where $\mu^*$ pullbacks a linear function on $\mathfrak g^*$ to $M$. The map $\mu^*:\C[\mathfrak g^*]\to \mathcal O(M)$ induced by $\mu$ commutes with the Poisson structure. If the group $G$ is connected, then the moment map is $G$-equivariant with respect to the coadjoint action on $\mathfrak g^*$.
+    \end{lemma}
+    \begin{proof}
+        The first claim is obvious: $H_x(m)=\mu(m)(x)=\langle\mu(m),x\rangle$ by definition.
+
+        \textcolor{red}{TODO.}
+    \end{proof}
+    \subsection{Hamiltonian reduction}
+    \textcolor{red}{TODO.}
+
+
+    \section{Hilbert Schemes}
+    \textcolor{red}{TODO.}
+
+    \section{Representations of Quivers}
+    In this section we review the basics of quiver representations required to construct the Nakajima's quiver varieties. Siao Chi Mok briefly covered most ideas here in her talk on McKay correspondence. The main references for this section is \cite{kirillov_2016_quiver}.
+    \subsection{Basic definitions}
+    In this section we explore the basic notions of quiver representations and their properties.
+    \begin{definition}\label{def-quiver}
+        A \textbf{quiver} $Q$ is a directed graph, that is, a set of \textbf{vertices} $I$, a set of edges $\Omega$, the source map $s:\Omega\to I$ which assigns to every edge its source, and the target map $t:\Omega \to I$ which specifies the target of each edge.
+    \end{definition}
+    We write $h:i\to j$ if $h$ is an edge from $i$ to $j$. Take $k$ to be any field. We are only interested in finite-dimensional linear representations of quivers.
+    \begin{definition}
+        A (linear) \textbf{representation of quiver $Q$} is an assignment of (finite-dimensional) $k$-vector spaces $\{V_i\}$ to vertices $i\in I$ and linear maps $x_h:V_i\to V_j$ to edges $h:i\to j$. A \textbf{morphism} of two representations $V, W$ of some quiver $Q$, $f:V\to W$, is a collection of linear maps $f_i:V_i\to W_i$ such that $f_jx_h=x_hf_i$ for all $h:i\to j$.
+    \end{definition}
+    \begin{remark}
+        We could view a representation $\rho$ as a pair of maps $(\rho_1,\rho_2)$ where $\rho_1$ sends a vertex to a finite-dimensional $k$-vector space and $\rho_2(h)$ is a linear map from $s(h)$ to $t(h)$.
+    \end{remark}
+    We denote by $\Rep(Q)$ the category of finite-dimensional representations of the quiver $Q$. We define the \textbf{direct sum} of representations as the collection of the direct sum of two vector spaces at each vertex. A \textbf{subrepresentation} $V$ of $W$ is a collection of vector spaces such that $V_i\subseteq W_i$ and $x_h(V_i)\subseteq V_j$ for each $h:i\to j$. The \textbf{quotient} of two representations $W/V$ can thus be defined as $(W/V)_i=W_i/V_i$. The \textbf{kernel and image} of a morphism of representations can be defined similarly. Note that under these definitions $\Rep(Q)$ is an abelian category.
+
+    To interpret the properties of representation of quivers, we consider the path algebra of a quiver.
+    \begin{definition}
+        A \textbf{path of length $l$} in a quiver is a sequence of edges $(h_l,\dots, h_1)$ such that $s(h_{i+1})=t(h_i)$. The source of the path algebra is defined to be the source of $h_1$, and similarly for the target.
+    \end{definition}
+    It is natural to define the multiplication of two paths by composing them:
+    \[(h_l,\dots, h_1)(h_m',\dots, h'_1)=\begin{cases}
+        (h_l,\dots, h_1, h_m',\dots, h'_1), &s(h_1)=t(h_m')\\
+        0, &\text{otherwise}
+    \end{cases}\]
+    We introduce the loops $e_i:i\to i$ of length zero such that for any path $p$,
+    \[
+        e_ip=\begin{cases}
+            p, &t(p)=i\\
+            0, &\text{otherwise}
+        \end{cases},\quad
+        pe_i\begin{cases}
+            p, &s(p)=i\\
+            0, &\text{otherwise}
+        \end{cases}
+    \]
+    Now we define the \textbf{path algebra} $kQ$ to be the $k$-vector space spanned by all paths in $Q$. With the multiplication defined above, $kQ$ is an associative $k$-algebra. If $Q$ has finitely many vertices, $kQ$ has a unit $\sum_{i\in I} e_i$; it is also graded by path length, and $(kQ)_0=\oplus ke_i$ is semisimple; clearly $kQ$ is finite-dimensional if and only if $Q$ contains no oriented-cycles (meaning it has finitely many paths, given finitely many vertices).
+
+    From now we only deal with quivers with finitely many vertices. The path algebra is quite useful in the following sense:
+    \begin{theorem}
+        The (not necessarily finite-dimensional) category of representations of $Q$ is equivalent to the category of left $kQ$-modules.
+    \end{theorem}
+    \begin{proof}
+        Given a representation $V$ os $Q$, we define $x_p:V_{s(p)}\to V_{t(p)}$ by $x_{e_i}=\id_{V_i}$ and $x_{(h_l,\dots, h_1)}=x_{h_l}\cdots x_{h_1}$. This defines a $kQ$-module $\bigoplus_{i\in I}V_i$ by $pv=x_p(v)$. Take the direct sum of all linear maps of a morphism of representations we get a morphism of $kQ$-modules.
+
+        Conversely, given a $kQ$-module $M$, attach $M_i=e_iM$ (which is a $k$-vector space) to vertex $i$ and for every edge $h:i\to j$ we have $hM_i\subseteq M_j$, so we can simply define $x_h:v\mapsto hv$. Restrict a morphism of $kQ$-module to each $M_i$ we get a morphism of representations. Clearly these two functors are inverses of each other, meaning these two categories are equivalent.
+    \end{proof}
+    With the above description, we can interpret many properties of representations in terms of modules.
+    \begin{definition}
+        A representation in $\Rep(Q)$ is \textbf{irreducible} if it contains no nontrivial subrepresentation; equivalently, its corresponding $kQ$-module is simple. A representation is \textbf{semisimple} if it's a direct sum of simple representations, or its corresponding $kQ$-module is semisimple. A representation is \textbf{indecomposable} if it cannot be written as a direct sum of nontrivial subrepresentations.
+    \end{definition}
+    For a quiver $Q$ and a vertex $i$ in it, it is natural to define the simplest representation $S(i)$ as $S(i)_j=\delta_{ij}k$.
+    \begin{lemma}
+        The $S(i)$ are the only simple representations of an acyclic quiver.
+    \end{lemma}
+    \begin{proof}
+        Take $I'=\{i:V_i\neq 0\}$ for a simple representation $V$. Then since $Q$ is acyclic, there exists $i$ such that there are no edges $i\to j$ for all $j\in I'$. Then we have a subrepresentation of $V'$ of $V$ given by $V_j'=\delta_{ij}V_i$. The simplicity of $V$ completes the proof.
+    \end{proof}
+    A indecomposable representation has an indecomposable path algebra, so one could apply the Krull-Remak-Schmidt theorem:
+    \begin{theorem}
+        Any finite-dimensional representation of a quiver $Q$ can be written as a direct sum of indecomposable representations unique up to reordering.
+    \end{theorem}
+    \begin{definition}
+        Take any abelian category $\mathcal C$, we define the \textbf{Grothendiec group} of $\mathcal C$, $K(\mathcal C)$ to be the group generated by isomorphism classes of $[A]$ of objects in $\mathcal C$, with the relation $[A]=[A_1]+[A_2]$ if there is an exact sequence $0\to A_1\to A\to A_2\to 0$.
+    \end{definition}
+    \begin{remark}
+        The letter $K$ is for the German word klasse meaning class in English. Clearly we have $[A_1]+[A_2]=[A_1\oplus A_2]$.
+    \end{remark}
+    \begin{lemma}
+        Let $Q$ be an acyclic quiver. Then the \textup{graded dimension} map $\varphi:K(Q)\to\Z^I$ given by
+        \[[V]\to (\dim V_{i_1},\dots, \dim V_{i_2},\dim V_{i_n})\]
+        is an isomorphism.
+    \end{lemma}
+    \begin{proof}
+        The representation $V$ as a Noetherian $kQ$-module has a composition series, meaning we can write $[V]=\sum n_i[S(i)]$ where $n_i$ is the dimension of $V_i$ since $S(i)$ are the only simple representations.
+
+        Note that $\varphi([S_i])=e_i$ are independent, so $\varphi$ is well-defined on $K(Q)$. This means $[S(i)]$ are independent in $K(Q)$ and thus they form a set of free generators, meaning $\varphi$ is an isomorphism.
+    \end{proof}
+
+    We now proceed to show that there are enough projectives in the category of (possibly infinite dimensional) representations of $Q$. Define
+    \[P(i)=kQe_i\]
+    which are projective modules since they are direct summands of the free module $kQ$. If $Q$ is acyclic, then the $[P(i)]$ form a basis of $kQ$ as $[P(i)]=\sum_j p_{ji}[S(j)]$ where $p_{ji}$ is the number of paths from $i\to j$. It is possible to reorder the vertices so that $[p_{ji}]$ is an upper-triangular matrix with ones on its diagonal.
+    \begin{lemma}
+        Suppose $Q$ is acyclic. The modules $P(i)$ are the only indecomposable projective objects in $\Rep(Q)$.
+    \end{lemma}
+    \begin{proof}
+        Since $\Hom(P(i), P(j))=\delta{ij}k$, they are indecomposable by the previous argument on $kQ$. Suppose $P$ is a projective module. Write $n_i=\dim\Hom(P, S(i))$ and $P'=\sum n_iP(i)$. Then $\Hom(P, S(i))\cong \Hom(P', S(i))$, which means for all $V\in\Rep$, $\Hom(P, V)\cong\Hom(P', V)$. Therefore $P\cong P'$, meaning the $P(i)$ form a full set of nonzero indecomposable projectives. 
+    \end{proof}
+    \begin{lemma}\label{lem-standard-resol}
+        Let $Q$ be a quiver. For any $kQ$-module $V$, we have a short exact sequence
+        \[0\to \bigoplus_{h\in\Omega}P(t(h))\otimes kh\otimes V_{s(h)}\xrightarrow{d_1}\bigoplus_{i\in I}P(i)\otimes V_i\xrightarrow{d_0}V\to 0\]
+        where $d_1:p\otimes h\otimes v\mapsto ph\otimes v-p\otimes x_h(v)$, $d_0:p\otimes v\mapsto x_p(v)$ and $V_i=e_iM$.
+    \end{lemma}
+    \begin{proof}
+        Note that $L=\bigoplus kh$ is a subspace that generates the path algebra. Take $A_0$ to be the subalgebra of paths of length zero, then $A_0L, LA_0\subseteq L$. Then as a standard commutative algebra result, we have an exact sequence
+        \[kQ\otimes_{A_0}L\otimes_{A_0}V\xrightarrow{d_1} kQ\otimes_{A_0}V\xrightarrow{d_0}V\to 0\]
+        where $kQ\otimes_{A_0}V=\bigoplus kQe_i\otimes e_iV$ and similarly for $kQ\otimes_{A_0}L\otimes_{A_0}V$.
+
+        It remains to show that $d_1$ is injective. If
+        \[\sum p_nh_n\otimes v_n-p_n\otimes x_{h_n}(v_n)=0\]
+        then let $l$ be the maximum length of the paths $p_n$. Ten we must have $\sum p_kh_k\otimes=0$ where the length of $p_k$ is $l$ (so that $p_kh_k$ has length $l+1$). Yet $p_kh_k$ are linearly independent for different $h_k$ so the original sum must be zero.
+    \end{proof}
+    This shows the category of representations of $Q$ has enough projectives, and thus we can apply the $\Ext$ functor. The resolution in \autoref{lem-standard-resol}, called the standard resolution of $V$, is a projective resolution of length at most one. Therefore, $\Ext^i_Q(V, W)=0$ for any representations $V, W$ and $i\geqslant 2$. Categories satisfying this property are called \textbf{hereditary}. This is equivalent to the fact that every left ideal of $kQ$ is projective, meaning $kQ$ is a hereditary algebra. In this case, the category of $kQ$-modules is hereditary. The following lemma can also be generalized to all hereditary categories, but for consistency we only state the relevant version.
+    \begin{lemma}
+        Suppose $P$ is a projective $kQ$-module, then every submodule of $P$ is also projective.
+    \end{lemma}
+    \begin{proof}
+        Suppose $V$ is a submodule of $P$. Then we have an exact sequence
+        \[0\to V\to P\to P/V\to 0\]
+        and thus by the left exactness of $\Ext$ we get an exact sequence for every module $X$,
+        \[\cdots\to\Ext^1(W, X)\to \Ext^1(P,X)\to \Ext^1(V, X)\to \Ext^2(W, X)\to\cdots\]
+        where $\Ext^1(P,X)=0=\Ext^2(W, X)$. This means $\Ext^1(V, X)=0$ or $V$ is projective.
+    \end{proof}
+    \begin{definition}
+        We now define the \textbf{Euler form of representations $V,W$} to be
+        \[\langle V, W\rangle=\sum(-1)^i\dim\Ext^i(V, W)=\dim\Hom(V, W)-\Ext^1(V, W)\]
+        and the \textbf{Euler form of the quiver $Q$} to be
+        \[\langle v, w\rangle=\sum_{i\in I} v_iw_i-\sum_{h\in\Omega} v_{s(h)}w_{t(h)}\]
+        for $v,w\in\Z^I$.
+    \end{definition}
+    \begin{remark}
+        Since $P(i)$ is projective 
+        \[\langle P(i), W\rangle=\dim\Hom(P(i), W)=\dim W_i\]
+        where the second equality is given by the isomorphism $p\mapsto x_p(v)$ for a path $p$ starting at $i$.
+    \end{remark}
+    \begin{lemma}
+        The Euler form of $Q$ defines a bilinear form on $\Z^I$. Furthermore, we have
+        \[\langle \varphi(V), \varphi(W)\rangle=\sum_{i\in I}\dim V_i\dim W_i-\sum_{h\in\Omega}\dim V_{s(h)}\dim W_{t(h)}\]
+        where $\varphi$ is the graded dimension.
+    \end{lemma}
+    \begin{proof}
+        Take the standard resolution of $V$, $0\to P_1\to P_0\to V\to 0$. By the left exactness of $\Hom(\cdot, W)$ and $\Ext(\cdot, W)$ we get
+        \[\langle V, W\rangle=\langle P_0, W\rangle-\langle P_1,W\rangle\]
+        where
+        \[\langle P_0, W\rangle=\sum_{i\in I}\dim\Hom(P(i),\Hom(V_i, W))=\sum_{i\in I}\dim V_i\dim W_i,\]
+        and similarly
+        \[\langle P_1, W\rangle=\sum_{h\in\Omega}\dim V_{s(h)}\dim W_{t(h)}\]
+        completing the proof.
+    \end{proof}
+    \begin{definition}
+        We call the quadratic form $q_Q(v)=\langle v,v\rangle/2$ on $\Z^I$ the \textbf{Tits form associated to $Q$}.
+    \end{definition}
+    \begin{definition}
+        A connected graph is \textbf{Dynkin} if its Tits form is positive-definite. A graph $Q$ is \textbf{Euclidean} if the Tits form is positive-semidefinite.
+    \end{definition}
+    \begin{theorem}
+        The Dynkin graphs are precisely the graphs $A_n, D_n$, $E_6, E_7, E_8$ shown below. A graph is Euclidean if and only if it's one of the $\widehat{A_n},\widehat{D_n}$, $\widehat{E_6}, \widehat{E_7}, \widehat{E_8}$.
+        \[\textcolor{red}{\text{PICTURE HERE}}\]
+    \end{theorem}
+    \begin{proof}
+        Proof omitted. One direction is easy. For the converse argue for the three cases where $Q$ is one of the extended graphs (Euclidean), properly contains one of them (indefinite Tits form) or does not contain any of them (Dynkin).
+    \end{proof}
+    For $V$, a finite dimensional representation of a quiver $Q$, we write $v\in\Z^I$ for its graded dimension. Choosing a basis for each $V_i$, we have $V_i\cong k^{v_i}$ and the representation is just a collection of matrices $x_h\in\Hom_k(k^{v_i}, k^{v_j})$ for each edge $h:i\to j$. The space of such collections is
+    \[R(Q, v)=\bigoplus_{h\in\Omega}\Hom_k(k^{v_{s(h)}}, k^{v_{t(h)}})\]
+    called the \textbf{representation space}. The group
+    \[G_v=\prod_{i\in I}GL(v_i, k)\]
+    naturally acts on $R(v)$ by conjugation, i.e., for every element $x\in\Hom(k^{v_i}, k^{v_j})$, $g\cdot x=g_j\circ x\circ g_i^{-1}$. For any $x\in R(v)$, we have a representation $(V^x)_i=k^{v_i}$ and linear maps $x_h$ corresponding to each edge $h$.
+    \subsection{Double quivers and framing}
+    Let $Q$ be a graph with vertices $I$ and edges $E$.
+    \begin{definition}
+        We define the \textbf{double quiver} $Q^\#$ of $Q$ to be the quiver with vertices $I$ and oriented edges
+        \[H=\{(e, o(e)): e\in E\}\]
+        where $o(e)$ is any orientation of $e$. Define
+        \[R(Q^\#, v)=\bigoplus_{h\in H}\Hom_k(k^{v_{s(h)}}, k^{v_{t(h)}})\]
+    \end{definition}
+    Since $\Hom(W, V)=\Hom(V, W)^*$, we have $R(Q^\#,v)=R(\bar{Q}, v)\oplus R(\bar{Q}, v)^*$ where $\bar Q$ is a quiver with underlying graph $Q$. This is precisely the cotangent bundle of $R(\bar{Q}, v)$.
+    \begin{definition}
+        Let $Q^\#$ be the double quiver of a graph $Q$ and let $\ve:H\to k^\times$ a function satisfying $\ve(h)+\ve(\bar h)=0$ for all edges $h$ and its opposite $\bar h$. Define the \textbf{preprojective algebra} to be
+        \[\Pi(Q)=kQ^\#/J\]
+        where $J$ is the ideal generated by elements $\theta_i$, $i\in I$ defined by 
+        \[\theta_i=\sum_{t(h)=i}\ve(h)h\bar h.\]
+    \end{definition}
+    \begin{definition}
+        Given a quiver $Q$, a \textbf{framing} of $Q$, denoted by $Q^\heartsuit$, is a quiver with two copies of vertices $I\sqcup I'$ with a bijection $I\xrightarrow{\sim} I'$ of $Q$ and edges $\Omega$ and for each $i\in I$ an edge $i\to i'$ to its corresponding vertex.
+    \end{definition}
+    \begin{definition}
+        Given a representation $V$ of $Q$, a \textbf{$W$-framed representation} of $Q$ is a representation on $Q^\heartsuit$ with $W_{i'}$ sitting at each $i'\in I'$ and $V_i$ at $i\in I$.
+    \end{definition}
+    We write $R(Q^\heartsuit, v, w)$ for the representation space $R(Q^\heartsuit, v\times w)$.
+
+    \textcolor{red}{TODO.}
+
+    
+
+    \chapter{McKay Correspondence}
+    In this chapter we go straightly to one of the main themes of the learning seminar --- McKay correspondence. Dr. Travis Schedler introduced the classical McKay correspondence to the learning group in the first talk in the geometric representation seminar, outlining the proof of the theorem. After Gabriel Ng and Alex Weiler built the necessary preliminaries required to understand the statement of the correspondence in their talks, a (reduced) proof consisting of two mains parts was given jointly by Lukas Juozulynas and Siao Chi Mok.
+    
+    \textcolor{red}{Blahblahblah about McKay correspondence. History and stuff.}
+    
+    
+    A third of the correspondence is the classification of simple Lie algebras, which is covered in \autoref{sec-lie-alg}. We will show the rest two thirds. The main references for this chapter are \cite{dolgachev_2009_mckay} and \cite{kirillov_2016_quiver}.
+    \section{Statement of the McKay Correspondence}
+
+    \section{Lie Algebras to Finite Subgroups of $SL_2$}
+    In this section we try to move from simple Lie algebras to finite subgroups of $SL_2$.
+    \subsection{Kleinian singularities}
+    In 1884, Felix Klein classified the finite subgroups of $SL_2(\C)$ in his \cite{Klein1884}. It turns out that the subgroups admit an ADE classification. We omit the proof of this theorem.
+    \begin{theorem}[Classification of finite subgroups of $SL_2(\C)$]
+        A finite subgroup of $SL_2(\C)$ is conjugate to one of the following types:
+        \begin{enumerate}[\normalfont(i)]
+            \item Type $A_{n-1}$: a cyclic group of order $n$,
+            \item Type $D_{n+2}$: a binary dihedral group $BD_{n}$,
+            \item Type $E_6$: the binary tetrahedral group $BT$,
+            \item Type $E_7$: the binary octahedral group $BO$,
+            \item Type $E_8$: the binary icosahedral subgroup $BI$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        As stated before, we will not give a proof of this theorem. However, we will list their generators to help understand their actions on the complex plane.
+        \begin{table}[!h]
+            \centering
+            \begin{tabular}{|c|l|c|}
+            \hline
+            Type  & Generators                                           & $z$          \\ \hline
+            $A_{n-1}$ & $\begin{bsmallmatrix}z & 0\\ 0 & z^{-1}\end{bsmallmatrix}$ & $e^{2\pi i/n}$ \\ \hline
+            $D_{n+2}$ & $\begin{bsmallmatrix}z & 0\\ 0 & z^{-1}\end{bsmallmatrix}, \begin{bsmallmatrix}0 & 1\\ -1 & 0\end{bsmallmatrix}$ & $e^{\pi i/n}$  \\ \hline
+            $E_6$ & $\begin{bsmallmatrix}i & 0\\ 0 & -i\end{bsmallmatrix}, \begin{bsmallmatrix}0 & 1\\ -1 & 0\end{bsmallmatrix}, \frac{1}{\sqrt{2}}\begin{bsmallmatrix}z & z^3\\ z & z^{-1}\end{bsmallmatrix}$ & $e^{\pi i/4}$\\ \hline
+            $E_7$ & $\begin{bsmallmatrix}0 & 1\\ -1 & 0\end{bsmallmatrix}, \frac{1}{\sqrt{2}}\begin{bsmallmatrix}z & z^3\\ z & z^{-1}\end{bsmallmatrix}, \begin{bsmallmatrix}z & 0\\ 0 & z^{-1}\end{bsmallmatrix}$ & $e^{\pi i/4}$\\ \hline
+            $E_8$ & $\begin{bsmallmatrix}z^3 & 0\\ 0 & z^{2}\end{bsmallmatrix}, \begin{bsmallmatrix}0 & 1\\ -1 & 0\end{bsmallmatrix}, \frac{1}{\sqrt{5}}\begin{bsmallmatrix}-z+z^4 & z^2-z^3\\ z^2-z^3 & z-z^4\end{bsmallmatrix}$ & $e^{2\pi i/5}$ \\ \hline
+            \end{tabular}%
+        \end{table}
+        One would be able to deduce the generators of the invariant algebras from this table.
+    \end{proof}
+
+    One very important tool we use to explore the connections among simple complex Lie algebras, finite subgroups of $SL_2(\C)$ and quivers of ADE types is the Kleinian singularity, whose minimal resolutions (and their cohomologies) are of great interests. We will take advantage of the canonical action of the subgroups on the plane $\C^2$.
+    \begin{definition}
+        Given a finite group $\Gamma$ of $SL_2$, the \textbf{Kleinian singularity} associated to $\Gamma$ is defined to be $\C^2/\Gamma=\Spec \C[x, y]^\Gamma$.
+    \end{definition}
+    \begin{remark}
+        This type of singularities are named after Klein for his classification of finite subgroups. One might also see the name du Val singularity, crediting Patrick du Val for his classification of the singularities. \textcolor{red}{FACT CHECK.}
+    \end{remark}
+    It is immediate from Nagata's theorem that the invariant algebra is finitely generated. However, it remains to find the generators of the algebra of different types of subgroups. Before classifying all the invariant algebras, here is a very simple example:
+    \begin{example}
+        Take $\Gamma=\{\pm I\}$. Then the invariant monomials are those of even degrees, meaning $\C[x, y]^\Gamma$ is generated by $x^2, y^2$ and $xy$. The map from $\C[x, y, z]\to \C[x, y]^\Gamma$ sending $z\to x^2$, $y\to y^2$, $z\to xy$ is surjective with kernel $xy-z^2$. Thus, $\Spec \C[x, y]^\Gamma\cong \Spec \C[x, y, z]/(xy-z^2)$.
+    \end{example}
+    \begin{theorem}[Classification of Kleinian singularities]
+        A Kleinian singularity $\Spec \C[x, y]^\Gamma$ embedded into the affine $3$-space is isomorphic to an affine scheme with one of the following structure ring: when $\Gamma$ has type
+        \begin{enumerate}[\normalfont(i)]
+            \item $A_{n-1}$: $\C[x, y, z]/(x^2+y^2+z^n)$,
+            \item $D_{n+2}$: $\C[x. y, z]/(x^2+y^2z+z^{n+1})$,
+            \item $E_6$: $\C[x,y,z]/(x^2+y^3+z^4)$,
+            \item $E_7$: $\C[x,y,z]/(x^2+y^3+yz^3)$,
+            \item $E_8$: $\C[x,y,z]/(x^2+y^3+z^5)$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        See \cite{dolgachev_2009_mckay}. \textcolor{red}{Can provide a detailed proof if time allows.}
+    \end{proof}
+    It is obvious that the schemes have a singularity at the origin. 
+    \subsection{Transverse slices}
+    To better illustrate our use of Slodowy slices, we take the definition of transverse slices from \cite{slodowy_1980}. Suppose a linear algebraic group $G$ acting via the adjoint map on its Lie algebra $\mathfrak g$. 
+    \begin{definition}
+        A \textbf{transverse slice} to the orbit of some $x\in \mathfrak g$ is a locally closed subvariety of $\mathfrak g$ which satisfies
+        \begin{enumerate}[(i)]
+            \item $x\in S$,
+            \item The action $G\times S\to \mathfrak g$ is smooth,
+            \item $\dim S=\dim\mathfrak g-\dim O(x)$.
+        \end{enumerate}
+    \end{definition}
+    \begin{remark}
+        The term \textit{transverse} means the slice is not tangent to $O(x)$ at all.
+    \end{remark}
+    \section{Resolutions of Kleinian Singularities}
+    \subsection{Springer resolutions}
+    \subsection{Hilbert schemes}
+    \subsection{Nakajima's quiver varieties}
+    \section{Construction of the Dynkin Diagrams}
+    \section{Derived McKay Correspondence}
+    
+    %%%%%%%%%%%%%%
+    %%References%%
+    %%%%%%%%%%%%%%
+    \renewcommand{\section}[2]{\vskip 0.01em}
+    \printbibliography
+\end{document}
